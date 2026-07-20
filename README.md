@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Glasstech & Interior Solutions - Marketing Site
+
+Production marketing site for **Glasstech & Interior Solutions Limited**, a Nairobi-based automotive and architectural glass company.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm start       # serve production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 16** (App Router) + TypeScript
+- **Tailwind CSS v4** (CSS-based config)
+- **Lenis** for momentum smooth scroll
+- No external images or CDN dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design Tokens
 
-## Learn More
+All design tokens are defined as CSS custom properties in `src/app/globals.css` and mirrored into Tailwind's theme via `@theme inline` in the same file.
 
-To learn more about Next.js, take a look at the following resources:
+Key tokens: `--ink`, `--edge`, `--edge-deep`, `--warm`, `--frost`, `--paper`, `--pad`, `--maxw`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Fonts are loaded via `next/font/google` in `src/app/layout.tsx`:
+- **Bricolage Grotesque** (display headings)
+- **Fraunces** (italic accent in headings)
+- **Inter** (body text)
+- **Space Mono** (eyebrows, specs, labels)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Placeholder Content to Replace Before Launch
 
-## Deploy on Vercel
+The following items are unverified or placeholder and must be replaced with real data:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Email address**: `hello@glasstechandinteriors.com` - unverified, appears in Contact section and Footer
+- **Kirinyaga Road address**: "Kirinyaga Road, Nairobi CBD" - approximate, needs exact street address
+- **All statistics**: `12+ Years`, `2 Nairobi branches`, `500+ Jobs delivered`, `50+ Specialists`, `48h Turnaround` - all unverified
+- **Project tiles** (Work section): All four project cards use CSS gradients as placeholder art - replace with real project photography
+- **Social proof card** (Hero): The `5k+` count and avatar stack are placeholder - replace with real testimonial data
+- **Social media URLs**: Verify all four social links resolve to the correct profiles
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+  app/
+    globals.css      # Design tokens, utility classes, grain overlay
+    layout.tsx       # Root layout, font loading, meta tags
+    page.tsx         # Page composition
+  components/
+    Nav.tsx          # Floating glass pill nav with mobile menu
+    Hero.tsx         # Hero with facade, blooms, cursor light
+    Configurator.tsx # Quote configurator bar (WhatsApp integration)
+    Marquee.tsx      # Infinite scrolling service marquee
+    TwoPillars.tsx   # Automotive + Architectural cards
+    ServicesGrid.tsx # 6-cell services grid
+    WorkRail.tsx     # Horizontal drag-to-scroll project rail
+    Process.tsx      # 4-step process grid
+    StatsWhy.tsx     # Stats counters + why columns
+    Contact.tsx      # Branch cards + contact card
+    FinalCTA.tsx     # Final call-to-action
+    Footer.tsx       # 4-column footer
+    MotionSystem.tsx # Lenis, observers, count-ups, parallax, magnetic
+```
