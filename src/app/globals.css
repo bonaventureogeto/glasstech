@@ -1,26 +1,243 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────
+   Design tokens
+   ────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #050d0c;
+  --ink-2: #0a1614;
+  --ink-3: #12241f;
+  --frost: #eef3f2;
+  --paper: #fbfdfc;
+  --edge: #2ed3b7;
+  --edge-deep: #0e8a75;
+  --warm: #e8ad63;
+  --warm-deep: #c47d34;
+  --line: rgba(9, 19, 17, 0.12);
+  --line-soft: rgba(9, 19, 17, 0.06);
+  --muted: #4c5b57;
+  --muted-2: #7c8a86;
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-line: rgba(255, 255, 255, 0.22);
+  --r: 16px;
+  --maxw: 1280px;
+  --pad: clamp(18px, 4.5vw, 60px);
+  --e-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-io: cubic-bezier(0.65, 0.05, 0.25, 1);
 }
 
+/* Mirror tokens into Tailwind v4 theme */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-frost: var(--frost);
+  --color-paper: var(--paper);
+  --color-edge: var(--edge);
+  --color-edge-deep: var(--edge-deep);
+  --color-warm: var(--warm);
+  --color-warm-deep: var(--warm-deep);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-glass: var(--glass);
+  --color-glass-line: var(--glass-line);
+  --font-display: var(--font-bricolage);
+  --font-accent: var(--font-fraunces);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-space-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ──────────────────────────────────────────
+   Base reset & body
+   ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ──────────────────────────────────────────
+   Accessibility — focus outlines
+   ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--edge);
+  outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────
+   Type utilities
+   ────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+}
+
+.font-accent {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+}
+
+.font-mono {
+  font-family: var(--font-space-mono), monospace;
+}
+
+/* Eyebrow — mono uppercase small */
+.eyebrow {
+  font-family: var(--font-space-mono), monospace;
+  font-size: clamp(11px, 1.2vw, 13px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--edge-deep);
+}
+
+.eyebrow-light {
+  color: var(--edge);
+}
+
+/* ──────────────────────────────────────────
+   Section spacing
+   ────────────────────────────────────────── */
+.band {
+  padding: clamp(72px, 10vw, 140px) var(--pad);
+}
+
+.band.dark {
+  background: var(--ink);
+  color: var(--frost);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────
+   Grain overlay
+   ────────────────────────────────────────── */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ──────────────────────────────────────────
+   Scroll reveal system
+   ────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--e-out), transform 0.7s var(--e-out);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal[data-d="1"] { transition-delay: 80ms; }
+.reveal[data-d="2"] { transition-delay: 160ms; }
+.reveal[data-d="3"] { transition-delay: 240ms; }
+.reveal[data-d="4"] { transition-delay: 320ms; }
+.reveal[data-d="5"] { transition-delay: 400ms; }
+.reveal[data-d="6"] { transition-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ──────────────────────────────────────────
+   Heading italic phrase
+   ────────────────────────────────────────── */
+.heading-italic {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ──────────────────────────────────────────
+   Load orchestration
+   ────────────────────────────────────────── */
+body:not(.is-loaded) .load-fade {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.load-fade {
+  transition: opacity 0.7s var(--e-out), transform 0.7s var(--e-out);
+}
+
+body:not(.is-loaded) .load-mask {
+  transform: translateY(110%);
+}
+
+.load-mask {
+  transition: transform 0.8s var(--e-out);
+}
+
+/* ──────────────────────────────────────────
+   Custom scrollbar
+   ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--edge-deep);
+  border-radius: 3px;
+}
+
+/* ──────────────────────────────────────────
+   Hide scrollbar utility
+   ────────────────────────────────────────── */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ──────────────────────────────────────────
+   Magnetic button base
+   ────────────────────────────────────────── */
+.magnetic {
+  transition: transform 0.35s var(--e-out);
+}
+
+/* ──────────────────────────────────────────
+   Selection
+   ────────────────────────────────────────── */
+::selection {
+  background: var(--edge);
+  color: var(--ink);
 }
