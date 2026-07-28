@@ -58,8 +58,8 @@ export default function Nav() {
       <div
         className={`flex items-center justify-between gap-4 rounded-full px-5 py-2.5 transition-all duration-500 ${
           solid
-            ? "bg-[rgba(6,15,13,.82)] shadow-[0_8px_32px_rgba(0,0,0,.35)]"
-            : "bg-[rgba(10,22,20,.55)] shadow-[0_8px_32px_rgba(0,0,0,.18)]"
+            ? "bg-[rgba(6,11,23,.82)] shadow-[0_8px_32px_rgba(0,0,0,.35)]"
+            : "bg-[rgba(10,18,34,.55)] shadow-[0_8px_32px_rgba(0,0,0,.18)]"
         }`}
         style={{
           backdropFilter: "blur(16px) saturate(1.3)",
@@ -69,16 +69,12 @@ export default function Nav() {
       >
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 no-underline shrink-0" aria-label="Glasstech home">
-          <div className="relative w-[30px] h-[30px] rounded-lg overflow-hidden" style={{ background: "linear-gradient(135deg, var(--edge), var(--edge-deep))" }}>
-            {/* Sheen sweep */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: "linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%)",
-                animation: "sheen 5.5s ease-in-out infinite",
-              }}
-            />
-          </div>
+          <img
+            src="/images/logo-mark.png"
+            alt=""
+            className="w-[30px] h-[30px] object-contain"
+            aria-hidden="true"
+          />
           <div className="flex flex-col leading-none">
             <span className="text-white text-[15px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-bricolage)" }}>
               Glasstech
@@ -140,7 +136,7 @@ export default function Nav() {
           open ? "translate-x-0" : "translate-x-full"
         }`}
         style={{
-          background: "rgba(6,15,13,.95)",
+          background: "rgba(6,11,23,.95)",
           backdropFilter: "blur(24px)",
           WebkitBackdropFilter: "blur(24px)",
           transitionTimingFunction: "var(--e-out)",
@@ -182,12 +178,6 @@ export default function Nav() {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes sheen {
-          0%, 100% { transform: translateX(-120%); }
-          50% { transform: translateX(120%); }
-        }
-      `}</style>
     </nav>
   );
 }
