@@ -1,31 +1,44 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 
 const projects = [
   {
-    caption: "Residential \u00b7 Kirinyaga County",
-    title: "Kerugoya Site",
-    body: "Windows, balconies and interior glazing for a private residence.",
-    gradient: "linear-gradient(135deg, #0e8a75 0%, #12241f 60%, #0b2124 100%)",
+    caption: "Commercial \u00b7 Glass Partitions",
+    title: "Mombasa Road Site",
+    body: "Full-height glass partitions and windows for a commercial warehouse space.",
+    image: "/images/glass-1.jpeg",
   },
   {
-    caption: "Commercial \u00b7 Facade",
-    title: "Prism Site",
-    body: "Curtain-wall glazing and structural glass to a commercial elevation.",
-    gradient: "linear-gradient(135deg, #12241f 0%, #0e8a75 40%, #08171c 100%)",
+    caption: "Interior \u00b7 Shower Enclosures",
+    title: "Frameless Shower Cubicles",
+    body: "Frameless and semi-frameless glass shower enclosures with quality hardware.",
+    image: "/images/glass-2.jpeg",
+  },
+  {
+    caption: "Interior \u00b7 Office Partitioning",
+    title: "Office Glass Partitions",
+    body: "Floor-to-ceiling glass partitions that open up office floor plans with natural light.",
+    image: "/images/glass-3.jpeg",
+  },
+  {
+    caption: "Residential \u00b7 Kirinyaga County",
+    title: "Kerugoya Lodge",
+    body: "Full glass enclosure walls for a thatched-roof lodge with panoramic views.",
+    image: "/images/glass-4.jpeg",
   },
   {
     caption: "Residential \u00b7 Exterior",
-    title: "Windows & Balconies",
-    body: "Modern glass windows and balcony balustrades for a clean, exquisite look.",
-    gradient: "linear-gradient(135deg, #0b2426 0%, #0e8a75 50%, #071619 100%)",
+    title: "Thatched Roof Residence",
+    body: "Timber-framed glass walls wrapping an entire residence with seamless views.",
+    image: "/images/glass-5.jpeg",
   },
   {
-    caption: "Interior \u00b7 Office",
-    title: "Partitions",
-    body: "Glass partitioning that sub-divides open floor space without closing it in.",
-    gradient: "linear-gradient(160deg, #08171c 0%, #12241f 40%, #0e8a75 100%)",
+    caption: "Residential \u00b7 Windows & Glazing",
+    title: "Hillside Estate",
+    body: "Multi-unit residential glazing with timber frames and extensive glass facade work.",
+    image: "/images/glass-6.jpeg",
   },
 ];
 
@@ -89,8 +102,8 @@ export default function WorkRail() {
             <span className="heading-italic">of glass work.</span>
           </h2>
           <p className="text-[var(--muted)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
-            These tiles are placeholders for real project photography. Each card
-            represents a completed job.
+            From office partitions to full residential glazing — every project
+            measured, cut and fitted by our team.
           </p>
         </div>
       </div>
@@ -115,20 +128,17 @@ export default function WorkRail() {
               scrollSnapAlign: "start",
             }}
           >
-            {/* Art layer with parallax */}
+            {/* Photo layer with parallax */}
             <div
               className="absolute inset-[-10%] transition-transform duration-700 group-hover:scale-[1.03]"
               data-par="0.04"
-              style={{ background: p.gradient }}
             >
-              {/* Faint grid */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px)",
-                  backgroundSize: "40px 40px",
-                }}
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 820px) 80vw, 460px"
               />
             </div>
 
@@ -136,7 +146,7 @@ export default function WorkRail() {
             <div
               className="absolute inset-0"
               style={{
-                background: "linear-gradient(to top, rgba(5,13,12,.85) 0%, rgba(5,13,12,.2) 50%, transparent 100%)",
+                background: "linear-gradient(to top, rgba(6,11,23,.85) 0%, rgba(6,11,23,.2) 50%, transparent 100%)",
               }}
             />
 
