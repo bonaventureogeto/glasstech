@@ -4,19 +4,19 @@
    Design tokens
    ────────────────────────────────────────── */
 :root {
-  --ink: #050d0c;
-  --ink-2: #0a1614;
-  --ink-3: #12241f;
-  --frost: #eef3f2;
-  --paper: #fbfdfc;
-  --edge: #2ed3b7;
-  --edge-deep: #0e8a75;
-  --warm: #e8ad63;
-  --warm-deep: #c47d34;
-  --line: rgba(9, 19, 17, 0.12);
-  --line-soft: rgba(9, 19, 17, 0.06);
-  --muted: #4c5b57;
-  --muted-2: #7c8a86;
+  --ink: #060b17;
+  --ink-2: #0c1526;
+  --ink-3: #141e34;
+  --frost: #edf0f5;
+  --paper: #fbfcfd;
+  --edge: #3b96d8;
+  --edge-deep: #084a77;
+  --warm: #d03128;
+  --warm-deep: #a82520;
+  --line: rgba(8, 14, 28, 0.12);
+  --line-soft: rgba(8, 14, 28, 0.06);
+  --muted: #4c5a6b;
+  --muted-2: #7c8a99;
   --glass: rgba(255, 255, 255, 0.1);
   --glass-line: rgba(255, 255, 255, 0.22);
   --r: 16px;
