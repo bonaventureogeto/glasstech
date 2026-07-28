@@ -64,8 +64,8 @@ export default function TwoPillars() {
                 style={{
                   background:
                     idx === 0
-                      ? "radial-gradient(ellipse 80% 70% at 30% 20%, rgba(46,211,183,.08), transparent)"
-                      : "radial-gradient(ellipse 80% 70% at 70% 30%, rgba(46,211,183,.08), transparent)",
+                      ? "radial-gradient(ellipse 80% 70% at 30% 20%, rgba(59,150,216,.08), transparent)"
+                      : "radial-gradient(ellipse 80% 70% at 70% 30%, rgba(59,150,216,.08), transparent)",
                 }}
               />
 

@@ -87,7 +87,7 @@ export default function Contact() {
                   <span
                     className="font-mono text-[10px] tracking-[.04em] uppercase px-2.5 py-1 rounded-full"
                     style={{
-                      background: "rgba(14,138,117,.08)",
+                      background: "rgba(8,74,119,.08)",
                       color: "var(--edge-deep)",
                     }}
                   >

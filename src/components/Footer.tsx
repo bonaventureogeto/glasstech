@@ -67,9 +67,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div
-                className="w-[30px] h-[30px] rounded-lg"
-                style={{ background: "linear-gradient(135deg, var(--edge), var(--edge-deep))" }}
+              <img
+                src="/images/logo-mark.png"
+                alt=""
+                className="w-[30px] h-[30px] object-contain"
+                aria-hidden="true"
               />
               <div className="flex flex-col leading-none">
                 <span className="text-white text-[15px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-bricolage)" }}>
