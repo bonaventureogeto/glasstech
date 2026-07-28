@@ -94,7 +94,7 @@ export default function Configurator() {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic col-span-2 min-[880px]:col-span-1 min-[880px]:w-[56px] h-[52px] min-[880px]:h-auto rounded-2xl flex items-center justify-center text-white transition-colors hover:bg-[var(--ink-2)]"
+            className="col-span-2 min-[880px]:col-span-1 min-[880px]:w-[56px] h-[52px] min-[880px]:h-auto rounded-2xl flex items-center justify-center text-white transition-colors hover:bg-[var(--ink-2)]"
             style={{ background: "var(--ink)" }}
             aria-label="Get quote on WhatsApp"
           >

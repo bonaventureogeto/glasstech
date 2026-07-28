@@ -62,7 +62,6 @@ export default function RootLayout({
     >
       <body>
         {children}
-        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

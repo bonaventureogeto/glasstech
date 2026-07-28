@@ -7,7 +7,6 @@ export default function MotionSystem() {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const isFine = window.matchMedia("(pointer: fine)").matches;
 
     /* ── 1. Page load orchestration ─────────────────── */
     const loadTimer = setTimeout(() => {
@@ -103,65 +102,6 @@ export default function MotionSystem() {
       countObserver.observe(el);
     });
 
-    /* ── 5. Parallax ────────────────────────────────── */
-    let parallaxRafId: number;
-
-    if (!prefersReduced && isFine) {
-      const parElements = document.querySelectorAll("[data-par]");
-
-      function onParallaxScroll() {
-        const vh = window.innerHeight;
-        const scrollY = window.scrollY;
-
-        parElements.forEach((el) => {
-          const rect = (el as HTMLElement).getBoundingClientRect();
-          // Skip if too far out of viewport
-          if (rect.bottom < -200 || rect.top > vh + 200) return;
-
-          const factor = parseFloat(
-            (el as HTMLElement).dataset.par || "0"
-          );
-          const center = rect.top + rect.height / 2;
-          const offset = (center - vh / 2) * factor;
-
-          // Get existing transform and only append translateY
-          const existing = (el as HTMLElement).style.transform;
-          const base = existing.replace(/translateY\([^)]*\)/g, "").trim();
-          (el as HTMLElement).style.transform = `${base} translateY(${offset}px)`.trim();
-        });
-
-        parallaxRafId = requestAnimationFrame(onParallaxScroll);
-      }
-      parallaxRafId = requestAnimationFrame(onParallaxScroll);
-    }
-
-    /* ── 6. Magnetic buttons ────────────────────────── */
-    const magneticCleanups: (() => void)[] = [];
-
-    if (isFine && !prefersReduced) {
-      document.querySelectorAll(".magnetic").forEach((el) => {
-        const htmlEl = el as HTMLElement;
-
-        const onMove = (e: MouseEvent) => {
-          const rect = htmlEl.getBoundingClientRect();
-          const x = (e.clientX - rect.left - rect.width / 2) * 0.28;
-          const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
-          htmlEl.style.transform = `translate(${x}px, ${y}px)`;
-        };
-
-        const onLeave = () => {
-          htmlEl.style.transform = "";
-        };
-
-        htmlEl.addEventListener("mousemove", onMove);
-        htmlEl.addEventListener("mouseleave", onLeave);
-        magneticCleanups.push(() => {
-          htmlEl.removeEventListener("mousemove", onMove);
-          htmlEl.removeEventListener("mouseleave", onLeave);
-        });
-      });
-    }
-
     /* ── Cleanup ────────────────────────────────────── */
     return () => {
       clearTimeout(loadTimer);
@@ -171,8 +111,6 @@ export default function MotionSystem() {
       }
       revealObserver.disconnect();
       countObserver.disconnect();
-      if (parallaxRafId) cancelAnimationFrame(parallaxRafId);
-      magneticCleanups.forEach((fn) => fn());
     };
   }, []);
 

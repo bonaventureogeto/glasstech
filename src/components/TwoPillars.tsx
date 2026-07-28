@@ -51,55 +51,15 @@ export default function TwoPillars() {
           {pillars.map((p, idx) => (
             <div
               key={p.num}
-              className="group relative rounded-[var(--r)] overflow-hidden reveal"
+              className="rounded-[var(--r)] reveal"
               data-d={idx + 1}
               style={{
                 background: "var(--ink)",
                 minHeight: "380px",
               }}
             >
-              {/* Radial gradient bg */}
-              <div
-                className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]"
-                style={{
-                  background:
-                    idx === 0
-                      ? "radial-gradient(ellipse 80% 70% at 30% 20%, rgba(59,150,216,.08), transparent)"
-                      : "radial-gradient(ellipse 80% 70% at 70% 30%, rgba(59,150,216,.08), transparent)",
-                }}
-              />
-
-              {/* Grid overlay */}
-              <div
-                className="absolute inset-0 opacity-[.06]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-                  backgroundSize: "44px 44px",
-                  mask: idx === 0
-                    ? "linear-gradient(135deg, rgba(0,0,0,.6) 0%, transparent 60%)"
-                    : "linear-gradient(225deg, rgba(0,0,0,.6) 0%, transparent 60%)",
-                  WebkitMask: idx === 0
-                    ? "linear-gradient(135deg, rgba(0,0,0,.6) 0%, transparent 60%)"
-                    : "linear-gradient(225deg, rgba(0,0,0,.6) 0%, transparent 60%)",
-                }}
-              />
-
-              {/* Edge glow */}
-              <div
-                className="absolute w-[180px] h-[180px] rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700"
-                style={{
-                  background: "var(--edge)",
-                  filter: "blur(60px)",
-                  top: idx === 0 ? "10%" : "auto",
-                  bottom: idx === 1 ? "10%" : "auto",
-                  left: idx === 0 ? "5%" : "auto",
-                  right: idx === 1 ? "5%" : "auto",
-                }}
-              />
-
               {/* Content */}
-              <div className="relative z-10 flex flex-col justify-end h-full p-8 min-[820px]:p-10 transition-transform duration-500 group-hover:-translate-y-[5px]">
+              <div className="flex flex-col justify-end h-full p-8 min-[820px]:p-10">
                 <span className="font-mono text-[11px] tracking-[.08em] uppercase text-[var(--edge)] mb-3">
                   {p.num} — {p.kicker}
                 </span>

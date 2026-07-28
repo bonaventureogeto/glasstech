@@ -127,21 +127,11 @@ export default function Contact() {
 
           {/* Contact card */}
           <div
-            className="relative rounded-[var(--r)] p-8 overflow-hidden reveal"
+            className="rounded-[var(--r)] p-8 reveal"
             data-d="2"
             style={{ background: "var(--ink)" }}
           >
-            {/* Blurred glow */}
-            <div
-              className="absolute -top-[40px] -right-[40px] w-[200px] h-[200px] rounded-full"
-              style={{
-                background: "var(--edge)",
-                filter: "blur(80px)",
-                opacity: 0.15,
-              }}
-            />
-
-            <div className="relative z-10">
+            <div>
               <h3
                 className="font-display text-white text-[24px] leading-snug mb-3"
                 style={{ fontWeight: 700, letterSpacing: "-.02em" }}
@@ -159,7 +149,7 @@ export default function Contact() {
                   href="https://wa.me/254714498682?text=Hi%20Glasstech%2C%20I%27d%20like%20a%20quote."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="magnetic flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
+                  className="flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
                   style={{ background: "var(--edge-deep)" }}
                 >
                   <WhatsAppIcon />
@@ -167,14 +157,14 @@ export default function Contact() {
                 </a>
                 <a
                   href="tel:+254714498682"
-                  className="magnetic flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
+                  className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
                   style={{ border: "1px solid var(--glass-line)" }}
                 >
                   Call the workshop
                 </a>
                 <a
                   href="mailto:hello@glasstechandinteriors.com"
-                  className="magnetic flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
+                  className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-[14px] font-medium no-underline text-white transition-colors"
                   style={{ border: "1px solid var(--glass-line)" }}
                 >
                   Email us

@@ -7,17 +7,7 @@ const WhatsAppIcon = () => (
 export default function FinalCTA() {
   return (
     <section className="band dark relative overflow-hidden">
-      <div className="inner relative z-10 text-center max-w-[720px] mx-auto">
-        {/* Blurred glow */}
-        <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full -z-10"
-          style={{
-            background: "var(--edge)",
-            filter: "blur(120px)",
-            opacity: 0.12,
-          }}
-        />
-
+      <div className="inner text-center max-w-[720px] mx-auto">
         <p className="eyebrow eyebrow-light mb-4 reveal">Ready when you are</p>
         <h2
           className="font-display text-white leading-[1.08] mb-5 reveal"
@@ -44,7 +34,7 @@ export default function FinalCTA() {
             href="https://wa.me/254714498682?text=Hi%20Glasstech%2C%20I%27d%20like%20a%20quote."
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-[15px] font-medium no-underline text-white transition-colors"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-[15px] font-medium no-underline text-white transition-colors"
             style={{ background: "var(--edge-deep)" }}
           >
             <WhatsAppIcon />
@@ -52,7 +42,7 @@ export default function FinalCTA() {
           </a>
           <a
             href="tel:+254714498682"
-            className="magnetic inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-medium no-underline text-white transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-medium no-underline text-white transition-colors"
             style={{ border: "1px solid var(--glass-line)" }}
           >
             Call +254 714 498 682

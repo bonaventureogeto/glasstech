@@ -131,7 +131,6 @@ export default function WorkRail() {
             {/* Photo layer with parallax */}
             <div
               className="absolute inset-[-10%] transition-transform duration-700 group-hover:scale-[1.03]"
-              data-par="0.04"
             >
               <Image
                 src={p.image}
