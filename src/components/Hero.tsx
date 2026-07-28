@@ -52,9 +52,9 @@ export default function Hero() {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 70% 60% at 80% 15%, rgba(232,173,99,.12) 0%, transparent 70%),
-            radial-gradient(ellipse 50% 50% at 15% 60%, rgba(46,211,183,.08) 0%, transparent 60%),
-            linear-gradient(178deg, #08171c 0%, #0b2426 46%, #071619 100%)
+            radial-gradient(ellipse 70% 60% at 80% 15%, rgba(208,49,40,.10) 0%, transparent 70%),
+            radial-gradient(ellipse 50% 50% at 15% 60%, rgba(59,150,216,.08) 0%, transparent 60%),
+            linear-gradient(178deg, #060c1a 0%, #0a1528 46%, #060b17 100%)
           `,
         }}
       />
@@ -67,15 +67,15 @@ export default function Hero() {
           transform: "perspective(1400px) rotateY(-26deg) rotateX(3deg) scale(1.15)",
           transformOrigin: "left center",
           background: `
-            radial-gradient(circle 28px at 65% 25%, rgba(232,173,99,.35) 0%, transparent 100%),
-            radial-gradient(circle 22px at 78% 42%, rgba(232,173,99,.28) 0%, transparent 100%),
-            radial-gradient(circle 20px at 52% 58%, rgba(232,173,99,.22) 0%, transparent 100%),
-            radial-gradient(circle 25px at 85% 72%, rgba(232,173,99,.30) 0%, transparent 100%),
-            radial-gradient(circle 18px at 60% 80%, rgba(46,211,183,.20) 0%, transparent 100%),
-            linear-gradient(180deg, rgba(11,33,36,.6) 0%, rgba(11,33,36,.3) 100%),
+            radial-gradient(circle 28px at 65% 25%, rgba(208,49,40,.30) 0%, transparent 100%),
+            radial-gradient(circle 22px at 78% 42%, rgba(208,49,40,.22) 0%, transparent 100%),
+            radial-gradient(circle 20px at 52% 58%, rgba(208,49,40,.18) 0%, transparent 100%),
+            radial-gradient(circle 25px at 85% 72%, rgba(208,49,40,.25) 0%, transparent 100%),
+            radial-gradient(circle 18px at 60% 80%, rgba(59,150,216,.18) 0%, transparent 100%),
+            linear-gradient(180deg, rgba(12,21,38,.6) 0%, rgba(12,21,38,.3) 100%),
             repeating-linear-gradient(90deg, transparent 0px, transparent 76px, rgba(255,255,255,.06) 76px, rgba(255,255,255,.06) 78px),
             repeating-linear-gradient(0deg, transparent 0px, transparent 58px, rgba(255,255,255,.04) 58px, rgba(255,255,255,.04) 60px),
-            #0b2124
+            #0a1426
           `,
           mask: "linear-gradient(100deg, transparent 0%, #000 22%, #000 100%)",
           WebkitMask: "linear-gradient(100deg, transparent 0%, #000 22%, #000 100%)",
@@ -145,7 +145,7 @@ export default function Hero() {
         ref={cursorRef}
         className="absolute w-[220px] h-[220px] rounded-full pointer-events-none opacity-0 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2"
         style={{
-          background: "radial-gradient(circle, rgba(46,211,183,.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(59,150,216,.15) 0%, transparent 70%)",
           mixBlendMode: "screen",
         }}
       />
@@ -155,8 +155,8 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(5,13,12,.6) 100%),
-            linear-gradient(to top, rgba(5,13,12,.5) 0%, transparent 30%)
+            radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(6,11,23,.6) 100%),
+            linear-gradient(to top, rgba(6,11,23,.5) 0%, transparent 30%)
           `,
         }}
       />
@@ -200,10 +200,10 @@ export default function Hero() {
                 {/* Avatar stack */}
                 <div className="flex items-center mb-3">
                   {[
-                    "linear-gradient(135deg, #2ed3b7, #0e8a75)",
-                    "linear-gradient(135deg, #e8ad63, #c47d34)",
-                    "linear-gradient(135deg, #0e8a75, #050d0c)",
-                    "linear-gradient(135deg, #c47d34, #e8ad63)",
+                    "linear-gradient(135deg, #3b96d8, #084a77)",
+                    "linear-gradient(135deg, #d03128, #a82520)",
+                    "linear-gradient(135deg, #084a77, #060b17)",
+                    "linear-gradient(135deg, #a82520, #d03128)",
                   ].map((bg, i) => (
                     <div
                       key={i}
@@ -214,8 +214,8 @@ export default function Hero() {
                   <div
                     className="h-8 px-2.5 rounded-full flex items-center text-[11px] font-mono font-bold text-[var(--edge)] -ml-2"
                     style={{
-                      background: "rgba(46,211,183,.12)",
-                      border: "1px solid rgba(46,211,183,.2)",
+                      background: "rgba(59,150,216,.12)",
+                      border: "1px solid rgba(59,150,216,.2)",
                     }}
                   >
                     5k+
