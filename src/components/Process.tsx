@@ -30,10 +30,10 @@ export default function Process() {
           <p className="eyebrow eyebrow-light mb-3">How a job runs</p>
           <h2
             className="font-display text-white text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-.03em" }}
+            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
             Measured, made,{" "}
-            <span className="heading-italic">mounted.</span>
+            <span className="text-[var(--edge)]">mounted.</span>
           </h2>
           <p className="text-[var(--muted-2)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
             A straight line from your first message to glass that&apos;s fitted and
@@ -53,12 +53,12 @@ export default function Process() {
               style={{ background: "var(--ink)" }}
               data-d={String((i % 2) + 1)}
             >
-              <span className="font-mono text-[32px] font-bold text-[var(--edge)] block mb-4 opacity-30">
+              <span className="font-display text-[32px] font-bold text-[var(--edge)] block mb-4 opacity-30">
                 {s.num}
               </span>
               <h3
                 className="font-display text-white text-[20px] leading-snug mb-3"
-                style={{ fontWeight: 700, letterSpacing: "-.01em" }}
+                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
               >
                 {s.title}
               </h3>

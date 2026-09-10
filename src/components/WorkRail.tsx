@@ -96,10 +96,10 @@ export default function WorkRail() {
           <p className="eyebrow mb-3">Selected projects</p>
           <h2
             className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-.03em" }}
+            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
             A broad spectrum{" "}
-            <span className="heading-italic">of glass work.</span>
+            <span className="text-[var(--edge-deep)]">of glass work.</span>
           </h2>
           <p className="text-[var(--muted)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
             From office partitions to full residential glazing — every project
@@ -128,7 +128,7 @@ export default function WorkRail() {
               scrollSnapAlign: "start",
             }}
           >
-            {/* Photo layer with parallax */}
+            {/* Photo layer */}
             <div
               className="absolute inset-[-10%] transition-transform duration-700 group-hover:scale-[1.03]"
             >
@@ -151,12 +151,12 @@ export default function WorkRail() {
 
             {/* Content */}
             <div className="absolute bottom-0 left-0 right-0 p-7 z-10">
-              <span className="font-mono text-[10px] tracking-[.06em] uppercase text-[var(--edge)] block mb-2">
+              <span className="text-[10px] font-medium tracking-[.1em] uppercase text-[var(--edge)] block mb-2">
                 {p.caption}
               </span>
               <h3
                 className="font-display text-white text-[24px] leading-snug mb-1.5"
-                style={{ fontWeight: 700, letterSpacing: "-.02em" }}
+                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
               >
                 {p.title}
               </h3>
@@ -170,7 +170,7 @@ export default function WorkRail() {
 
       {/* Hint */}
       <div className="inner mt-5">
-        <p className="font-mono text-[11px] tracking-[.04em] text-[var(--muted-2)] flex items-center gap-2 reveal">
+        <p className="text-[11px] font-medium tracking-[.06em] text-[var(--muted-2)] flex items-center gap-2 reveal">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>

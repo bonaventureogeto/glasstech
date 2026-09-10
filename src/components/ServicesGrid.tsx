@@ -46,9 +46,9 @@ export default function ServicesGrid() {
           <p className="eyebrow mb-3">What we make &amp; fit</p>
           <h2
             className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-.03em" }}
+            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
-            Products &amp; <span className="heading-italic">services</span>
+            Products &amp; <span className="text-[var(--edge-deep)]">services</span>
           </h2>
           <p className="text-[var(--muted)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
             Every job starts with a real measurement and ends with a clean, safe
@@ -79,19 +79,19 @@ export default function ServicesGrid() {
                 }}
               />
 
-              <span className="font-mono text-[11px] text-[var(--muted-2)] tracking-[.04em] mb-4 block">
+              <span className="text-[11px] font-medium tracking-[.06em] text-[var(--muted-2)] mb-4 block">
                 {s.num}
               </span>
               <h3
                 className="font-display text-[20px] leading-snug mb-3"
-                style={{ fontWeight: 700, letterSpacing: "-.01em" }}
+                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
               >
                 {s.title}
               </h3>
               <p className="text-[var(--muted)] text-[14.5px] leading-relaxed mb-4">
                 {s.body}
               </p>
-              <span className="font-mono text-[11px] tracking-[.04em] text-[var(--edge-deep)]">
+              <span className="text-[11px] font-medium tracking-[.06em] uppercase text-[var(--edge-deep)]">
                 {s.spec}
               </span>
             </div>

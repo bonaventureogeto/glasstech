@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 const links = [
   { label: "Work", href: "#work" },
@@ -38,7 +39,6 @@ export default function Nav() {
       setOpen(false);
       const el = document.querySelector(href);
       if (el) {
-        // Use Lenis if available
         const lenis = (window as unknown as { lenis?: { scrollTo: (el: Element) => void } }).lenis;
         if (lenis) {
           lenis.scrollTo(el);
@@ -69,17 +69,19 @@ export default function Nav() {
       >
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 no-underline shrink-0" aria-label="Glasstech home">
-          <img
+          <Image
             src="/images/logo-mark.png"
             alt=""
-            className="w-[30px] h-[30px] object-contain"
+            width={30}
+            height={30}
+            className="object-contain"
             aria-hidden="true"
           />
           <div className="flex flex-col leading-none">
-            <span className="text-white text-[15px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-bricolage)" }}>
+            <span className="text-white text-[15px] font-semibold tracking-tight font-display">
               Glasstech
             </span>
-            <span className="font-mono text-[9px] tracking-[.08em] uppercase text-[var(--muted-2)]">
+            <span className="text-[9px] font-medium tracking-[.08em] uppercase text-[var(--muted-2)]">
               Interior Solutions Ltd
             </span>
           </div>
@@ -124,7 +126,6 @@ export default function Nav() {
             className="absolute w-5 h-[1.5px] bg-white transition-all duration-300"
             style={{
               transform: open ? "rotate(-45deg)" : "translateY(4px)",
-              opacity: open ? 1 : 1,
             }}
           />
         </button>
@@ -150,8 +151,7 @@ export default function Nav() {
               onClick={(e) => handleNav(e, l.href)}
               className="text-[clamp(28px,6vw,42px)] font-display text-white no-underline py-2 opacity-80 hover:opacity-100 transition-opacity"
               style={{
-                fontFamily: "var(--font-bricolage)",
-                letterSpacing: "-.02em",
+                letterSpacing: "-0.01em",
                 transitionDelay: open ? `${i * 50 + 100}ms` : "0ms",
                 transform: open ? "translateX(0)" : "translateX(40px)",
                 opacity: open ? 0.8 : 0,
@@ -177,7 +177,6 @@ export default function Nav() {
           </a>
         </div>
       </div>
-
     </nav>
   );
 }

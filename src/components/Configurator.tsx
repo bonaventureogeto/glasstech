@@ -142,7 +142,7 @@ function Cell({
     >
       <div className="flex items-center gap-1.5 mb-1">
         {icon}
-        <span className="font-mono text-[10px] tracking-[.06em] uppercase text-[var(--muted)]">{label}</span>
+        <span className="text-[10px] font-medium tracking-[.1em] uppercase text-[var(--muted)]">{label}</span>
       </div>
       <div className="relative">
         {children}

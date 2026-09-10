@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const serviceLinks = [
   { label: "Glass shower cubicles", href: "#services" },
   { label: "Office partitioning", href: "#services" },
@@ -67,17 +69,19 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <img
+              <Image
                 src="/images/logo-mark.png"
                 alt=""
-                className="w-[30px] h-[30px] object-contain"
+                width={30}
+                height={30}
+                className="object-contain"
                 aria-hidden="true"
               />
               <div className="flex flex-col leading-none">
-                <span className="text-white text-[15px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-bricolage)" }}>
+                <span className="text-white text-[15px] font-semibold tracking-tight font-display">
                   Glasstech
                 </span>
-                <span className="font-mono text-[9px] tracking-[.08em] uppercase text-[var(--muted-2)]">
+                <span className="text-[9px] font-medium tracking-[.08em] uppercase text-[var(--muted-2)]">
                   Interior Solutions Ltd
                 </span>
               </div>
@@ -115,7 +119,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-mono text-[11px] tracking-[.08em] uppercase text-[var(--edge)] mb-4">
+            <h4 className="text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--edge)] mb-4">
               Services
             </h4>
             <ul className="space-y-2.5 list-none p-0 m-0">
@@ -134,7 +138,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-mono text-[11px] tracking-[.08em] uppercase text-[var(--edge)] mb-4">
+            <h4 className="text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--edge)] mb-4">
               Company
             </h4>
             <ul className="space-y-2.5 list-none p-0 m-0">
@@ -153,7 +157,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-mono text-[11px] tracking-[.08em] uppercase text-[var(--edge)] mb-4">
+            <h4 className="text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--edge)] mb-4">
               Contact
             </h4>
             <div className="space-y-2.5 text-[13.5px]">
@@ -189,10 +193,10 @@ export default function Footer() {
           className="pt-6 flex flex-wrap justify-between gap-4"
           style={{ borderTop: "1px solid var(--glass-line)" }}
         >
-          <p className="font-mono text-[11px] tracking-[.02em] text-[var(--muted-2)]">
+          <p className="text-[11px] tracking-[.02em] text-[var(--muted-2)]">
             &copy; {year} Glasstech &amp; Interior Solutions Limited. All rights reserved.
           </p>
-          <p className="font-mono text-[11px] tracking-[.02em] text-[var(--muted-2)]">
+          <p className="text-[11px] tracking-[.02em] text-[var(--muted-2)]">
             Nairobi, Kenya &middot; Automotive &amp; architectural glass
           </p>
         </div>

@@ -12,13 +12,13 @@ export default function FinalCTA() {
         <h2
           className="font-display text-white leading-[1.08] mb-5 reveal"
           style={{
-            fontSize: "clamp(34px, 6vw, 72px)",
+            fontSize: "clamp(34px, 6vw, 68px)",
             fontWeight: 700,
-            letterSpacing: "-.03em",
+            letterSpacing: "-0.01em",
           }}
           data-d="1"
         >
-          Let&apos;s get your <span className="heading-italic">glass</span>{" "}
+          Let&apos;s get your <span className="text-[var(--edge)]">glass</span>{" "}
           sorted.
         </h2>
         <p

@@ -38,14 +38,14 @@ export default function StatsWhy() {
             >
               <span
                 className="font-display text-[clamp(40px,6vw,64px)] font-bold text-white leading-none block mb-2"
-                style={{ letterSpacing: "-.03em" }}
+                style={{ letterSpacing: "-0.01em" }}
                 data-count-target={s.n}
                 data-count-suffix={s.suffix}
               >
                 {s.n}
                 <span className="text-[var(--edge)]">{s.suffix}</span>
               </span>
-              <span className="font-mono text-[11px] tracking-[.06em] uppercase text-[var(--muted-2)]">
+              <span className="text-[11px] font-medium tracking-[.1em] uppercase text-[var(--muted-2)]">
                 {s.label}
               </span>
             </div>
@@ -63,7 +63,7 @@ export default function StatsWhy() {
             >
               <h3
                 className="font-display text-white text-[20px] leading-snug mb-1.5"
-                style={{ fontWeight: 700, letterSpacing: "-.01em" }}
+                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
               >
                 {w.title}
               </h3>

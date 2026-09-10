@@ -52,10 +52,10 @@ export default function Contact() {
           <p className="eyebrow mb-3">Come see us</p>
           <h2
             className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-.03em" }}
+            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
             Two branches,{" "}
-            <span className="heading-italic">one standard.</span>
+            <span className="text-[var(--edge-deep)]">one standard.</span>
           </h2>
         </div>
 
@@ -80,12 +80,12 @@ export default function Contact() {
                 <div className="flex items-baseline gap-3 mb-4">
                   <h3
                     className="font-display text-[20px]"
-                    style={{ fontWeight: 700, letterSpacing: "-.01em" }}
+                    style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
                   >
                     {b.name}
                   </h3>
                   <span
-                    className="font-mono text-[10px] tracking-[.04em] uppercase px-2.5 py-1 rounded-full"
+                    className="text-[10px] font-medium tracking-[.06em] uppercase px-2.5 py-1 rounded-full"
                     style={{
                       background: "rgba(8,74,119,.08)",
                       color: "var(--edge-deep)",
@@ -134,9 +134,9 @@ export default function Contact() {
             <div>
               <h3
                 className="font-display text-white text-[24px] leading-snug mb-3"
-                style={{ fontWeight: 700, letterSpacing: "-.02em" }}
+                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
               >
-                Get a <span className="heading-italic">quote</span> today
+                Get a <span className="text-[var(--edge)]">quote</span> today
               </h3>
               <p className="text-[var(--muted-2)] text-[14.5px] leading-relaxed mb-6">
                 Send us the job — a photo, rough sizes, your location — and
@@ -171,7 +171,7 @@ export default function Contact() {
                 </a>
               </div>
 
-              <p className="font-mono text-[10px] tracking-[.04em] text-[var(--muted-2)] mt-5">
+              <p className="text-[10px] font-medium tracking-[.06em] text-[var(--muted-2)] mt-5">
                 Typical response within a couple of hours, business days
               </p>
             </div>

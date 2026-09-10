@@ -13,10 +13,10 @@ const items = [
 export default function Marquee() {
   const track = items.map((item, i) => (
     <span key={i} className="flex items-center gap-6 shrink-0">
-      <span className="font-mono text-[clamp(12px,1.4vw,14px)] uppercase tracking-[.06em] text-[var(--ink)] whitespace-nowrap">
+      <span className="text-[clamp(12px,1.4vw,14px)] font-medium uppercase tracking-[.06em] text-[var(--ink)] whitespace-nowrap">
         {item}
       </span>
-      <span className="text-[var(--edge-deep)] text-[14px] font-mono" aria-hidden="true">/</span>
+      <span className="text-[var(--edge-deep)] text-[14px]" aria-hidden="true">/</span>
     </span>
   ));
 
