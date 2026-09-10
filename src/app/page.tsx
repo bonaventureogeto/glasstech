@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import HeroStats from "@/components/HeroStats";
 import Configurator from "@/components/Configurator";
 import Marquee from "@/components/Marquee";
 import TwoPillars from "@/components/TwoPillars";
@@ -18,6 +19,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <HeroStats />
         <Configurator />
         <Marquee />
         <TwoPillars />

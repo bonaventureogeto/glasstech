@@ -1,10 +1,3 @@
-const stats = [
-  { n: 12, suffix: "+", label: "Years in glass" },
-  { n: 2, suffix: "", label: "Nairobi branches" },
-  { n: 50, suffix: "+", label: "Specialists on the floor" },
-  { n: 48, suffix: "h", label: "Typical turnaround" },
-];
-
 const whyItems = [
   {
     title: "Quality first",
@@ -27,32 +20,6 @@ export default function StatsWhy() {
   return (
     <section className="band dark" style={{ paddingTop: 0 }}>
       <div className="inner">
-        {/* Stats row */}
-        <div className="grid grid-cols-2 min-[820px]:grid-cols-4 gap-8 mb-20 reveal">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className="pl-5 reveal"
-              style={{ borderLeft: "1px solid var(--glass-line)" }}
-              data-d={String(i + 1)}
-            >
-              <span
-                className="font-display text-[clamp(40px,6vw,64px)] font-bold text-white leading-none block mb-2"
-                style={{ letterSpacing: "-0.01em" }}
-                data-count-target={s.n}
-                data-count-suffix={s.suffix}
-              >
-                {s.n}
-                <span className="text-[var(--edge)]">{s.suffix}</span>
-              </span>
-              <span className="text-[11px] font-medium tracking-[.1em] uppercase text-[var(--muted-2)]">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Why columns */}
         <div className="grid grid-cols-1 min-[820px]:grid-cols-3 gap-8">
           {whyItems.map((w, i) => (
             <div
