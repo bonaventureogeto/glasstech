@@ -1,27 +1,33 @@
+import Image from "next/image";
+
 const pillars = [
   {
     num: "01",
     kicker: "Automotive glass",
     title: (
       <>
-        Back on the road, <span className="heading-italic">same day</span>
+        Back on the road, <span className="text-[var(--edge)]">same day</span>
       </>
     ),
     body: "Windshield replacement, chip and crack repair, side and rear glass \u2014 for private cars, fleets and insurance jobs.",
     chips: ["Windshields", "Chip repair", "Side & rear", "Fleet / insurance"],
     link: { label: "Book a fitting", href: "#contact" },
+    image: "/images/pillar-automotive.jpg",
+    alt: "Auto glass technician fitting a car windshield",
   },
   {
     num: "02",
     kicker: "Architectural & interior",
     title: (
       <>
-        From shower screens <span className="heading-italic">to facades</span>
+        From shower screens <span className="text-[var(--edge)]">to facades</span>
       </>
     ),
     body: "Toughened and laminated glass supplied, fabricated and installed for homes, offices and developments across Kenya.",
     chips: ["Shower cubicles", "Partitions", "Facades", "Balconies"],
     link: { label: "Start a project", href: "#contact" },
+    image: "/images/pillar-architectural.jpg",
+    alt: "Modern building clad in architectural glass",
   },
 ];
 
@@ -34,10 +40,10 @@ export default function TwoPillars() {
           <p className="eyebrow mb-3">Two trades, one workshop</p>
           <h2
             className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-.03em" }}
+            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
             Whatever needs glass,{" "}
-            <span className="heading-italic">we cut it.</span>
+            <span className="text-[var(--edge-deep)]">we cut it.</span>
           </h2>
           <p className="text-[var(--muted)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
             We run two arms out of the same fabrication floor — vehicle glass and
@@ -51,21 +57,38 @@ export default function TwoPillars() {
           {pillars.map((p, idx) => (
             <div
               key={p.num}
-              className="rounded-[var(--r)] reveal"
+              className="relative rounded-[var(--r)] overflow-hidden reveal"
               data-d={idx + 1}
               style={{
                 background: "var(--ink)",
                 minHeight: "380px",
               }}
             >
+              {/* Background image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={p.image}
+                  alt={p.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 820px) 100vw, 50vw"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to top, rgba(6,11,23,.92) 0%, rgba(6,11,23,.6) 50%, rgba(6,11,23,.35) 100%)",
+                  }}
+                />
+              </div>
+
               {/* Content */}
-              <div className="flex flex-col justify-end h-full p-8 min-[820px]:p-10">
-                <span className="font-mono text-[11px] tracking-[.08em] uppercase text-[var(--edge)] mb-3">
+              <div className="relative flex flex-col justify-end h-full p-8 min-[820px]:p-10">
+                <span className="text-[11px] font-medium tracking-[.1em] uppercase text-[var(--edge)] mb-3">
                   {p.num} — {p.kicker}
                 </span>
                 <h3
                   className="font-display text-white text-[clamp(22px,3vw,30px)] leading-[1.15] mb-3"
-                  style={{ fontWeight: 700, letterSpacing: "-.02em" }}
+                  style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
                 >
                   {p.title}
                 </h3>
@@ -76,7 +99,7 @@ export default function TwoPillars() {
                   {p.chips.map((c) => (
                     <span
                       key={c}
-                      className="font-mono text-[10px] tracking-[.04em] uppercase px-3 py-1.5 rounded-full"
+                      className="text-[10px] font-medium tracking-[.06em] uppercase px-3 py-1.5 rounded-full"
                       style={{
                         background: "rgba(255,255,255,.06)",
                         color: "var(--muted-2)",
