@@ -1,24 +1,11 @@
 import type { Metadata } from "next";
-import {
-  Bricolage_Grotesque,
-  Fraunces,
-  Inter,
-  Space_Mono,
-} from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: "italic",
-  variable: "--font-fraunces",
+  weight: ["500", "600", "700"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -29,17 +16,19 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Glasstech & Interior Solutions | Automotive & Architectural Glass in Nairobi",
+  metadataBase: new URL("https://glasstechandinteriors.com"),
+  title:
+    "Glasstech & Interior Solutions | Automotive & Architectural Glass in Nairobi",
   description:
     "Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings. Windshields, shower cubicles, office partitions, facades and more \u2014 measured on site, fabricated to spec.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Glasstech & Interior Solutions | Automotive & Architectural Glass",
     description:
@@ -47,6 +36,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_KE",
     siteName: "Glasstech & Interior Solutions Limited",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Glasstech & Interior Solutions \u2014 Automotive & architectural glass, Nairobi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Glasstech & Interior Solutions | Automotive & Architectural Glass",
+    description:
+      "Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings.",
+    images: ["/og.jpg"],
   },
 };
 
@@ -56,13 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${bricolage.variable} ${fraunces.variable} ${inter.variable} ${spaceMono.variable}`}
-    >
-      <body>
-        {children}
-      </body>
+    <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
