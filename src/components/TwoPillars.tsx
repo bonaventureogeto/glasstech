@@ -1,127 +1,87 @@
 import Image from "next/image";
+import { media, pillarMedia } from "@/content/media";
+import { whatsappLink } from "@/content/site";
 
 const pillars = [
   {
-    num: "01",
-    kicker: "Automotive glass",
-    title: (
-      <>
-        Back on the road, <span className="text-[var(--edge)]">same day</span>
-      </>
-    ),
-    body: "Windshield replacement, chip and crack repair, side and rear glass \u2014 for private cars, fleets and insurance jobs.",
-    chips: ["Windshields", "Chip repair", "Side & rear", "Fleet / insurance"],
-    link: { label: "Book a fitting", href: "#contact" },
-    image: "/images/pillar-automotive.jpg",
-    alt: "Auto glass technician fitting a car windshield",
+    kicker: "01 · Automotive glass",
+    title: "Back on the road, same day",
+    body: "Windshield replacement, chip and crack repair, side and rear glass. Private cars, fleets and insurance jobs.",
+    chips: ["Windshields", "Chip repair", "Side and rear", "Fleet and insurance"],
+    cta: "Book a fitting",
+    message: "Hi Glasstech, I'd like to book an auto glass fitting.",
+    mediaId: pillarMedia.automotive,
   },
   {
-    num: "02",
-    kicker: "Architectural & interior",
-    title: (
-      <>
-        From shower screens <span className="text-[var(--edge)]">to facades</span>
-      </>
-    ),
+    kicker: "02 · Architectural and interior",
+    title: "From shower screens to facades",
     body: "Toughened and laminated glass supplied, fabricated and installed for homes, offices and developments across Kenya.",
     chips: ["Shower cubicles", "Partitions", "Facades", "Balconies"],
-    link: { label: "Start a project", href: "#contact" },
-    image: "/images/pillar-architectural.jpg",
-    alt: "Modern building clad in architectural glass",
+    cta: "Start a project",
+    message: "Hi Glasstech, I'd like to start an architectural glass project.",
+    mediaId: pillarMedia.architectural,
   },
 ];
 
 export default function TwoPillars() {
   return (
-    <section className="band" id="about">
-      <div className="inner">
-        {/* Header */}
-        <div className="mb-12 max-w-[640px] reveal">
-          <p className="eyebrow mb-3">Two trades, one workshop</p>
-          <h2
-            className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
-          >
-            Whatever needs glass,{" "}
-            <span className="text-[var(--edge-deep)]">we cut it.</span>
-          </h2>
-          <p className="text-[var(--muted)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
-            We run two arms out of the same fabrication floor — vehicle glass and
-            architectural glass — so the same standard of measuring, cutting and
-            fitting shows up on a saloon car and a six-storey facade.
+    <section id="about" aria-labelledby="about-title" className="bg-white">
+      <div className="shell flex flex-col gap-7 py-16 md:gap-12 md:pt-28 md:pb-24">
+        <div className="reveal grid gap-3 md:grid-cols-12 md:items-end md:gap-8">
+          <div className="flex flex-col gap-3 md:col-span-7 md:gap-4">
+            <p className="eyebrow text-[11px] text-navy md:text-xs">Two trades, one workshop</p>
+            <h2 id="about-title" className="text-h2 font-bold">
+              Whatever needs glass, <span className="text-red">we cut it.</span>
+            </h2>
+          </div>
+          <p className="text-[15px] text-muted md:col-span-5 md:text-[17px] md:leading-[1.65]">
+            We run vehicle glass and architectural glass off the same fabrication floor, so the same standard of
+            measuring, cutting and fitting shows up on a saloon car and a six-storey facade.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 min-[820px]:grid-cols-2 gap-5">
-          {pillars.map((p, idx) => (
-            <div
-              key={p.num}
-              className="relative rounded-[var(--r)] overflow-hidden reveal"
-              data-d={idx + 1}
-              style={{
-                background: "var(--ink)",
-                minHeight: "380px",
-              }}
-            >
-              {/* Background image */}
-              <div className="absolute inset-0">
-                <Image
-                  src={p.image}
-                  alt={p.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 820px) 100vw, 50vw"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, rgba(6,11,23,.92) 0%, rgba(6,11,23,.6) 50%, rgba(6,11,23,.35) 100%)",
-                  }}
-                />
-              </div>
-
-              {/* Content */}
-              <div className="relative flex flex-col justify-end h-full p-8 min-[820px]:p-10">
-                <span className="text-[11px] font-medium tracking-[.1em] uppercase text-[var(--edge)] mb-3">
-                  {p.num} — {p.kicker}
-                </span>
-                <h3
-                  className="font-display text-white text-[clamp(22px,3vw,30px)] leading-[1.15] mb-3"
-                  style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
-                >
-                  {p.title}
-                </h3>
-                <p className="text-[var(--muted-2)] text-[15px] leading-relaxed mb-5 max-w-[400px]">
-                  {p.body}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {p.chips.map((c) => (
-                    <span
-                      key={c}
-                      className="text-[10px] font-medium tracking-[.06em] uppercase px-3 py-1.5 rounded-full"
-                      style={{
-                        background: "rgba(255,255,255,.06)",
-                        color: "var(--muted-2)",
-                        border: "1px solid rgba(255,255,255,.08)",
-                      }}
-                    >
-                      {c}
-                    </span>
-                  ))}
+        <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+          {pillars.map((p) => {
+            const photo = p.mediaId ? media.find((m) => m.id === p.mediaId) : undefined;
+            return (
+              <article
+                key={p.kicker}
+                className="reveal on-dark relative isolate flex min-h-[340px] flex-col justify-between gap-10 overflow-hidden rounded-card bg-navy-panel p-[22px] text-white md:min-h-[480px] md:rounded-panel md:p-8"
+              >
+                {/* Multiplied into the navy so bright sky and walls never sit behind the text */}
+                {photo && (
+                  <Image
+                    src={photo.poster ?? photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover opacity-55 mix-blend-multiply"
+                  />
+                )}
+                <div className="mull-grid absolute inset-0" aria-hidden="true" />
+                <p className="eyebrow relative text-[11px] text-sky md:text-xs">{p.kicker}</p>
+                <div className="relative flex flex-col gap-3 md:gap-3.5">
+                  <h3 className="text-[26px] leading-[1.1] font-semibold tracking-[-0.01em] md:text-[32px]">{p.title}</h3>
+                  <p className="max-w-[460px] text-[15px] leading-[1.55] text-mist md:text-base md:leading-[1.6]">{p.body}</p>
+                  <ul className="hidden flex-wrap gap-2 md:flex" aria-label="Includes">
+                    {p.chips.map((c) => (
+                      <li key={c} className="rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium">
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={whatsappLink(p.message)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-red mt-1 self-start md:mt-2"
+                  >
+                    {p.cta}
+                  </a>
                 </div>
-                <a
-                  href={p.link.href}
-                  className="inline-flex items-center gap-2 text-[var(--edge)] text-[14px] font-medium no-underline group/link"
-                >
-                  {p.link.label}
-                  <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">
-                    &rarr;
-                  </span>
-                </a>
-              </div>
-            </div>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -64,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${figtree.variable} ${inter.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${figtree.variable} ${inter.variable}`}>
       <body>
         {children}
         <script

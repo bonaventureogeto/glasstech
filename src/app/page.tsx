@@ -1,16 +1,15 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import HeroStats from "@/components/HeroStats";
-import Configurator from "@/components/Configurator";
-import Marquee from "@/components/Marquee";
+import TrustStrip from "@/components/TrustStrip";
 import TwoPillars from "@/components/TwoPillars";
 import ServicesGrid from "@/components/ServicesGrid";
-import WorkRail from "@/components/WorkRail";
+import Work from "@/components/Work";
 import Process from "@/components/Process";
-import StatsWhy from "@/components/StatsWhy";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
 
 export default function Home() {
@@ -19,18 +18,17 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <HeroStats />
-        <Configurator />
-        <Marquee />
+        <TrustStrip />
         <TwoPillars />
         <ServicesGrid />
-        <WorkRail />
+        <Work />
         <Process />
-        <StatsWhy />
+        <Testimonials />
         <Contact />
         <FinalCTA />
       </main>
       <Footer />
+      <StickyCTA />
       <MotionSystem />
     </>
   );

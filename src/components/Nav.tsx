@@ -1,182 +1,126 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
+import { useRef } from "react";
+import Link from "next/link";
+import Logo from "@/components/Logo";
+import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { site, whatsappLink } from "@/content/site";
 
 const links = [
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
+const phone = site.phones[0];
+
 export default function Nav() {
-  const [solid, setSolid] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
-  const handleNav = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      setOpen(false);
-      const el = document.querySelector(href);
-      if (el) {
-        const lenis = (window as unknown as { lenis?: { scrollTo: (el: Element) => void } }).lenis;
-        if (lenis) {
-          lenis.scrollTo(el);
-        } else {
-          el.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    },
-    []
-  );
+  const menu = useRef<HTMLDialogElement>(null);
+  const close = () => menu.current?.close();
 
   return (
-    <nav
-      className="fixed top-4 left-1/2 z-[100] w-[calc(100%-32px)] max-w-[1120px] -translate-x-1/2 load-fade"
-      style={{ transitionDelay: "0ms" }}
-    >
-      <div
-        className={`flex items-center justify-between gap-4 rounded-full px-5 py-2.5 transition-all duration-500 ${
-          solid
-            ? "bg-[rgba(6,11,23,.82)] shadow-[0_8px_32px_rgba(0,0,0,.35)]"
-            : "bg-[rgba(10,18,34,.55)] shadow-[0_8px_32px_rgba(0,0,0,.18)]"
-        }`}
-        style={{
-          backdropFilter: "blur(16px) saturate(1.3)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.3)",
-          border: "1px solid rgba(255,255,255,.14)",
-        }}
-      >
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 no-underline shrink-0" aria-label="Glasstech home">
-          <Image
-            src="/images/logo-mark.png"
-            alt=""
-            width={30}
-            height={30}
-            className="object-contain"
-            aria-hidden="true"
-          />
-          <div className="flex flex-col leading-none">
-            <span className="text-white text-[15px] font-semibold tracking-tight font-display">
-              Glasstech
-            </span>
-            <span className="text-[9px] font-medium tracking-[.08em] uppercase text-[var(--muted-2)]">
-              Interior Solutions Ltd
-            </span>
-          </div>
-        </a>
+    <header className="sticky top-0 z-40 border-b border-line bg-white/94 backdrop-blur-[14px]">
+      <nav aria-label="Main" className="shell flex h-16 items-center justify-between gap-6 md:h-[72px]">
+        <Link href="/#top" aria-label="Glasstech and Interior Solutions, home" className="flex min-h-11 items-center">
+          <Logo />
+        </Link>
 
-        {/* Desktop links */}
-        <div className="hidden min-[920px]:flex items-center gap-1">
+        <ul className="hidden items-center gap-1 min-[920px]:flex">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => handleNav(e, l.href)}
-              className="px-3 py-1.5 text-[13.5px] text-[var(--frost)] opacity-75 hover:opacity-100 transition-opacity rounded-full no-underline"
-            >
-              {l.label}
-            </a>
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink transition-colors hover:text-red"
+              >
+                {l.label}
+              </Link>
+            </li>
           ))}
+        </ul>
+
+        <div className="flex items-center gap-2 md:gap-3">
           <a
-            href="#contact"
-            onClick={(e) => handleNav(e, "#contact")}
-            className="ml-2 flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium no-underline transition-colors bg-[var(--frost)] text-[var(--ink)] hover:bg-white"
+            href={phone.href}
+            className="hidden min-h-11 items-center gap-2 px-1 text-sm font-medium text-ink transition-colors hover:text-red min-[920px]:inline-flex"
           >
-            <span className="w-[6px] h-[6px] rounded-full bg-[var(--edge)]" />
-            Get a quote
+            <PhoneIcon size={16} />
+            {phone.display}
           </a>
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-red min-h-11 px-3.5 text-[13px] max-[379px]:hidden md:px-[18px] md:text-sm"
+          >
+            Get a quote
+            <ArrowRightIcon size={16} className="hidden md:block" />
+          </a>
+          <button
+            type="button"
+            onClick={() => menu.current?.showModal()}
+            aria-label="Open menu"
+            aria-haspopup="dialog"
+            className="inline-flex size-11 items-center justify-center rounded-button text-ink min-[920px]:hidden"
+          >
+            <MenuIcon size={22} />
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          className="min-[920px]:hidden relative w-10 h-10 flex items-center justify-center"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          <span
-            className="absolute w-5 h-[1.5px] bg-white transition-all duration-300"
-            style={{
-              transform: open ? "rotate(45deg)" : "translateY(-4px)",
-            }}
-          />
-          <span
-            className="absolute w-5 h-[1.5px] bg-white transition-all duration-300"
-            style={{
-              transform: open ? "rotate(-45deg)" : "translateY(4px)",
-            }}
-          />
-        </button>
-      </div>
-
-      {/* Mobile panel */}
-      <div
-        className={`fixed inset-0 top-0 z-[-1] min-[920px]:hidden transition-transform duration-500 ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
-        style={{
-          background: "rgba(6,11,23,.95)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          transitionTimingFunction: "var(--e-out)",
-        }}
+      <dialog
+        ref={menu}
+        aria-label="Menu"
+        onClick={(e) => e.target === menu.current && close()}
+        className="menu-panel fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-none w-[min(100vw,420px)] max-w-none bg-white p-0 text-ink"
       >
-        <div className="flex flex-col items-start justify-center h-full px-8 gap-2">
-          {links.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => handleNav(e, l.href)}
-              className="text-[clamp(28px,6vw,42px)] font-display text-white no-underline py-2 opacity-80 hover:opacity-100 transition-opacity"
-              style={{
-                letterSpacing: "-0.01em",
-                transitionDelay: open ? `${i * 50 + 100}ms` : "0ms",
-                transform: open ? "translateX(0)" : "translateX(40px)",
-                opacity: open ? 0.8 : 0,
-                transition: "transform .5s var(--e-out), opacity .5s var(--e-out)",
-              }}
+        <div className="flex h-full flex-col">
+          <div className="flex h-16 items-center justify-between border-b border-line px-5">
+            <Logo compact />
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Close menu"
+              className="inline-flex size-11 items-center justify-center rounded-button text-ink"
             >
-              {l.label}
+              <CloseIcon size={22} />
+            </button>
+          </div>
+
+          <ul className="flex flex-col px-5 pt-4">
+            {links.map((l) => (
+              <li key={l.href} className="border-b border-line">
+                <Link
+                  href={l.href}
+                  onClick={close}
+                  className="flex min-h-14 items-center font-display text-[28px] font-semibold tracking-[-0.01em] text-ink hover:text-red"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-auto flex flex-col gap-3 px-5 pt-8 pb-[calc(24px+env(safe-area-inset-bottom))]">
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+              className="btn btn-red min-h-[52px] text-[15px]"
+            >
+              <WhatsAppIcon />
+              Quote on WhatsApp
             </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={(e) => handleNav(e, "#contact")}
-            className="mt-6 flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-medium no-underline bg-[var(--frost)] text-[var(--ink)]"
-            style={{
-              transitionDelay: open ? "350ms" : "0ms",
-              transform: open ? "translateX(0)" : "translateX(40px)",
-              opacity: open ? 1 : 0,
-              transition: "transform .5s var(--e-out), opacity .5s var(--e-out)",
-            }}
-          >
-            <span className="w-[6px] h-[6px] rounded-full bg-[var(--edge)]" />
-            Get a quote
-          </a>
+            <a href={phone.href} className="btn btn-outline min-h-[52px] text-[15px]">
+              <PhoneIcon size={18} />
+              Call {phone.display}
+            </a>
+            <p className="pt-1 text-center text-[13px] text-muted">{site.hours.display}</p>
+          </div>
         </div>
-      </div>
-    </nav>
+      </dialog>
+    </header>
   );
 }

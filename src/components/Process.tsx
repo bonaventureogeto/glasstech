@@ -1,72 +1,99 @@
+import LoopVideo from "@/components/LoopVideo";
+import { processLoop } from "@/content/media";
+
 const steps = [
   {
-    num: "01",
-    title: "Inquiry & site visit",
+    title: "Inquiry and site visit",
     body: "Tell us the job. We come out, look at the opening and talk through options and glass types.",
   },
   {
-    num: "02",
-    title: "Measure & quote",
-    body: "Exact measurements on site, then a clear written quote \u2014 spec, thickness, treatment and price.",
+    title: "Measure and quote",
+    body: "Exact measurements on site, then a clear written quote: spec, thickness, treatment and price.",
   },
   {
-    num: "03",
-    title: "Cut, temper & polish",
+    title: "Cut, temper and polish",
     body: "Glass is cut to size, toughened or laminated as needed, and edges polished in the workshop.",
   },
   {
-    num: "04",
-    title: "Deliver & install",
+    title: "Deliver and install",
     body: "Our fitters deliver and install, check the seal and clean the glass before we leave.",
+  },
+];
+
+const reasons = [
+  {
+    kicker: "Quality first",
+    title: "Glass we'd fit in our own homes",
+    body: "Sourced from vetted manufacturers, so what arrives on site is what was promised in the quote.",
+  },
+  {
+    kicker: "Service that shows up",
+    title: "One team, inquiry to install",
+    body: "The people who quote the job see it through to fitting. You're never handed to a stranger.",
+  },
+  {
+    kicker: "Experience that counts",
+    title: "Cars and buildings, daily",
+    body: "Years across both trades means fewer callbacks and a cleaner finish, first time.",
   },
 ];
 
 export default function Process() {
   return (
-    <section className="band dark" id="process">
-      <div className="inner">
-        {/* Header */}
-        <div className="mb-12 max-w-[600px] reveal">
-          <p className="eyebrow eyebrow-light mb-3">How a job runs</p>
-          <h2
-            className="font-display text-white text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
-            style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
-          >
-            Measured, made,{" "}
-            <span className="text-[var(--edge)]">mounted.</span>
-          </h2>
-          <p className="text-[var(--muted-2)] text-[clamp(15px,1.6vw,17px)] leading-relaxed">
-            A straight line from your first message to glass that&apos;s fitted and
-            cleaned down. No surprises in the middle.
+    <section id="process" aria-labelledby="process-title" className="on-dark bg-navy-deep text-white">
+      <div className="shell flex flex-col gap-7 py-16 md:gap-14 md:py-24">
+        <div className="reveal grid gap-3 md:grid-cols-12 md:items-end md:gap-8">
+          <div className="flex flex-col gap-3 md:col-span-7 md:gap-4">
+            <p className="eyebrow text-[11px] text-sky md:text-xs">How a job runs</p>
+            <h2 id="process-title" className="text-h2 font-bold">
+              Measured, made, <span className="text-coral">mounted.</span>
+            </h2>
+          </div>
+          <p className="text-[15px] text-mist md:col-span-5 md:text-[17px] md:leading-[1.65]">
+            A straight line from your first message to glass that&apos;s fitted and cleaned down. No surprises in the
+            middle.
           </p>
         </div>
 
-        {/* Grid */}
-        <div
-          className="grid grid-cols-1 min-[480px]:grid-cols-2"
-          style={{ gap: "1px", background: "var(--glass-line)" }}
-        >
+        <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <div
-              key={s.num}
-              className="p-8 reveal"
-              style={{ background: "var(--ink)" }}
-              data-d={String((i % 2) + 1)}
+            <li
+              key={s.title}
+              className="reveal flex gap-4 border-t border-white/18 pt-[18px] md:flex-col md:gap-3.5 md:pt-6"
             >
-              <span className="font-display text-[32px] font-bold text-[var(--edge)] block mb-4 opacity-30">
-                {s.num}
+              <span className="flex-[0_0_44px] font-display text-[26px] leading-none font-bold text-coral md:flex-none md:text-[40px]">
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <h3
-                className="font-display text-white text-[20px] leading-snug mb-3"
-                style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
-              >
-                {s.title}
-              </h3>
-              <p className="text-[var(--muted-2)] text-[14.5px] leading-relaxed">
-                {s.body}
-              </p>
-            </div>
+              <div className="flex flex-col gap-1.5 md:gap-3.5">
+                <h3 className="text-lg font-semibold tracking-[-0.01em] md:text-[22px]">{s.title}</h3>
+                <p className="text-sm leading-[1.55] text-mist md:text-[15px] md:leading-[1.6]">{s.body}</p>
+              </div>
+            </li>
           ))}
+        </ol>
+
+        <div className="grid gap-5 lg:grid-cols-12">
+          {processLoop ? (
+            <LoopVideo
+              loop={processLoop}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="reveal relative aspect-video rounded-[18px] lg:col-span-5 lg:aspect-auto lg:min-h-80"
+            />
+          ) : (
+            <div className="mull aspect-video rounded-[18px] lg:col-span-5 lg:aspect-auto lg:min-h-80" aria-hidden="true" />
+          )}
+          <ul className="grid gap-5 md:grid-cols-3 lg:col-span-7">
+            {reasons.map((r) => (
+              <li
+                key={r.kicker}
+                className="reveal flex flex-col gap-3 rounded-card border border-white/10 bg-white/5 p-6"
+              >
+                <p className="eyebrow text-[11px] text-sky">{r.kicker}</p>
+                <h3 className="text-[19px] leading-[1.25] font-semibold">{r.title}</h3>
+                <p className="text-sm text-mist">{r.body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

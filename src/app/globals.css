@@ -123,6 +123,146 @@
   text-transform: uppercase;
 }
 
+/* Page container: 1280px max, 20px gutters on phones, 32px from tablet up */
+@utility shell {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 20px;
+
+  @media (width >= 48rem) {
+    padding-inline: 32px;
+  }
+}
+
+/* ──────────────────────────────────────────
+   Buttons: red for the action, navy for form submits,
+   ghost on navy, outline for everything else
+   ────────────────────────────────────────── */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding-inline: 20px;
+  border-radius: var(--radius-button);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+@utility btn-red {
+  background-color: var(--color-red);
+  color: var(--color-white);
+
+  &:hover {
+    background-color: var(--color-red-hover);
+  }
+}
+
+@utility btn-navy {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+
+  &:hover {
+    background-color: var(--color-red);
+  }
+}
+
+@utility btn-ghost {
+  border: 1px solid rgb(255 255 255 / 0.28);
+  color: var(--color-white);
+
+  &:hover {
+    border-color: var(--color-white);
+  }
+}
+
+@utility btn-outline {
+  border: 1px solid var(--color-outline);
+  background-color: var(--color-white);
+  color: var(--color-ink);
+
+  &:hover {
+    border-color: var(--color-ink);
+  }
+}
+
+/* Filter chips; the pressed one is solid navy */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 16px;
+  border: 1px solid var(--color-outline);
+  border-radius: 999px;
+  background-color: var(--color-white);
+  color: var(--color-ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+
+  &:hover {
+    border-color: var(--color-navy);
+  }
+
+  &[aria-pressed="true"] {
+    border-color: var(--color-navy);
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    font-weight: 600;
+  }
+}
+
+/* Native dialogs (menu, lightbox): lock the page behind them */
+@layer base {
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* Mobile menu slides in from the right */
+.menu-panel::backdrop {
+  background: rgb(6 47 77 / 0.5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu-panel {
+    transform: translateX(100%);
+    transition:
+      transform 250ms ease-out,
+      overlay 250ms allow-discrete,
+      display 250ms allow-discrete;
+  }
+
+  .menu-panel[open] {
+    transform: none;
+  }
+
+  @starting-style {
+    .menu-panel[open] {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.lightbox::backdrop {
+  background: rgb(6 47 77 / 0.95);
+}
+
 /* ──────────────────────────────────────────
    Motion: fade and rise on scroll
    ────────────────────────────────────────── */
@@ -139,74 +279,4 @@
     opacity: 1;
     transform: none;
   }
-}
-
-/* ──────────────────────────────────────────
-   Legacy tokens for the sections that have not been rebuilt yet.
-   Removed once every section uses the brand tokens above.
-   ────────────────────────────────────────── */
-:root {
-  --ink: #062f4d;
-  --ink-2: #073b61;
-  --ink-3: #084a77;
-  --frost: #f2f6fa;
-  --paper: #ffffff;
-  --edge: #8ec1ea;
-  --edge-deep: #084a77;
-  --warm: #d03128;
-  --warm-deep: #b8281f;
-  --line: #dce6ef;
-  --line-soft: rgb(8 74 119 / 0.06);
-  --muted: #4f6376;
-  --muted-2: #9cb8cf;
-  --glass: rgb(255 255 255 / 0.1);
-  --glass-line: rgb(255 255 255 / 0.22);
-  --r: 16px;
-  --maxw: 1280px;
-  --pad: clamp(18px, 4.5vw, 60px);
-  --e-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.eyebrow-light {
-  color: var(--edge);
-}
-
-.band {
-  padding: clamp(72px, 10vw, 140px) var(--pad);
-}
-
-.band.dark {
-  background: var(--ink);
-  color: var(--frost);
-}
-
-.inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  width: 100%;
-}
-
-.load-fade {
-  transition: opacity 0.7s var(--e-out), transform 0.7s var(--e-out);
-}
-
-.load-mask {
-  transition: transform 0.8s var(--e-out);
-}
-
-body:not(.is-loaded) .load-fade {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-body:not(.is-loaded) .load-mask {
-  transform: translateY(110%);
-}
-
-.scrollbar-hide {
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
 }

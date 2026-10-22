@@ -1,158 +1,92 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, type FormEvent } from "react";
+import { ArrowRightIcon, ChevronDownIcon } from "@/components/icons";
+import { quoteMessage, site, whatsappLink } from "@/content/site";
 
-const services = [
-  "Automotive glass",
-  "Glass shower cubicle",
-  "Office partitioning",
-  "Building glass supply",
-  "Balconies & railings",
-  "Mirrors & splashbacks",
-];
-
-const glassTypes = [
-  "Toughened",
-  "Laminated",
-  "Low-iron",
-  "Float \u00b7 clear",
-  "Mirror",
-  "Not sure yet",
-];
-
-const locations = [
-  "Nairobi",
-  "Kiambu",
-  "Machakos",
-  "Nakuru",
-  "Mombasa",
-  "Elsewhere in Kenya",
-];
-
-const ServiceIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--edge-deep)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" />
-  </svg>
-);
-const GlassIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--edge-deep)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M4 4h16v16H4z" /><path d="M4 4l16 16" />
-  </svg>
-);
-const PinIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--edge-deep)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" /><circle cx="12" cy="9" r="2.5" />
-  </svg>
-);
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14M12 5l7 7-7 7" />
-  </svg>
-);
+const fields = [
+  {
+    id: "quote-service",
+    label: "Service",
+    options: [
+      "Automotive glass",
+      "Glass shower cubicle",
+      "Office partitioning",
+      "Building glass supply",
+      "Balconies and railings",
+      "Mirrors and splashbacks",
+    ],
+  },
+  {
+    id: "quote-glass",
+    label: "Glass type",
+    options: ["Toughened", "Laminated", "Low-iron", "Clear float", "Mirror", "Not sure yet"],
+  },
+  {
+    id: "quote-location",
+    label: "Location",
+    options: ["Nairobi", "Kiambu", "Machakos", "Nakuru", "Mombasa", "Elsewhere in Kenya"],
+  },
+] as const;
 
 export default function Configurator() {
-  const [service, setService] = useState(services[0]);
-  const [glass, setGlass] = useState(glassTypes[0]);
-  const [location, setLocation] = useState(locations[0]);
+  const [values, setValues] = useState<string[]>(fields.map((f) => f.options[0]));
 
-  const waLink = useMemo(() => {
-    const text = `Hi Glasstech, I'd like a quote.\nService: ${service}\nGlass type: ${glass}\nLocation: ${location}`;
-    return `https://wa.me/254714498682?text=${encodeURIComponent(text)}`;
-  }, [service, glass, location]);
+  const message = `${quoteMessage}\nService: ${values[0]}\nGlass type: ${values[1]}\nLocation: ${values[2]}`;
 
-  const selectClass =
-    "appearance-none bg-transparent border-0 text-[var(--ink)] text-[14px] w-full cursor-pointer pr-6 focus:outline-none font-medium";
+  function submit(e: FormEvent) {
+    e.preventDefault();
+    window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
+  }
 
   return (
-    <div className="configurator-wrap load-fade" style={{ transitionDelay: "800ms" }}>
-      <div
-        className="rounded-[20px] p-1.5"
-        style={{
-          background: "rgba(251,253,252,.92)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          boxShadow: "0 12px 48px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06)",
-        }}
+    <div>
+      {/* Without JS this still opens WhatsApp with a plain quote request. */}
+      <form
+        action={`https://wa.me/${site.whatsappNumber}`}
+        method="get"
+        target="_blank"
+        onSubmit={submit}
+        aria-label="Quick quote"
+        className="grid grid-cols-2 overflow-hidden rounded-card bg-white text-ink shadow-[0_24px_60px_rgb(0_0_0/0.35)] min-[880px]:grid-cols-4"
       >
-        <div className="grid grid-cols-2 min-[880px]:grid-cols-[1fr_1fr_1fr_56px] gap-0">
-          <Cell icon={<ServiceIcon />} label="Service" className="col-span-2 min-[880px]:col-span-1">
-            <select value={service} onChange={(e) => setService(e.target.value)} className={selectClass} aria-label="Select service">
-              {services.map((s) => <option key={s}>{s}</option>)}
-            </select>
-          </Cell>
-          <Cell icon={<GlassIcon />} label="Glass type" divider>
-            <select value={glass} onChange={(e) => setGlass(e.target.value)} className={selectClass} aria-label="Select glass type">
-              {glassTypes.map((g) => <option key={g}>{g}</option>)}
-            </select>
-          </Cell>
-          <Cell icon={<PinIcon />} label="Location" divider>
-            <select value={location} onChange={(e) => setLocation(e.target.value)} className={selectClass} aria-label="Select location">
-              {locations.map((l) => <option key={l}>{l}</option>)}
-            </select>
-          </Cell>
-          <a
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="col-span-2 min-[880px]:col-span-1 min-[880px]:w-[56px] h-[52px] min-[880px]:h-auto rounded-2xl flex items-center justify-center text-white transition-colors hover:bg-[var(--ink-2)]"
-            style={{ background: "var(--ink)" }}
-            aria-label="Get quote on WhatsApp"
+        <input type="hidden" name="text" value={quoteMessage} />
+        {fields.map((f, i) => (
+          <div
+            key={f.id}
+            className={`relative flex flex-col gap-1.5 border-line px-[18px] pt-4 pb-2 min-[880px]:border-b-0 min-[880px]:px-[22px] min-[880px]:pt-[18px] min-[880px]:pb-2.5 ${
+              i === 0 ? "col-span-2 border-b min-[880px]:col-span-1 min-[880px]:border-r" : "border-b"
+            } ${i === 1 ? "border-r" : ""}`}
           >
-            <SearchIcon />
-          </a>
+            <label htmlFor={f.id} className="eyebrow text-[11px] text-navy">
+              {f.label}
+            </label>
+            <select
+              id={f.id}
+              value={values[i]}
+              onChange={(e) => setValues((v) => v.map((x, j) => (j === i ? e.target.value : x)))}
+              className="min-h-11 w-full cursor-pointer appearance-none bg-transparent pr-6 text-base font-semibold text-ink"
+            >
+              {f.options.map((o) => (
+                <option key={o}>{o}</option>
+              ))}
+            </select>
+            <ChevronDownIcon
+              size={16}
+              className="pointer-events-none absolute right-[18px] bottom-[22px] text-muted min-[880px]:right-[22px] min-[880px]:bottom-6"
+            />
+          </div>
+        ))}
+        <div className="col-span-2 flex p-2.5 min-[880px]:col-span-1">
+          <button type="submit" className="btn btn-navy min-h-[52px] flex-1 text-[15px] min-[880px]:min-h-14">
+            Get my quote on WhatsApp
+            <ArrowRightIcon size={16} />
+          </button>
         </div>
-      </div>
-
-      <style jsx>{`
-        .configurator-wrap {
-          position: relative;
-          z-index: 20;
-          padding: 0 var(--pad);
-          margin: -34px auto 0;
-          max-width: calc(var(--maxw) + var(--pad) * 2);
-        }
-        @media (min-width: 880px) {
-          .configurator-wrap {
-            position: relative;
-            margin-top: -50px;
-          }
-        }
-      `}</style>
-    </div>
-  );
-}
-
-function Cell({
-  icon,
-  label,
-  children,
-  divider,
-  className,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  children: React.ReactNode;
-  divider?: boolean;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`px-4 py-3 min-[880px]:py-4 relative ${className || ""}`}
-      style={divider ? { boxShadow: "inset 1px 0 0 var(--line)" } : undefined}
-    >
-      <div className="flex items-center gap-1.5 mb-1">
-        {icon}
-        <span className="text-[10px] font-medium tracking-[.1em] uppercase text-[var(--muted)]">{label}</span>
-      </div>
-      <div className="relative">
-        {children}
-        <svg
-          className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none"
-          width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted-2)" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </div>
+      </form>
+      <p className="mt-3.5 text-center text-[13px] text-mist-muted">
+        Reply within a couple of hours on business days. No obligation.
+      </p>
     </div>
   );
 }
