@@ -1,123 +1,108 @@
 # Glasstech & Interior Solutions - Marketing Site
 
-Production marketing site for **Glasstech & Interior Solutions Limited**, a Nairobi-based automotive and architectural glass company.
+Production marketing site for **Glasstech and Interior Solutions Limited**, an automotive, architectural and interior glass company working from one workshop at Sunrise Centre, Northern Bypass, Nairobi. Live at [www.glasstech.co.ke](https://www.glasstech.co.ke).
 
-## Getting Started
+## Getting started
 
 ```bash
 npm install
 npm run dev     # http://localhost:3000
 npm run build   # production build
-npm start       # serve production build
+npm start       # serve the production build
+npm run lint
 ```
 
 ## Stack
 
-- **Next.js 16** (App Router) + TypeScript
-- **Tailwind CSS v4** (CSS-based config)
-- **Lenis** for momentum smooth scroll
-- No external images or CDN dependencies
+- **Next.js 16** (App Router, Turbopack) + TypeScript, every route prerendered as static HTML
+- **Tailwind CSS v4** with the theme defined in CSS (`src/app/globals.css`)
+- **next/font** for Figtree and Inter, **next/image** for every photo and poster
+- No animation or scroll libraries: motion is CSS plus one IntersectionObserver
 
-## Design Tokens
+## Routes
 
-All design tokens are defined as CSS custom properties in `src/app/globals.css` and mirrored into Tailwind's theme via `@theme inline` in the same file.
+| Route | What it is |
+|-------|------------|
+| `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, testimonials, contact, final CTA |
+| `/work` | Every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive, with a lightbox |
+| `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
-Key tokens: `--ink`, `--edge`, `--edge-deep`, `--warm`, `--frost`, `--paper`, `--pad`, `--maxw`.
+## Brand
 
-## Fonts
+Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.css`; Tailwind's default palette is switched off so only these exist (`bg-navy-deep`, `text-coral`, ...).
 
-Loaded via `next/font/google` in `src/app/layout.tsx`:
+| Token | Hex | Use |
+|-------|-----|-----|
+| `navy` | `#084A77` | Eyebrows and icons on light, navy buttons, structure |
+| `navy-deep` | `#062F4D` | Ground for dark sections |
+| `navy-panel` | `#073B61` | Hero and dark cards (with the `.mull` window grid) |
+| `red` / `red-hover` | `#D03128` / `#B8281F` | Primary CTA only, plus one accent word on light |
+| `coral` | `#F0564C` | Accent word on navy, 32px+ only |
+| `sky` | `#8EC1EA` | Eyebrows and small labels on navy |
+| `ink` / `muted` | `#0B1F30` / `#4F6376` | Text on light |
+| `mist` / `mist-muted` | `#CFE0EE` / `#9CB8CF` | Text on navy |
+| `frost` / `line` | `#F2F6FA` / `#DCE6EF` | Light sections, borders |
 
-- **Archivo** (weights 500, 600, 700) -- all headings (h1, h2, h3), stat numbers, and display text. CSS variable: `--font-archivo`. Mapped to `--font-display` in Tailwind theme.
-- **Inter** (weights 400, 500, 600) -- body text, buttons, nav links, labels, eyebrows, and everything else. CSS variable: `--font-inter`. Mapped to `--font-body` in Tailwind theme.
+- **Type**: Figtree (600-800) for headings and numbers, Inter (400-700) for everything else. H1 76/42px and H2 48/32px scale fluidly between 768px and 1280px (`text-h1`, `text-h2`).
+- **Motif**: `.mull` is the window grid from the logo mark on `navy-panel`; `.mull-grid` is the same lines without a ground, laid over photos; `.mull-light` is the light variant.
+- **Components**: `btn` + `btn-red` (WhatsApp and primary actions), `btn-navy` (form submits), `btn-ghost` (on navy), `btn-outline` (everything else), `chip` (filters), `shell` (1280px container). Radius: 10px buttons, 16px cards, 20px feature panels, 999px chips. Every control is at least 44px tall.
+- **Contrast**: every text pairing passes WCAG AA (sky on navy-deep 7.2:1, muted on frost 5.7:1, white on red 5.1:1; coral is only used at 26px and above, 3.4:1 or better).
 
-Heading letter-spacing is set to `-0.01em` throughout. Eyebrows and labels use Inter at 500/600 weight, 11-12px, `letter-spacing: 0.1em`, uppercase.
+### Logo
 
-## Image & Video Assets
+`public/brand/` holds three SVGs extracted from the Illustrator master (`NEW GLASSTECH logo.pdf`, not committed): `logo-full.svg` (navy and red, for white), `logo-full-white.svg` (navy parts white, red kept, for navy) and `logo-mark.svg` (the G and building, square). Fills are the PDF's own values, and the window panes are cut out so they show whatever sits behind the logo.
 
-All assets are stored locally in `/public/`. No external hotlinking.
+`npm run brand` (`scripts/build-brand-assets.mjs`) regenerates `src/app/favicon.ico` (16/32/48), `public/icon.svg`, `public/apple-touch-icon.png` (180px, mark on white) and `public/og.jpg` (1200x630: white logo on the window grid beside the hero still).
 
-### Hero video (`/public/video/`)
+## Business facts
 
-| File | Status | Subject |
-|------|--------|---------|
-| `hero-facade.mp4` | Present | Glass buildings with cloudy sky, ~4.3 MB, 720p. Source: Mixkit (free commercial license) |
-| `hero-facade.webm` | **Missing -- needs conversion** | WebM version of the hero video for smaller file size. Convert with: `ffmpeg -i hero-facade.mp4 -c:v libvpx-vp9 -b:v 1M -an hero-facade.webm` |
-| `hero-facade-poster.jpg` | Present | Glass building facade still from Pexels. Used as video poster and fallback image on mobile/reduced-motion |
+Stats, phone numbers, hours, address, email and social links live in `src/content/site.ts`, which also builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Change them there and every section updates.
 
-The hero video autoplays only on screens >= 768px wide, when the user has not set `prefers-reduced-motion`, and when Save-Data is not active. Otherwise the poster image is shown as a static background.
+## Media pipeline
 
-### Section images (`/public/images/`)
+All photography and video is Glasstech's own work; there is no stock imagery.
 
-| File | Status | Alt text | Subject / source |
-|------|--------|----------|------------------|
-| `pillar-automotive.jpg` | Present | Auto glass technician fitting a car windshield | Car windshield / auto glass close-up. Pexels photo 2265634 |
-| `pillar-architectural.jpg` | Present | Modern building clad in architectural glass | Modern glass curtain-wall facade. Pexels photo 162539 |
-| `work-kerugoya.jpg` | Present | Residential home with floor-to-ceiling glazing | Modern luxury house with glass windows. Pexels photo 35361412 |
-| `work-prism.jpg` | Present | Commercial glass curtain-wall facade | Modern multistory building with glass windows. Pexels photo 8529658 |
-| `work-windows-balconies.jpg` | Present | Frameless glass balcony balustrade | Glass railing on a balcony. Pexels photo 10420335 |
-| `work-partitions.jpg` | Present | Office interior divided by glass partitions | Stylish office interior with glass walls. Pexels photo 3801167 |
-| `proof-interior.jpg` | Present | Frameless glass shower enclosure in a modern bathroom | Clear glass shower room. Pexels photo 271631 |
-| `why-workshop.jpg` | **Missing -- optional** | Glass being cut and polished in the workshop | Suggested search: "glass cutting workshop" on Pexels/Unsplash |
+1. **Originals** go in `public/content/` (a mirror of the `glasstech content` folder: about 18 GB of 4K drone and Osmo Pocket footage). It is gitignored and listed in `.vercelignore`, so it is never committed or uploaded.
+2. **`scripts/media-manifest.mjs`** is the source of truth: each item's source file, category, project, alt text, trim window and poster frame, which items fill the homepage slots, and the files that are deliberately left out with the reason.
+3. **`npm run media`** (`scripts/optimise-media.mjs`, needs `ffmpeg`) writes the optimised files to `public/media/` and regenerates **`src/content/media.ts`** (do not edit that file by hand):
+   - images: WebP at max 2000px on the long edge, plus an 800px variant
+   - clips: 720p H.264, 30fps, no audio, at most 8s, with WebP posters (1600px and 800px)
+   - hero loop: 4:5 crop at 864x1080, 8s with a 1s crossfade so it loops seamlessly, kept under 6 MB (4.8 MB)
+   - process loop: 16:9 at 1280x720, 10s crossfaded, kept under 10 MB (1.7 MB)
 
-### Existing project photos (`/public/images/glass-*.jpeg`)
+   It only builds what is missing; `--force` rebuilds and `--only=id,id` limits the run. Without ffmpeg it prints the exact commands to run and leaves missing clips out of `media.ts`, so the site never links to a file that does not exist.
 
-These are the original project photos used in the Work Rail section:
-- `glass-1.jpeg` through `glass-6.jpeg` -- actual Glasstech project photos
+The hero and process loops autoplay muted only on screens 768px and wider, when the visitor has not asked for reduced motion and is not on Save-Data; everyone else sees the poster.
 
-### Brand assets (`/public/images/`)
+### Placeholders to replace before launch
 
-| File | Purpose |
-|------|---------|
-| `logo-mark.png` | Logo mark (red G + navy building), used in nav and footer |
-| `logo-full.png` | Full logo with wordmark |
-| `glasstech-logo-transparent.png` | Logo on transparent background |
+- **Testimonials**: the three cards hold bracketed placeholder copy (`[CLIENT QUOTE: ...]`, `[Client name]`).
+- **Project titles**: the camera files have no project names (`DJI_20260714...`), so titles in the manifest are descriptive ("Garden Glass Conservatory", "Apartment Tower Glazing"). Swap in real project names in `projects` in `scripts/media-manifest.mjs`, then `npm run media`.
+- **Sectors**: residential/commercial is inferred from the footage; check it per project.
+- **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
+- **Automotive**: there is no automotive footage yet, so the automotive pillar shows the plain window grid and the Automotive filter shows a "book a fitting" message. Add automotive items to the manifest when photos exist.
+- **Email**: `hello@glasstechandinteriors.com` is carried over from the previous site; confirm it is monitored.
 
-### Icons & OG
-
-| File | Status | Notes |
-|------|--------|-------|
-| `/src/app/favicon.ico` | Present | Auto-detected by Next.js App Router |
-| `/public/icon.svg` | Present | SVG favicon, simplified logo mark |
-| `/public/apple-touch-icon.png` | Present | Copy of logo-mark.png (ideally replace with a 180x180 version) |
-| `/public/og.jpg` | **Placeholder** | Currently uses the hero poster image. Replace with a 1200x630 composited image featuring the wordmark and tagline "Automotive & architectural glass, Nairobi" |
-
-To drop in an official logo SVG, place it at `/public/brand/logo.svg` and update the Nav and Footer components to reference it.
-
-## Project Structure
+## Project structure
 
 ```
+scripts/
+  media-manifest.mjs     # media source of truth (edit this)
+  optimise-media.mjs     # npm run media
+  build-brand-assets.mjs # npm run brand
 src/
   app/
-    globals.css      # Design tokens, utility classes
-    layout.tsx       # Root layout, font loading, meta tags
-    page.tsx         # Page composition
-  components/
-    Nav.tsx          # Floating glass pill nav with mobile menu
-    Hero.tsx         # Hero with background video, poster fallback
-    Configurator.tsx # Quote configurator bar (WhatsApp integration)
-    Marquee.tsx      # Infinite scrolling service marquee
-    TwoPillars.tsx   # Automotive + Architectural cards with photos
-    ServicesGrid.tsx # 6-cell services grid
-    WorkRail.tsx     # Horizontal drag-to-scroll project rail
-    Process.tsx      # 4-step process grid
-    StatsWhy.tsx     # Stats counters + why columns
-    Contact.tsx      # Branch cards + contact card
-    FinalCTA.tsx     # Final call-to-action
-    Footer.tsx       # 4-column footer
-    MotionSystem.tsx # Lenis, observers, count-ups
+    globals.css          # brand tokens, utilities, motion
+    layout.tsx           # fonts, metadata, LocalBusiness JSON-LD
+    page.tsx             # homepage composition
+    work/page.tsx        # /work
+  content/
+    site.ts              # business facts and WhatsApp link builder
+    media.ts             # generated media library and homepage picks
+    labels.ts            # category and sector labels, filters
+  components/            # one file per section, plus Lightbox, LoopVideo, CountUp, icons
+public/
+  brand/                 # logo SVGs
+  media/                 # optimised photos, clips and posters (committed)
+  content/               # original camera media (gitignored)
 ```
-
-## Placeholder Content to Replace Before Launch
-
-The following items are unverified or placeholder and must be replaced with real data:
-
-- **Email address**: `hello@glasstechandinteriors.com` -- unverified, appears in Contact section and Footer
-- **Kirinyaga Road address**: "Kirinyaga Road, Nairobi CBD" -- approximate, needs exact street address
-- **All statistics**: `12+ Years`, `2 Nairobi branches`, `500+ Jobs delivered`, `50+ Specialists`, `48h Turnaround` -- all unverified
-- **Social proof card** (removed in current build): The `5k+` count and avatar stack were placeholder
-- **Social media URLs**: Verify all four social links resolve to the correct profiles
-- **OG image** (`/public/og.jpg`): Currently a stock photo placeholder -- replace with branded composite
-- **WebM video** (`/public/video/hero-facade.webm`): Not yet generated -- convert from mp4 for smaller file size
-- **Apple touch icon** (`/public/apple-touch-icon.png`): Currently full logo mark -- ideally resize to 180x180
-- **Domain**: `metadataBase` in layout.tsx is set to `https://glasstechandinteriors.com` -- confirm this is the production domain
