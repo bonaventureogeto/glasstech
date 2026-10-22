@@ -72,7 +72,7 @@ All photography and video is Glasstech's own work; there is no stock imagery.
 
    It only builds what is missing; `--force` rebuilds and `--only=id,id` limits the run. Without ffmpeg it prints the exact commands to run and leaves missing clips out of `media.ts`, so the site never links to a file that does not exist.
 
-The hero and process loops autoplay muted only on screens 768px and wider, when the visitor has not asked for reduced motion and is not on Save-Data; everyone else sees the poster.
+Both loops autoplay muted unless the visitor has asked for reduced motion or is on Save-Data; the hero plays at every screen size, the process loop only from 768px up. Everyone else sees the poster.
 
 ### Placeholders to replace before launch
 

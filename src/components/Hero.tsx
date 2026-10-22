@@ -56,6 +56,7 @@ export default function Hero() {
               <LoopVideo
                 loop={heroLoop}
                 priority
+                playOnPhones
                 sizes="(min-width: 1280px) 490px, (min-width: 1024px) 40vw, 100vw"
                 className="absolute inset-0"
               />
