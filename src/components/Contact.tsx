@@ -1,5 +1,7 @@
 "use client";
 
+import { site } from "@/content/site";
+
 /* Icons */
 const PinIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--edge-deep)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -25,21 +27,11 @@ const WhatsAppIcon = () => (
 
 const branches = [
   {
-    name: "Mombasa Road",
-    tag: "Main branch",
-    address: "Piranha Centre, Mombasa Road, Nairobi",
-    phones: [
-      { display: "+254 714 498 682", href: "tel:+254714498682" },
-      { display: "+254 726 019 644", href: "tel:+254726019644" },
-    ],
-    hours: "Mon\u2013Fri 8:00\u201316:30 \u00b7 Sat 8:00\u201314:00",
-  },
-  {
-    name: "Kirinyaga Road",
-    tag: "Second branch",
-    address: "Kirinyaga Road, Nairobi CBD",
-    phones: [{ display: "+254 726 019 644", href: "tel:+254726019644" }],
-    hours: "Mon\u2013Fri 8:00\u201316:30 \u00b7 Sat 8:00\u201314:00",
+    name: site.workshop.name,
+    tag: site.workshop.label,
+    address: `${site.workshop.street}, ${site.workshop.city}`,
+    phones: site.phones,
+    hours: site.hours.display,
   },
 ];
 
@@ -54,8 +46,8 @@ export default function Contact() {
             className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] mb-4"
             style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
           >
-            Two branches,{" "}
-            <span className="text-[var(--edge-deep)]">one standard.</span>
+            One workshop,{" "}
+            <span className="text-[var(--warm)]">one standard.</span>
           </h2>
         </div>
 

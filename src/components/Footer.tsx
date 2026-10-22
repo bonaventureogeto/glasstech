@@ -162,7 +162,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-2.5 text-[13.5px]">
               <p className="text-[var(--muted-2)]">
-                Piranha Centre, Mombasa Road
+                Sunrise Centre, Northern Bypass
                 <br />
                 Nairobi, Kenya
               </p>

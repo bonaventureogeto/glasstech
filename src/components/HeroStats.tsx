@@ -1,12 +1,6 @@
-const stats = [
-  { n: 12, suffix: "+", label: "Years in glass" },
-  { n: 2, suffix: "", label: "Nairobi branches" },
-  { n: 50, suffix: "+", label: "Specialists on the floor" },
-  { n: 48, suffix: "h", label: "Typical turnaround" },
-  { n: 50, suffix: "+", label: "Glass professionals" },
-  { n: 10, suffix: "K+", label: "Completed projects" },
-  { n: 170, suffix: "K+", label: "Hours of experience" },
-];
+import { site } from "@/content/site";
+
+const stats = site.stats.map((s) => ({ n: s.value, suffix: s.suffix, label: s.label }));
 
 export default function HeroStats() {
   return (
@@ -15,13 +9,12 @@ export default function HeroStats() {
       style={{ paddingTop: "clamp(48px, 6vw, 72px)", paddingBottom: "clamp(48px, 6vw, 72px)" }}
     >
       <div className="inner">
-        <div className="grid grid-cols-2 min-[600px]:grid-cols-4 min-[1024px]:grid-cols-7 gap-8">
-          {stats.map((s, i) => (
+        <div className="grid grid-cols-3 gap-8">
+          {stats.map((s) => (
             <div
               key={s.label}
               className="pl-5 reveal"
               style={{ borderLeft: "1px solid var(--glass-line)" }}
-              data-d={String((i % 7) + 1)}
             >
               <span
                 className="font-display text-[clamp(36px,5vw,56px)] font-bold text-white leading-none block mb-2"

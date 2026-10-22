@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Inter } from "next/font/google";
+import { localBusinessSchema } from "@/content/site";
 import "./globals.css";
 
 // Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
@@ -64,7 +65,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${figtree.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c"),
+          }}
+        />
+      </body>
     </html>
   );
 }

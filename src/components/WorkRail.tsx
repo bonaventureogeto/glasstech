@@ -6,7 +6,7 @@ import Image from "next/image";
 const projects = [
   {
     caption: "Commercial \u00b7 Glass Partitions",
-    title: "Mombasa Road Site",
+    title: "Warehouse Glass Partitions",
     body: "Full-height glass partitions and windows for a commercial warehouse space.",
     image: "/images/glass-1.jpeg",
   },
