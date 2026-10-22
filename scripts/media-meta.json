@@ -1,0 +1,402 @@
+{
+  "/media/video/balustrades-garden-view.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/balustrades-upper-floor.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.4
+  },
+  "/media/video/conservatory-aerial-orbit.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/conservatory-aerial-pass.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/conservatory-corner.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.6
+  },
+  "/media/video/conservatory-dining-view.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-exterior.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.1
+  },
+  "/media/video/conservatory-from-house.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-garden-walk.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-living-room.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-lounge-pan.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-lounge.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-open-plan.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-roof-beams.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-roof-walls.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-side-walk.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-sliding-door.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-sofa-detail.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4.7
+  },
+  "/media/video/conservatory-sofas.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/conservatory-walk-through.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/glass-edge-detail.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/glass-roof-frame.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4.9
+  },
+  "/media/video/glass-roof-hose-down.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 6.7
+  },
+  "/media/video/glass-roof-reflections.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.8
+  },
+  "/media/video/glass-roof-rinse.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/hero-loop.mp4": {
+    "width": 864,
+    "height": 1080,
+    "duration": 8
+  },
+  "/media/video/interior-dining-mirrors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/interior-dining-room.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/interior-dining-table.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/interior-vanity-detail.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.7
+  },
+  "/media/video/interior-vanity-mirror.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/interior-vanity-reflection.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/interior-vanity-wide.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-corridor.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-door-handle.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-entrance-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-lobby-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-meeting-room.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-open-plan.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-partition-corner.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 6.7
+  },
+  "/media/video/office-partition-walls.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/office-patch-fittings.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/process-loop.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 10
+  },
+  "/media/video/safety-glass-break.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4.5
+  },
+  "/media/video/safety-glass-drop.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.7
+  },
+  "/media/video/slim-window.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/stone-house-attic-windows.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 6.1
+  },
+  "/media/video/stone-house-bay-exterior.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/stone-house-bay-interior.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/stone-house-bay-window.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4
+  },
+  "/media/video/stone-house-exterior.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7
+  },
+  "/media/video/stone-house-gable-front.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 6.2
+  },
+  "/media/video/stone-house-gable-glazing.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.7
+  },
+  "/media/video/stone-house-garden-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4.9
+  },
+  "/media/video/stone-house-picture-windows.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.3
+  },
+  "/media/video/stone-house-sliding-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.6
+  },
+  "/media/video/stone-house-stacked-bays.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.9
+  },
+  "/media/video/stone-house-stair-window.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 4
+  },
+  "/media/video/stone-house-stairwell-glazing.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 6.2
+  },
+  "/media/video/stone-house-tall-window.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 5.1
+  },
+  "/media/video/stone-house-veranda-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7
+  },
+  "/media/video/stone-house-veranda-window.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.1
+  },
+  "/media/video/terrace-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/terrace-lounge.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/terrace-screens.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/tower-approach.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-balconies-sliding-doors.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-balustrade-install.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-facade-descent.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-facade-pass.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-glass-balconies.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-juliet-balconies.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-orbit.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-rooftop.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-upper-floors.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/tower-wide.mp4": {
+    "width": 1280,
+    "height": 720,
+    "duration": 8
+  },
+  "/media/video/villa-pool-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 7.4
+  },
+  "/media/video/villa-pool-reflection.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/villa-sliding-doors.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  },
+  "/media/video/villa-veranda-windows.mp4": {
+    "width": 720,
+    "height": 1280,
+    "duration": 8
+  }
+}

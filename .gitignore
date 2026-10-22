@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# original camera media (multi-GB); only the optimised copies in /public/media are committed
+/public/content/
+/glasstech content/

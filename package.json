@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "media": "node scripts/optimise-media.mjs",
     "brand": "node scripts/build-brand-assets.mjs"
   },
   "dependencies": {
