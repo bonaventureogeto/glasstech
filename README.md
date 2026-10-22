@@ -76,7 +76,7 @@ The hero and process loops autoplay muted only on screens 768px and wider, when 
 
 ### Placeholders to replace before launch
 
-- **Testimonials**: the three cards hold bracketed placeholder copy (`[CLIENT QUOTE: ...]`, `[Client name]`).
+- **Testimonials**: the section only renders real quotes from `src/content/testimonials.ts` and is hidden while that list is empty. Add Hackhouse Africa's quote there in their own words.
 - **Project titles**: the camera files have no project names (`DJI_20260714...`), so titles in the manifest are descriptive ("Garden Glass Conservatory", "Apartment Tower Glazing"). Swap in real project names in `projects` in `scripts/media-manifest.mjs`, then `npm run media`.
 - **Sectors**: residential/commercial is inferred from the footage; check it per project.
 - **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
