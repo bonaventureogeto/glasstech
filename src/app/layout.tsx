@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Archivo, Inter } from "next/font/google";
+import { Figtree, Inter } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({
+// Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
+const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-archivo",
+  variable: "--font-figtree",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
 });
@@ -60,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
+    <html lang="en" className={`${figtree.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );

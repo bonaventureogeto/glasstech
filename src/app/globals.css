@@ -1,107 +1,176 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────
-   Design tokens
+   Brand tokens: navy and red from the logo
+   ────────────────────────────────────────── */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+
+  --color-navy: #084a77; /* eyebrows and icons on light, navy buttons */
+  --color-navy-deep: #062f4d; /* ground for dark sections */
+  --color-navy-panel: #073b61; /* dark cards and the hero */
+  --color-red: #d03128; /* primary CTA only, plus one accent word on light */
+  --color-red-hover: #b8281f;
+  --color-coral: #f0564c; /* accent word on navy, 32px+ only */
+  --color-sky: #8ec1ea; /* eyebrows and small labels on navy */
+  --color-ink: #0b1f30; /* body text on light */
+  --color-muted: #4f6376; /* secondary text on light */
+  --color-mist: #cfe0ee; /* body text on navy */
+  --color-mist-muted: #9cb8cf; /* secondary text on navy */
+  --color-frost: #f2f6fa; /* light alternate sections */
+  --color-line: #dce6ef; /* borders on light */
+  --color-line-dark: rgb(255 255 255 / 0.12);
+  --color-tile: #e8f0f7; /* icon tiles on light */
+  --color-outline: #c3d2e0; /* outline buttons and chips on light */
+
+  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* H1 76/42, H2 48/32: fluid between 768px and 1280px */
+  --text-h1: clamp(2.625rem, 6.64vw - 0.5625rem, 4.75rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(2rem, 3.125vw + 0.5rem, 3rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.015em;
+  --text-cta: clamp(2.25rem, 5.47vw - 0.375rem, 4rem);
+  --text-cta--line-height: 1.04;
+  --text-cta--letter-spacing: -0.015em;
+
+  --radius-button: 10px;
+  --radius-card: 16px;
+  --radius-panel: 20px;
+}
+
+/* ──────────────────────────────────────────
+   Base
+   ────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 88px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-sky);
+  }
+
+  ::selection {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+}
+
+/* ──────────────────────────────────────────
+   Window grid: echoes the windows in the logo mark
+   ────────────────────────────────────────── */
+@utility mull {
+  background-color: var(--color-navy-panel);
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 72px);
+}
+
+/* The same lines without a ground, for laying over a photo */
+@utility mull-grid {
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 72px);
+}
+
+@utility mull-light {
+  background-color: #e8eff5;
+  background-image:
+    repeating-linear-gradient(90deg, rgb(8 74 119 / 0.08) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgb(8 74 119 / 0.08) 0 1px, transparent 1px 48px);
+}
+
+/* Small uppercase label above headings and on cards */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ──────────────────────────────────────────
+   Motion: fade and rise on scroll
+   ────────────────────────────────────────── */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 400ms ease-out,
+      transform 400ms ease-out;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ──────────────────────────────────────────
+   Legacy tokens for the sections that have not been rebuilt yet.
+   Removed once every section uses the brand tokens above.
    ────────────────────────────────────────── */
 :root {
-  --ink: #060b17;
-  --ink-2: #0c1526;
-  --ink-3: #141e34;
-  --frost: #edf0f5;
-  --paper: #fbfcfd;
-  --edge: #3b96d8;
+  --ink: #062f4d;
+  --ink-2: #073b61;
+  --ink-3: #084a77;
+  --frost: #f2f6fa;
+  --paper: #ffffff;
+  --edge: #8ec1ea;
   --edge-deep: #084a77;
   --warm: #d03128;
-  --warm-deep: #a82520;
-  --line: rgba(8, 14, 28, 0.12);
-  --line-soft: rgba(8, 14, 28, 0.06);
-  --muted: #4c5a6b;
-  --muted-2: #7c8a99;
-  --glass: rgba(255, 255, 255, 0.1);
-  --glass-line: rgba(255, 255, 255, 0.22);
+  --warm-deep: #b8281f;
+  --line: #dce6ef;
+  --line-soft: rgb(8 74 119 / 0.06);
+  --muted: #4f6376;
+  --muted-2: #9cb8cf;
+  --glass: rgb(255 255 255 / 0.1);
+  --glass-line: rgb(255 255 255 / 0.22);
   --r: 16px;
   --maxw: 1280px;
   --pad: clamp(18px, 4.5vw, 60px);
   --e-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Mirror tokens into Tailwind v4 theme */
-@theme inline {
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-frost: var(--frost);
-  --color-paper: var(--paper);
-  --color-edge: var(--edge);
-  --color-edge-deep: var(--edge-deep);
-  --color-warm: var(--warm);
-  --color-warm-deep: var(--warm-deep);
-  --color-line: var(--line);
-  --color-line-soft: var(--line-soft);
-  --color-muted: var(--muted);
-  --color-muted-2: var(--muted-2);
-  --color-glass: var(--glass);
-  --color-glass-line: var(--glass-line);
-  --font-display: var(--font-archivo);
-  --font-body: var(--font-inter);
-}
-
-/* ──────────────────────────────────────────
-   Base reset & body
-   ────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
-}
-
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ──────────────────────────────────────────
-   Accessibility — focus outlines
-   ────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--edge);
-  outline-offset: 2px;
-}
-
-/* ──────────────────────────────────────────
-   Type utilities
-   ────────────────────────────────────────── */
-.font-display {
-  font-family: var(--font-archivo), system-ui, sans-serif;
-}
-
-/* Eyebrow — small uppercase label */
-.eyebrow {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: clamp(11px, 1.2vw, 12px);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--edge-deep);
-}
-
 .eyebrow-light {
   color: var(--edge);
 }
 
-/* ──────────────────────────────────────────
-   Section spacing
-   ────────────────────────────────────────── */
 .band {
   padding: clamp(72px, 10vw, 140px) var(--pad);
 }
@@ -117,86 +186,27 @@ body {
   width: 100%;
 }
 
-/* ──────────────────────────────────────────
-   Scroll reveal system
-   ────────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--e-out), transform 0.7s var(--e-out);
-}
-
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal[data-d="1"] { transition-delay: 80ms; }
-.reveal[data-d="2"] { transition-delay: 160ms; }
-.reveal[data-d="3"] { transition-delay: 240ms; }
-.reveal[data-d="4"] { transition-delay: 320ms; }
-.reveal[data-d="5"] { transition-delay: 400ms; }
-.reveal[data-d="6"] { transition-delay: 480ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-/* ──────────────────────────────────────────
-   Load orchestration
-   ────────────────────────────────────────── */
-body:not(.is-loaded) .load-fade {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
 .load-fade {
   transition: opacity 0.7s var(--e-out), transform 0.7s var(--e-out);
-}
-
-body:not(.is-loaded) .load-mask {
-  transform: translateY(110%);
 }
 
 .load-mask {
   transition: transform 0.8s var(--e-out);
 }
 
-/* ──────────────────────────────────────────
-   Custom scrollbar
-   ────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
+body:not(.is-loaded) .load-fade {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--ink);
+body:not(.is-loaded) .load-mask {
+  transform: translateY(110%);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--edge-deep);
-  border-radius: 3px;
-}
-
-/* ──────────────────────────────────────────
-   Hide scrollbar utility
-   ────────────────────────────────────────── */
 .scrollbar-hide {
   scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
 }
 
-/* ──────────────────────────────────────────
-   Selection
-   ────────────────────────────────────────── */
-::selection {
-  background: var(--edge);
-  color: var(--ink);
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
