@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowRightIcon, ChevronDownIcon } from "@/components/icons";
-import { quoteMessage, site, whatsappLink } from "@/content/site";
+import { quoteMessage, whatsappLink, whatsappUrl } from "@/content/site";
 
 const fields = [
   {
@@ -43,7 +43,7 @@ export default function Configurator() {
     <div>
       {/* Without JS this still opens WhatsApp with a plain quote request. */}
       <form
-        action={`https://wa.me/${site.whatsappNumber}`}
+        action={whatsappUrl}
         method="get"
         target="_blank"
         onSubmit={submit}

@@ -35,6 +35,22 @@ export default function Contact() {
                   {p.display}
                 </a>
               ))}
+              <a
+                href={links.taplink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center self-start text-navy underline underline-offset-4 transition-colors hover:text-red"
+              >
+                Save our number and find us on social
+              </a>
+              <a
+                href={links.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center self-start text-navy underline underline-offset-4 transition-colors hover:text-red"
+              >
+                Read our reviews on Google
+              </a>
               <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
                 {site.email}
               </a>

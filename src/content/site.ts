@@ -1,7 +1,7 @@
 // Business facts used across the site and in the LocalBusiness schema.
 // Change a number, phone or address here and it updates everywhere.
 
-import { links } from "@/content/links";
+import { links, socials } from "@/content/links";
 
 export const site = {
   name: "Glasstech and Interior Solutions Limited",
@@ -40,20 +40,16 @@ export const site = {
     { value: 100, suffix: "+", label: "Completed projects" },
     { value: 10, suffix: "", label: "Specialist craftsmen" },
   ],
-  socials: [
-    { label: "Facebook", href: "https://facebook.com/glasstechandinteriorsolutionsltd" },
-    { label: "X", href: "https://x.com/GlasstechLtd" },
-    { label: "Instagram", href: "https://instagram.com/glasstechandinteriors/" },
-    { label: "LinkedIn", href: "https://linkedin.com/company/glasstechandinteriorsolutionsltd/" },
-  ],
 } as const;
 
 export const fullAddress = `${site.workshop.street}, ${site.workshop.city}`;
 
 export const quoteMessage = "Hi Glasstech, I'd like a quote.";
 
+export const whatsappUrl = `https://wa.me/${site.whatsappNumber}`;
+
 export function whatsappLink(text: string = quoteMessage) {
-  return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(text)}`;
+  return `${whatsappUrl}?text=${encodeURIComponent(text)}`;
 }
 
 export const localBusinessSchema = {
@@ -81,5 +77,5 @@ export const localBusinessSchema = {
     closes: h.closes,
   })),
   areaServed: { "@type": "Country", name: site.workshop.country },
-  sameAs: site.socials.map((s) => s.href),
+  sameAs: [...Object.values(socials).map((s) => s.href), links.taplink],
 };

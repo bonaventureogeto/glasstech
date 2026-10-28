@@ -56,7 +56,7 @@ Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.c
 
 ## Business facts
 
-Stats, phone numbers, hours, address, email and social links live in `src/content/site.ts`, which also builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Change them there and every section updates.
+Stats, phone numbers, hours, address and email live in `src/content/site.ts`, which also builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
 
 ## Media pipeline
 
@@ -98,6 +98,7 @@ src/
     work/page.tsx        # /work
   content/
     site.ts              # business facts and WhatsApp link builder
+    links.ts             # social profiles, Taplink, Google Maps listing
     media.ts             # generated media library and homepage picks
     labels.ts            # category and sector labels, filters
   components/            # one file per section, plus Lightbox, LoopVideo, CountUp, icons

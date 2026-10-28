@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FacebookIcon, InstagramIcon, LinkedInIcon, XIcon } from "@/components/icons";
-import { links } from "@/content/links";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  SnapchatIcon,
+  TikTokIcon,
+  XIcon,
+  YouTubeIcon,
+} from "@/components/icons";
+import { links, socials, type Social } from "@/content/links";
 import { site } from "@/content/site";
 
 const serviceLinks = [
@@ -21,7 +29,15 @@ const companyLinks = [
   { label: "Contact", href: "/#contact" },
 ];
 
-const socialIcons = { Facebook: FacebookIcon, X: XIcon, Instagram: InstagramIcon, LinkedIn: LinkedInIcon };
+const socialIcons = {
+  tiktok: TikTokIcon,
+  snapchat: SnapchatIcon,
+  facebook: FacebookIcon,
+  linkedin: LinkedInIcon,
+  x: XIcon,
+  youtube: YouTubeIcon,
+  instagram: InstagramIcon,
+} satisfies Record<Social, unknown>;
 
 const link = "inline-flex min-h-11 min-w-11 items-center text-mist transition-colors hover:text-white";
 const heading = "eyebrow mb-1 text-[11px] text-sky";
@@ -43,24 +59,35 @@ export default function Footer() {
               A registered private limited company dealing in automotive and building glass across Kenya: supplied,
               fabricated and fitted.
             </p>
-            <ul className="flex gap-2.5">
-              {site.socials.map((s) => {
-                const Icon = socialIcons[s.label];
-                return (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Glasstech on ${s.label}`}
-                      className="inline-flex size-11 items-center justify-center rounded-button border border-white/16 text-mist transition-colors hover:border-white hover:text-white"
-                    >
-                      <Icon />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="flex flex-col gap-1">
+              {/* One row at every width: below 344px the 44px buttons narrow instead of wrapping. */}
+              <ul className="flex gap-1.5 sm:gap-2.5">
+                {(Object.keys(socials) as Social[]).map((key) => {
+                  const Icon = socialIcons[key];
+                  return (
+                    <li key={key} className="min-w-0 flex-[0_1_44px]">
+                      <a
+                        href={socials[key].href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Glasstech on ${socials[key].label}`}
+                        className="flex h-11 w-full items-center justify-center rounded-button border border-white/16 text-mist transition-colors hover:border-white hover:text-white"
+                      >
+                        <Icon />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+              <a
+                href={links.taplink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center self-start text-[13px] text-mist underline underline-offset-4 transition-colors hover:text-white"
+              >
+                All our links and contacts
+              </a>
+            </div>
           </div>
 
           <nav aria-labelledby="footer-services" className="text-sm lg:col-span-2">

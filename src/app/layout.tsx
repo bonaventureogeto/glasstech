@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Inter } from "next/font/google";
-import { fullAddress, localBusinessSchema } from "@/content/site";
+import { fullAddress, localBusinessSchema, site } from "@/content/site";
 import "./globals.css";
 
 // Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
@@ -26,7 +26,7 @@ const ogImage = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.glasstech.co.ke"),
+  metadataBase: new URL(site.url),
   title:
     "Glasstech & Interior Solutions | Automotive & Architectural Glass in Nairobi",
   description,

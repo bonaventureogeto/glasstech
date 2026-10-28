@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react";
 import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { quoteMessage, site, whatsappLink } from "@/content/site";
+import { quoteMessage, site, whatsappLink, whatsappUrl } from "@/content/site";
 
 const field =
   "w-full rounded-button border border-white/18 bg-white/6 px-4 text-[15px] text-white placeholder:text-mist-muted focus-visible:border-sky";
@@ -23,7 +23,7 @@ export default function QuoteForm() {
   return (
     // Without JS the form still opens WhatsApp with a plain quote request.
     <form
-      action={`https://wa.me/${site.whatsappNumber}`}
+      action={whatsappUrl}
       method="get"
       target="_blank"
       onSubmit={submit}
