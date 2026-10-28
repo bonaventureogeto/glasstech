@@ -1,16 +1,31 @@
-// Real client quotes only, in the client's own words. The "What clients say"
-// section stays hidden while this list is empty.
-//
-// Hackhouse Africa's quote goes here once it is supplied, for example:
-//   { quote: "…", client: "Hackhouse Africa", name: "…", role: "…" },
+// Client video testimonials: YouTube Shorts (9:16) that play in place in the
+// "What clients say" section. `client` and `service` label each card; until
+// they are filled in, the card shows the title instead.
 
 export interface Testimonial {
-  quote: string;
-  /** The organisation, e.g. "Hackhouse Africa" */
-  client: string;
-  /** The person quoted, if they are happy to be named */
-  name?: string;
-  role?: string;
+  id: string;
+  youtubeId: string;
+  /** Describes the video; also the player's accessible title */
+  title: string;
+  /** The client, as they are happy to be named */
+  client?: string;
+  /** The job, e.g. "Office partitioning" */
+  service?: string;
 }
 
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    id: "hackhouse",
+    youtubeId: "mhPdD0nXm40",
+    title: "Hackhouse x Glasstech client testimonial",
+    client: "",
+    service: "",
+  },
+  {
+    id: "partitioning",
+    youtubeId: "kATQIiQdLuM",
+    title: "Client testimonial on modern partitioning",
+    client: "",
+    service: "",
+  },
+];

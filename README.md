@@ -76,7 +76,7 @@ Both loops autoplay muted unless the visitor has asked for reduced motion or is 
 
 ### Placeholders to replace before launch
 
-- **Testimonials**: the section only renders real quotes from `src/content/testimonials.ts` and is hidden while that list is empty. Add Hackhouse Africa's quote there in their own words.
+- **Testimonials**: the two client videos in `src/content/testimonials.ts` have empty `client` and `service` fields, so their cards show the video title. Fill them in with the names the clients are happy to use. The YouTube player only loads when a visitor presses play.
 - **Project titles**: the camera files have no project names (`DJI_20260714...`), so titles in the manifest are descriptive ("Garden Glass Conservatory", "Apartment Tower Glazing"). Swap in real project names in `projects` in `scripts/media-manifest.mjs`, then `npm run media`.
 - **Sectors**: residential/commercial is inferred from the footage; check it per project.
 - **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
@@ -99,6 +99,7 @@ src/
   content/
     site.ts              # business facts and WhatsApp link builder
     links.ts             # social profiles, Taplink, Google Maps listing
+    testimonials.ts      # client video testimonials (YouTube Shorts)
     media.ts             # generated media library and homepage picks
     labels.ts            # category and sector labels, filters
   components/            # one file per section, plus Lightbox, LoopVideo, CountUp, icons
