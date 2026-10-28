@@ -81,7 +81,7 @@ Both loops autoplay muted unless the visitor has asked for reduced motion or is 
 - **Sectors**: residential/commercial is inferred from the footage; check it per project.
 - **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
 - **Automotive**: there is no automotive footage yet, so the automotive pillar shows the plain window grid and the Automotive filter shows a "book a fitting" message. Add automotive items to the manifest when photos exist.
-- **Email**: `hello@glasstechandinteriors.com` is carried over from the previous site; confirm it is monitored.
+- **Email**: `hello@glasstech.co.ke` is the address on the site; the mailbox is set up by hand in cPanel, so confirm it receives mail.
 
 ## Project structure
 

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Inter } from "next/font/google";
-import { localBusinessSchema } from "@/content/site";
+import { fullAddress, localBusinessSchema } from "@/content/site";
 import "./globals.css";
 
 // Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
@@ -16,8 +16,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const description =
-  "Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings. Windshields, shower cubicles, office partitions and facades, measured on site and fabricated at our Sunrise Centre workshop on the Northern Bypass, Nairobi.";
+const description = `Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings. Windshields, shower cubicles, office partitions and facades, measured on site and fabricated at our workshop: ${fullAddress}.`;
 
 const ogImage = {
   url: "/og.jpg",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FacebookIcon, InstagramIcon, LinkedInIcon, XIcon } from "@/components/icons";
+import { links } from "@/content/links";
 import { site } from "@/content/site";
 
 const serviceLinks = [
@@ -95,11 +96,17 @@ export default function Footer() {
           <div className="text-sm sm:col-span-2 lg:col-span-3">
             <h2 className={heading}>Contact</h2>
             <address className="flex flex-col not-italic">
-              <span className="py-2.5 leading-normal">
-                {site.workshop.street}
+              <a
+                href={links.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 leading-normal text-mist transition-colors hover:text-white"
+              >
+                {site.workshop.lines[0]}
                 <br />
-                {site.workshop.city}, {site.workshop.country}
-              </span>
+                {site.workshop.lines.slice(1).join(", ")}
+                <span className="sr-only"> (opens in Google Maps)</span>
+              </a>
               {site.phones.map((p) => (
                 <a key={p.href} href={p.href} className={link}>
                   {p.display}

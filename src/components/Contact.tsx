@@ -1,4 +1,5 @@
 import QuoteForm from "@/components/QuoteForm";
+import { links } from "@/content/links";
 import { site } from "@/content/site";
 
 export default function Contact() {
@@ -18,9 +19,17 @@ export default function Contact() {
               <h3 className="text-xl font-semibold md:text-[22px]">{site.workshop.name}</h3>
             </div>
             <address className="flex flex-col gap-1 text-sm leading-normal text-muted not-italic">
-              <span className="py-1">
-                {site.workshop.street}, {site.workshop.city}
-              </span>
+              <a
+                href={links.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col self-start py-1 underline decoration-outline underline-offset-4 transition-colors hover:text-red hover:decoration-red"
+              >
+                {site.workshop.lines.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+                <span className="sr-only">(opens in Google Maps)</span>
+              </a>
               {site.phones.map((p) => (
                 <a key={p.href} href={p.href} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
                   {p.display}

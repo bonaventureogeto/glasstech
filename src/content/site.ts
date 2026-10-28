@@ -1,10 +1,12 @@
 // Business facts used across the site and in the LocalBusiness schema.
 // Change a number, phone or address here and it updates everywhere.
 
+import { links } from "@/content/links";
+
 export const site = {
   name: "Glasstech and Interior Solutions Limited",
   url: "https://www.glasstech.co.ke",
-  email: "hello@glasstechandinteriors.com",
+  email: "hello@glasstech.co.ke",
   phones: [
     { display: "+254 714 498 682", href: "tel:+254714498682", e164: "+254714498682" },
     { display: "+254 726 019 644", href: "tel:+254726019644", e164: "+254726019644" },
@@ -13,8 +15,16 @@ export const site = {
   workshop: {
     label: "Workshop and showroom",
     name: "Sunrise Centre, Northern Bypass",
-    street: "Sunrise Centre, Northern Bypass",
+    // The client's exact wording; keep `street` and `lines` in step. The
+    // contact card shows `lines`, the footer the first line and then the rest.
+    street:
+      "Sunrise Centre, Northern Bypass, next to PCEA Beulah Church, off Kiambu Road, Fourways Junction, near Glee Hotel",
     city: "Nairobi",
+    lines: [
+      "Sunrise Centre, Northern Bypass",
+      "Next to PCEA Beulah Church, off Kiambu Road",
+      "Fourways Junction, near Glee Hotel, Nairobi",
+    ],
     country: "Kenya",
     countryCode: "KE",
   },
@@ -37,6 +47,8 @@ export const site = {
     { label: "LinkedIn", href: "https://linkedin.com/company/glasstechandinteriorsolutionsltd/" },
   ],
 } as const;
+
+export const fullAddress = `${site.workshop.street}, ${site.workshop.city}`;
 
 export const quoteMessage = "Hi Glasstech, I'd like a quote.";
 
@@ -61,6 +73,7 @@ export const localBusinessSchema = {
     addressLocality: site.workshop.city,
     addressCountry: site.workshop.countryCode,
   },
+  hasMap: links.googleMaps,
   openingHoursSpecification: site.hours.schema.map((h) => ({
     "@type": "OpeningHoursSpecification",
     dayOfWeek: h.days,
