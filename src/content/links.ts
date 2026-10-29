@@ -21,4 +21,6 @@ export const links = {
   // The Google Business listing, resolved from the client's share link
   // (share.google/KP1vFmn0PUdJ0VZ3i). The cid is the listing's own id.
   googleMaps: "https://maps.google.com/?cid=6591373478864543300",
+  // Google's "Leave a review" form for the same listing, by its place id
+  googleWriteReview: "https://search.google.com/local/writereview?placeid=ChIJ09WJNwINLxgRRN6mpUFDeVs",
 } as const;

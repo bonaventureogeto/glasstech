@@ -14,7 +14,7 @@ npm run lint
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack) + TypeScript, every route prerendered as static HTML
+- **Next.js 16** (App Router, Turbopack) + TypeScript, every route prerendered as static HTML (`/` and `/reviews` regenerate daily so review dates stay current)
 - **Tailwind CSS v4** with the theme defined in CSS (`src/app/globals.css`)
 - **next/font** for Figtree and Inter, **next/image** for every photo and poster
 - No animation or scroll libraries: motion is CSS plus one IntersectionObserver
@@ -23,8 +23,9 @@ npm run lint
 
 | Route | What it is |
 |-------|------------|
-| `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, testimonials, contact, final CTA |
+| `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, client videos and six Google reviews, contact, final CTA |
 | `/work` | Every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive, with a lightbox |
+| `/reviews` | Every Google review with text, with the rating and links to read or leave one on Google |
 | `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
 ## Brand
@@ -57,6 +58,15 @@ Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.c
 ## Business facts
 
 Stats, phone numbers, hours, address and email live in `src/content/site.ts`, which also builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
+
+## Google reviews
+
+The rating and reviews under the client videos (six) and on `/reviews` (all) are copied by hand from the Google Business listing (place id `ChIJ09WJNwINLxgRRN6mpUFDeVs`) into `src/content/reviews.json`. The site makes no requests to Google and needs no API key.
+
+- **Adding a review**: copy it from the listing to the top of `reviews`: the name, the stars, the text exactly as written, Google's "3 days ago" as `relativeTime` and that date as `publishTime` (`YYYY-MM-DD`). Update `rating` and `count` at the top to match the listing.
+- **What shows**: reviews without text are left out (28 of the listing's 67 ratings have none), and the rest are sorted by rating, then date. Dates read like Google's ("3 months ago") and are worked out from `publishTime` each day. The homepage shows six, the ones marked `"featured": true` first; move the flag to change them.
+- **Dates**: the reviews were copied on 29 October 2026, and `publishTime` was worked out from Google's wording that day, so older ones are approximate ("5 years ago" became 2021-10-29).
+- **Structured data**: the `LocalBusiness` JSON-LD deliberately has no `AggregateRating` or `Review`. Google does not show review stars for a business's reviews of itself on its own site (embedded Google reviews included), and its guidelines rule out marking up ratings gathered from another site.
 
 ## Media pipeline
 
@@ -96,10 +106,14 @@ src/
     layout.tsx           # fonts, metadata, LocalBusiness JSON-LD
     page.tsx             # homepage composition
     work/page.tsx        # /work
+    reviews/page.tsx     # /reviews
+  lib/
+    googleReviews.ts     # reads reviews.json: text-only, sorted, dated
   content/
     site.ts              # business facts and WhatsApp link builder
     links.ts             # social profiles, Taplink, Google Maps listing
     testimonials.ts      # client video testimonials (YouTube Shorts)
+    reviews.json         # Google reviews, copied by hand from the listing
     media.ts             # generated media library and homepage picks
     labels.ts            # category and sector labels, filters
   components/            # one file per section, plus Lightbox, LoopVideo, CountUp, icons

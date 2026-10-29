@@ -12,6 +12,9 @@ import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
 
+// Regenerated daily so review dates ("3 months ago") stay current.
+export const revalidate = 86400;
+
 export default function Home() {
   return (
     <>
