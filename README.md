@@ -109,12 +109,12 @@ All photography and video is Glasstech's own work; there is no stock imagery.
    - images: WebP at max 2000px on the long edge, plus an 800px variant
    - clips: 720p H.264, 30fps, no audio, at most 8s, with WebP posters (1600px and 800px)
    - hero loop: 4:5 crop at 864x1080, 8s with a 1s crossfade so it loops seamlessly, kept under 6 MB (4.8 MB)
-   - process loop: 16:9 at 1280x720, 10s crossfaded, kept under 10 MB (1.7 MB)
+   - process loop: none at the moment. Its footage (two installers fitting a balustrade, `drone shots/DJI_0224.MP4`) was taken off the site on 3 November 2026, together with its `/work` clip, so "How a job runs" shows the window-grid panel. A new one is a 16:9 slot in `slots.process` (10s crossfaded, under 10 MB)
    - feature videos (`category: "feature"`): the whole clip with its sound, H.264 at 1080p max, re-encoded until it is under 12 MB. 1080p is only kept if it fits at CRF 26 or better; otherwise 720p at a lower CRF looks sharper for the same bytes. iPhone HDR (HLG) footage is tone mapped to SDR with macOS `avconvert` first, or it plays back grey and flat. The poster is a chosen frame (`poster` in seconds), plus a 24px blurred copy inlined in `media.ts` that fills the frame around vertical footage
 
    It only builds what is missing; `--force` rebuilds and `--only=id,id` limits the run. Without ffmpeg it prints the exact commands to run and leaves missing clips out of `media.ts`, so the site never links to a file that does not exist.
 
-Both loops autoplay muted unless the visitor has asked for reduced motion or is on Save-Data; the hero plays at every screen size, the process loop only from 768px up. Everyone else sees the poster.
+Loops autoplay muted unless the visitor has asked for reduced motion or is on Save-Data; the hero plays at every screen size, a process loop only from 768px up. Everyone else sees the poster.
 
 ### Jeff Koinange's feature
 

@@ -68,8 +68,6 @@ export const items = [
     alt: "Glass balcony balustrades in front of black-framed sliding doors on the apartment tower, seen from the air" },
   { id: "tower-glass-balconies", source: "drone shots/DJI_0223.MP4", type: "video", project: "tower", category: "balcony-railing", trim: [1, 13], poster: 4,
     alt: "Frameless glass balcony balustrades with steel handrails on the side of the apartment tower" },
-  { id: "tower-balustrade-install", source: "drone shots/DJI_0224.MP4", type: "video", project: "tower", category: "balcony-railing", trim: [2, 14], poster: 9,
-    alt: "Two installers fitting a glass balcony balustrade on an upper floor of the apartment tower" },
 
   // Garden glass conservatory (14 Jul)
   { id: "conservatory-aerial-orbit", source: "DJI_0228.MP4", type: "video", project: "conservatory", category: "windows-glazing", trim: [74, 86], poster: 80,
@@ -289,6 +287,7 @@ export const excluded = {
   "DJI_20260729155555_0218_D.MP4": "0.2s accidental clip",
   "DJI_20260729160727_0234_D.MP4": "selfie piece-to-camera, no glass work",
   "drone shots/DJI_0213.MP4": "drone take-off from a rooftop floor, no glass work",
+  "drone shots/DJI_0224.MP4": "two installers fitting a balustrade on an upper floor: taken off the site on request (3 Nov 2026), both the /work clip and the homepage process loop cut from it",
 };
 
 // Where media appears on the homepage. Ids refer to `items` above.
@@ -297,10 +296,11 @@ export const slots = {
     source: "DJI_20260714101858_0085_D.MP4", start: 9, length: 8, crossfade: 1, aspect: [4, 5], width: 864, maxBytes: 6e6,
     alt: "A black-framed glass conservatory with sliding glass walls and a glass roof, seen from its garden",
   },
-  process: {
-    source: "drone shots/DJI_0224.MP4", start: 8, length: 10, crossfade: 1, aspect: [16, 9], width: 1280, maxBytes: 10e6,
-    alt: "Two installers fitting a glass balcony balustrade on an upper floor of an apartment tower",
-  },
+  // The "How a job runs" loop. Empty since its footage (DJI_0224) came off the
+  // site; the section shows the window-grid panel instead. To add one, give a
+  // 16:9 slot like the hero's: { source, start, length, crossfade: 1,
+  // aspect: [16, 9], width: 1280, maxBytes: 10e6, alt }.
+  process: null,
   // Background of pillar card 01: the strongest windshield-fitting shot
   pillars: { automotive: "land-cruiser-windshield-out", architectural: "tower-orbit" },
   // Image strip on the "Automotive glass" service card: the second strongest

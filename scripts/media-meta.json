@@ -214,11 +214,6 @@
     "height": 1280,
     "duration": 8
   },
-  "/media/video/process-loop.mp4": {
-    "width": 1280,
-    "height": 720,
-    "duration": 10
-  },
   "/media/video/safety-glass-break.mp4": {
     "width": 720,
     "height": 1280,
@@ -335,11 +330,6 @@
     "duration": 8
   },
   "/media/video/tower-balconies-sliding-doors.mp4": {
-    "width": 1280,
-    "height": 720,
-    "duration": 8
-  },
-  "/media/video/tower-balustrade-install.mp4": {
     "width": 1280,
     "height": 720,
     "duration": 8

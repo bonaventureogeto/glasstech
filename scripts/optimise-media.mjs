@@ -10,8 +10,9 @@
 // Feature videos (category "feature"): the whole clip with its sound, H.264 at
 // 1080p max, re-encoded until it is under 12 MB. iPhone HDR footage is tone
 // mapped to SDR first (macOS avconvert), or it plays back grey and flat.
-// Homepage loops (hero, process) are cropped, crossfaded so they wrap without
-// a jump, and re-encoded until they fit their byte budget.
+// Homepage loops (hero, and process when its slot is set) are cropped,
+// crossfaded so they wrap without a jump, and re-encoded until they fit their
+// byte budget.
 //
 // Originals live in public/content/ (gitignored). Without them, or without
 // ffmpeg, existing outputs are reused and anything missing is left out of
@@ -315,7 +316,7 @@ const built = await pool(items.map((item) => async () => {
 }), JOBS);
 
 const heroLoop = await processLoop("hero", slots.hero);
-const processLoopMedia = await processLoop("process", slots.process);
+const processLoopMedia = slots.process ? await processLoop("process", slots.process) : null;
 
 const media = built.filter(Boolean);
 const ids = new Set(media.map((m) => m.id));

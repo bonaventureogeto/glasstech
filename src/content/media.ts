@@ -210,20 +210,6 @@ export const media: MediaItem[] = [
     "thumb": "/media/video/tower-glass-balconies-800.webp"
   },
   {
-    "id": "tower-balustrade-install",
-    "src": "/media/video/tower-balustrade-install.mp4",
-    "type": "video",
-    "category": "balcony-railing",
-    "sector": "residential",
-    "title": "Apartment Tower Glazing",
-    "alt": "Two installers fitting a glass balcony balustrade on an upper floor of the apartment tower",
-    "width": 1280,
-    "height": 720,
-    "duration": 8,
-    "poster": "/media/video/tower-balustrade-install.webp",
-    "thumb": "/media/video/tower-balustrade-install-800.webp"
-  },
-  {
     "id": "conservatory-aerial-orbit",
     "src": "/media/video/conservatory-aerial-orbit.mp4",
     "type": "video",
@@ -1409,15 +1395,7 @@ export const heroLoop: MediaLoop | null = {
   "duration": 8
 };
 
-export const processLoop: MediaLoop | null = {
-  "src": "/media/video/process-loop.mp4",
-  "poster": "/media/video/process-loop.webp",
-  "thumb": "/media/video/process-loop-800.webp",
-  "alt": "Two installers fitting a glass balcony balustrade on an upper floor of an apartment tower",
-  "width": 1280,
-  "height": 720,
-  "duration": 10
-};
+export const processLoop: MediaLoop | null = null;
 
 export const pillarMedia: { automotive: string | null; architectural: string | null } = {
   "automotive": "land-cruiser-windshield-out",
