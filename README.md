@@ -57,18 +57,21 @@ Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.c
 
 ## Business facts
 
-Stats, phone numbers, hours, address and email live in `src/content/company.ts`, which also holds `SITE_URL` and builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
+Stats, phone numbers, hours, address and email live in `src/content/company.ts`, which also holds `SITE_URL`. `src/lib/structuredData.ts` builds the homepage's `LocalBusiness` JSON-LD from them. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
 
 The hero's first figure is **80+ years of combined experience**: the client has not confirmed it as years trading. The number and its label are `stats.experienceYears` and `stats.experienceLabel` in `company.ts`, and the hero and the homepage meta description both read them, so if the client confirms the stronger claim, changing that one label updates both.
 
 ## Google reviews
 
-The rating and reviews under the client videos (six) and on `/reviews` (all) are copied by hand from the Google Business listing (place id `ChIJ09WJNwINLxgRRN6mpUFDeVs`) into `src/content/reviews.json`. The site makes no requests to Google and needs no API key.
+Every rating, count and review on the site comes from one function, `getGoogleReviews()` in `src/lib/googleReviews.ts`: the rating row and buttons under the client videos, the reviews link in Contact, `/reviews` (the page and its meta description) and the `AggregateRating` in the homepage's LocalBusiness JSON-LD.
 
-- **Adding a review**: copy it from the listing to the top of `reviews`: the name, the stars, the text exactly as written, Google's "3 days ago" as `relativeTime` and that date as `publishTime` (`YYYY-MM-DD`). Update `rating` and `count` at the top to match the listing.
-- **What shows**: reviews without text are left out (28 of the listing's 67 ratings have none), and the rest are sorted by rating, then date. Dates read like Google's ("3 months ago") and are worked out from `publishTime` each day. The homepage shows six, the ones marked `"featured": true` first; move the flag to change them.
-- **Dates**: the reviews were copied on 29 October 2026, and `publishTime` was worked out from Google's wording that day, so older ones are approximate ("5 years ago" became 2021-10-29).
-- **Structured data**: the `LocalBusiness` JSON-LD deliberately has no `AggregateRating` or `Review`. Google does not show review stars for a business's reviews of itself on its own site (embedded Google reviews included), and its guidelines rule out marking up ratings gathered from another site.
+- **Rating and count**: live from the Places API (place id `ChIJ09WJNwINLxgRRN6mpUFDeVs`, `rating` and `userRatingCount`) when `GOOGLE_PLACES_API_KEY` is set, cached for a day like the pages; otherwise `googleRating` and `googleRatingCount` from `src/content/reviews.json`. The rating shows to one decimal place.
+- **One number**: the count is always Google's rating count, never the number of reviews in the file. The site lists only reviews with text (star-only ratings have none to show), so the link to `/reviews` carries no number ("More reviews"), `/reviews` says why it lists fewer, and every link to the listing reads "Read all {count} reviews on Google".
+- **Refreshing the fallback**: `npm run reviews` (`scripts/fetch-reviews.mjs`, needs the key in `.env.local`, see `.env.example`) writes Google's rating and count into `reviews.json`, adds the reviews with text the API returns that are not in the file yet (it returns five at most), and replaces the worked-back dates of copied reviews with Google's exact ones. It checks the result before writing (a rating of 1 to 5, a count no lower than the reviews with text). `npm run reviews -- --check` runs the checks without writing and, with a key, fails if the saved rating or count is out of date.
+- **Adding a review by hand**: copy it from the listing to the top of `reviews`: the name, the stars, the text exactly as written, Google's "3 days ago" as `relativeTime` and that date as `publishTime` (`YYYY-MM-DD`). Update `googleRating` and `googleRatingCount` at the top to match the listing.
+- **What shows**: reviews without text are left out, and the rest are sorted by rating, then date. Dates read like Google's ("3 months ago") and are worked out from `publishTime` each day. The homepage shows six, the ones marked `"featured": true` first; move the flag to change them.
+- **Dates**: the hand-copied reviews were copied on 29 October 2026, and `publishTime` was worked out from Google's wording that day, so older ones are approximate ("5 years ago" became 2021-10-29) until `npm run reviews` corrects them.
+- **Structured data**: the homepage's LocalBusiness JSON-LD carries an `AggregateRating` with the same rating and count (requested in the November 2026 feedback round). Google's review snippet guidelines exclude both a business's ratings of itself (LocalBusiness and Organization) and ratings gathered from another site, so it will not earn review stars, and Search Console may report it as structured data that breaks the guidelines. If it does, delete the `aggregateRating` block in `localBusiness()` in `src/lib/structuredData.ts`.
 
 ## Media pipeline
 
@@ -106,6 +109,7 @@ Both loops autoplay muted unless the visitor has asked for reduced motion or is 
 scripts/
   media-manifest.mjs     # media source of truth (edit this)
   optimise-media.mjs     # npm run media
+  fetch-reviews.mjs      # npm run reviews
   build-brand-assets.mjs # npm run brand
 src/
   app/
@@ -115,13 +119,13 @@ src/
     work/page.tsx        # /work
     reviews/page.tsx     # /reviews
   lib/
-    googleReviews.ts     # reads reviews.json: text-only, sorted, dated
+    googleReviews.ts     # rating, count and reviews: live Places API, else reviews.json
     structuredData.ts    # JSON-LD builders, typed with schema-dts
   content/
     company.ts           # business facts, SITE_URL, stats and WhatsApp link builder
     links.ts             # social profiles, Taplink, Google Maps listing
     testimonials.ts      # client video testimonials (YouTube Shorts)
-    reviews.json         # Google reviews, copied by hand from the listing
+    reviews.json         # Google rating, count and reviews (npm run reviews refreshes it)
     media.ts             # generated media library and homepage picks
     labels.ts            # category and sector labels, filters
   components/            # one file per section, plus FeatureVideo, Lightbox, LoopVideo, CountUp, JsonLd, icons

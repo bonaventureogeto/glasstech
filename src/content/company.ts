@@ -1,7 +1,6 @@
-// Business facts used across the site and in the LocalBusiness schema.
-// Change a number, phone or address here and it updates everywhere.
-
-import { links, socials } from "@/content/links";
+// Business facts used across the site and in the LocalBusiness schema
+// (src/lib/structuredData.ts). Change a number, phone or address here and it
+// updates everywhere.
 
 /** The canonical origin. Every absolute URL on the site is built from it. */
 export const SITE_URL = "https://www.glasstech.co.ke";
@@ -67,31 +66,3 @@ export const whatsappUrl = `https://wa.me/${company.whatsappNumber}`;
 export function whatsappLink(text: string = quoteMessage) {
   return `${whatsappUrl}?text=${encodeURIComponent(text)}`;
 }
-
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: company.name,
-  url: SITE_URL,
-  logo: `${SITE_URL}/apple-touch-icon.png`,
-  image: `${SITE_URL}/og.jpg`,
-  description:
-    "Automotive, architectural and interior glass: windshields, shower cubicles, office partitions, balconies and facades, measured, fabricated and fitted from one Nairobi workshop.",
-  email: company.email,
-  telephone: company.phones.map((p) => p.e164),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: company.workshop.street,
-    addressLocality: company.workshop.city,
-    addressCountry: company.workshop.countryCode,
-  },
-  hasMap: links.googleMaps,
-  openingHoursSpecification: company.hours.schema.map((h) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: h.days,
-    opens: h.opens,
-    closes: h.closes,
-  })),
-  areaServed: { "@type": "Country", name: company.workshop.country },
-  sameAs: [...Object.values(socials).map((s) => s.href), links.taplink],
-};

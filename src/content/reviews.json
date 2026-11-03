@@ -1,6 +1,7 @@
 {
-  "rating": 4.3,
-  "count": 67,
+  "googleRating": 4.3,
+  "googleRatingCount": 67,
+  "updatedAt": "2026-10-29",
   "reviews": [
     {
       "author": "alifiyah najmi",

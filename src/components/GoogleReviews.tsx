@@ -3,11 +3,15 @@ import Link from "next/link";
 import ReviewText from "@/components/ReviewText";
 import { GoogleIcon, StarIcon } from "@/components/icons";
 import { links } from "@/content/links";
-import type { Review, ReviewData } from "@/lib/googleReviews";
+import { readAllOnGoogle, type Review, type ReviewData } from "@/lib/googleReviews";
 
 // The Google rating row and review cards. With `limit` only that many are shown,
 // featured reviews first, with a link to /reviews for the rest. The rating row
 // always renders; the grid only when there are reviews to put in it.
+//
+// The only number shown is `count`, the rating count Google shows. The site
+// lists only the reviews with text (fewer: most star-only ratings have none),
+// so links to them never carry a number of their own.
 export default function GoogleReviews({ data, limit }: { data: ReviewData; limit?: number }) {
   const shown = limit
     ? [...data.reviews.filter((r) => r.featured), ...data.reviews.filter((r) => !r.featured)].slice(0, limit)
@@ -36,7 +40,7 @@ export default function GoogleReviews({ data, limit }: { data: ReviewData; limit
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={links.googleMaps} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            Read all on Google
+            {readAllOnGoogle(data.count)}
           </a>
           <a href={links.googleWriteReview} target="_blank" rel="noopener noreferrer" className="btn btn-red">
             Leave a review
@@ -46,6 +50,13 @@ export default function GoogleReviews({ data, limit }: { data: ReviewData; limit
 
       {shown.length > 0 && (
         <>
+          {/* The full list explains why it holds fewer reviews than the count */}
+          {!limit && (
+            <p className="-mt-2 max-w-[720px] text-sm text-muted md:-mt-4">
+              Below is every review with written comments, highest rated first. Ratings left without a comment count
+              toward the Google total but have no text to show.
+            </p>
+          )}
           <ul className="grid gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {shown.map((r) => (
               <ReviewCard key={`${r.author}-${r.publishTime}`} review={r} />
@@ -55,7 +66,7 @@ export default function GoogleReviews({ data, limit }: { data: ReviewData; limit
             <p className="text-xs text-muted">Ratings and reviews from Google Maps.</p>
             {shown.length < data.reviews.length && (
               <Link href="/reviews" className="btn btn-outline">
-                See all {data.reviews.length} reviews
+                More reviews
               </Link>
             )}
           </div>
@@ -72,7 +83,13 @@ function ReviewCard({ review: r }: { review: Review }) {
       <ReviewText text={r.text} />
       <div className="mt-auto flex items-center gap-3">
         {r.authorPhoto ? (
-          <Image src={r.authorPhoto} alt="" width={40} height={40} className="size-10 rounded-full bg-tile object-cover" />
+          <Image
+            src={r.authorPhoto}
+            alt={`${r.author}'s Google profile photo`}
+            width={40}
+            height={40}
+            className="size-10 rounded-full bg-tile object-cover"
+          />
         ) : (
           <span
             aria-hidden="true"

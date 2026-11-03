@@ -5,20 +5,23 @@ import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
-import { getReviews } from "@/lib/googleReviews";
+import { getGoogleReviews } from "@/lib/googleReviews";
 
-// Regenerated daily so review dates ("3 months ago") stay current.
+// Regenerated daily so review dates ("3 months ago") and the rating stay current.
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Reviews | Glasstech & Interior Solutions",
-  description:
-    "Google reviews of Glasstech and Interior Solutions: what clients say about our automotive, architectural and interior glass work in Nairobi.",
-  alternates: { canonical: "/reviews" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { rating, count } = await getGoogleReviews();
+  const rated = rating !== null && count !== null ? `Rated ${rating.toFixed(1)} from ${count} Google reviews: ` : "";
+  return {
+    title: "Reviews | Glasstech & Interior Solutions",
+    description: `${rated}what Nairobi clients say about our automotive, architectural and interior glass work.`,
+    alternates: { canonical: "/reviews" },
+  };
+}
 
-export default function ReviewsPage() {
-  const reviews = getReviews();
+export default async function ReviewsPage() {
+  const reviews = await getGoogleReviews();
 
   return (
     <>

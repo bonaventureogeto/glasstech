@@ -1,8 +1,11 @@
 import QuoteForm from "@/components/QuoteForm";
 import { links } from "@/content/links";
 import { company } from "@/content/company";
+import { getGoogleReviews, readAllOnGoogle } from "@/lib/googleReviews";
 
-export default function Contact() {
+export default async function Contact() {
+  const { count } = await getGoogleReviews();
+
   return (
     <section id="contact" aria-labelledby="contact-title" className="border-t border-line bg-frost">
       <div className="shell grid gap-5 py-16 md:gap-8 md:py-24 lg:grid-cols-12">
@@ -49,7 +52,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center self-start text-navy underline underline-offset-4 transition-colors hover:text-red"
               >
-                Read our reviews on Google
+                {readAllOnGoogle(count)}
               </a>
               <a href={`mailto:${company.email}`} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
                 {company.email}

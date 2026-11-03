@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "media": "node scripts/optimise-media.mjs",
-    "brand": "node scripts/build-brand-assets.mjs"
+    "brand": "node scripts/build-brand-assets.mjs",
+    "reviews": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fetch-reviews.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

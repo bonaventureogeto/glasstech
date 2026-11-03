@@ -4,13 +4,13 @@ import { YouTubeIcon } from "@/components/icons";
 import { socials } from "@/content/links";
 import { media } from "@/content/media";
 import { testimonials } from "@/content/testimonials";
-import { getReviews } from "@/lib/googleReviews";
+import { getGoogleReviews } from "@/lib/googleReviews";
 
 // "What clients say": Jeff Koinange's feature, then the client videos from
 // src/content/testimonials.ts, all played in place, then the Google rating
 // and six reviews, featured ones first.
-export default function Testimonials() {
-  const reviews = getReviews();
+export default async function Testimonials() {
+  const reviews = await getGoogleReviews();
   const feature = media.find((m) => m.featured && m.type === "video");
 
   return (

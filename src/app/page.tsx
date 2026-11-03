@@ -13,16 +13,19 @@ import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
 import JsonLd from "@/components/JsonLd";
 import { media } from "@/content/media";
-import { videoObject } from "@/lib/structuredData";
+import { getGoogleReviews } from "@/lib/googleReviews";
+import { localBusiness, videoObject } from "@/lib/structuredData";
 
 // Regenerated daily so review dates ("3 months ago") stay current.
 export const revalidate = 86400;
 
-export default function Home() {
+export default async function Home() {
   const feature = media.find((m) => m.featured && m.type === "video");
+  const reviews = await getGoogleReviews();
 
   return (
     <>
+      <JsonLd data={localBusiness(reviews)} />
       {feature && <JsonLd data={videoObject(feature)} />}
       <Nav />
       <main>
