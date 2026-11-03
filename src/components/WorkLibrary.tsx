@@ -6,7 +6,7 @@ import Lightbox from "@/components/Lightbox";
 import { PlayIcon } from "@/components/icons";
 import type { MediaItem } from "@/content/media";
 import { categoryLabels, categoryOrder, eyebrowFor, filters, sectorLabels, type WorkFilter } from "@/content/labels";
-import { whatsappLink } from "@/content/site";
+import { whatsappLink } from "@/content/company";
 
 // Portrait tiles: the 800px variant is enough. Landscape media is cropped to a
 // portrait tile, so it needs the full-size still to stay sharp on 2x screens.

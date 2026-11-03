@@ -6,7 +6,7 @@ import Lightbox from "@/components/Lightbox";
 import { PlayIcon } from "@/components/icons";
 import type { MediaItem } from "@/content/media";
 import { eyebrowFor, filters, type WorkFilter } from "@/content/labels";
-import { whatsappLink } from "@/content/site";
+import { whatsappLink } from "@/content/company";
 
 // Desktop bento: one wide and one medium tile, then three equal tiles.
 const spans = [

@@ -2,9 +2,9 @@
 // the build. Rendered with <JsonLd>.
 import type { VideoObject, WithContext } from "schema-dts";
 import type { MediaItem } from "@/content/media";
-import { site } from "@/content/site";
+import { SITE_URL } from "@/content/company";
 
-export const absoluteUrl = (path: string) => new URL(path, site.url).href;
+export const absoluteUrl = (path: string) => new URL(path, SITE_URL).href;
 
 /** A video that can be watched on the page it is marked up on. */
 export function videoObject(video: MediaItem): WithContext<VideoObject> {

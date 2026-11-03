@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowRightIcon, ChevronDownIcon } from "@/components/icons";
-import { quoteMessage, whatsappLink, whatsappUrl } from "@/content/site";
+import { quoteMessage, whatsappLink, whatsappUrl } from "@/content/company";
 
 const fields = [
   {

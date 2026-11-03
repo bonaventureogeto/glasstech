@@ -1,5 +1,5 @@
 import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { site, whatsappLink } from "@/content/site";
+import { company, whatsappLink } from "@/content/company";
 
 // Floating WhatsApp button from tablet up; a two-button bar pinned to the
 // bottom of the screen on phones.
@@ -17,7 +17,7 @@ export default function StickyCTA() {
       </a>
 
       <div className="on-dark fixed inset-x-0 bottom-0 z-30 grid grid-cols-2 gap-2.5 border-t border-white/10 bg-navy-deep/94 px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] backdrop-blur-[14px] md:hidden">
-        <a href={site.phones[0].href} className="btn btn-ghost">
+        <a href={company.phones[0].href} className="btn btn-ghost">
           <PhoneIcon size={16} />
           Call now
         </a>

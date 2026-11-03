@@ -10,7 +10,7 @@ import {
   YouTubeIcon,
 } from "@/components/icons";
 import { links, socials, type Social } from "@/content/links";
-import { site } from "@/content/site";
+import { company } from "@/content/company";
 
 const serviceLinks = [
   "Glass shower cubicles",
@@ -129,18 +129,18 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="py-2.5 leading-normal text-mist transition-colors hover:text-white"
               >
-                {site.workshop.lines[0]}
+                {company.workshop.lines[0]}
                 <br />
-                {site.workshop.lines.slice(1).join(", ")}
+                {company.workshop.lines.slice(1).join(", ")}
                 <span className="sr-only"> (opens in Google Maps)</span>
               </a>
-              {site.phones.map((p) => (
+              {company.phones.map((p) => (
                 <a key={p.href} href={p.href} className={link}>
                   {p.display}
                 </a>
               ))}
-              <a href={`mailto:${site.email}`} className={`${link} break-all`}>
-                {site.email}
+              <a href={`mailto:${company.email}`} className={`${link} break-all`}>
+                {company.email}
               </a>
             </address>
           </div>

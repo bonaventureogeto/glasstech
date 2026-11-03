@@ -10,7 +10,7 @@ import {
   WrenchIcon,
 } from "@/components/icons";
 import { media, serviceMedia } from "@/content/media";
-import { whatsappLink } from "@/content/site";
+import { whatsappLink } from "@/content/company";
 
 const services: {
   title: string;

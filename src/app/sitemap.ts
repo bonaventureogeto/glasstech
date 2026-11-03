@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { SITE_URL } from "@/content/company";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: site.url, changeFrequency: "monthly", priority: 1 },
-    { url: `${site.url}/work`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${site.url}/reviews`, changeFrequency: "weekly", priority: 0.6 },
+    { url: SITE_URL, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE_URL}/work`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/reviews`, changeFrequency: "weekly", priority: 0.6 },
   ];
 }

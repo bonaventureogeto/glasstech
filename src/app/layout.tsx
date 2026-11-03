@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Inter } from "next/font/google";
-import { fullAddress, localBusinessSchema, site } from "@/content/site";
+import { experience, localBusinessSchema, SITE_URL } from "@/content/company";
 import "./globals.css";
 
 // Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
@@ -16,7 +16,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const description = `Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings. Windshields, shower cubicles, office partitions and facades, measured on site and fabricated at our workshop: ${fullAddress}.`;
+// The experience figure comes from company.ts, so it follows the stat label.
+const description = `Automotive and architectural glass in Nairobi: windshields, shower cubicles, partitions and facades from a team with ${experience}.`;
 
 const ogImage = {
   url: "/og.jpg",
@@ -26,7 +27,7 @@ const ogImage = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(SITE_URL),
   title:
     "Glasstech & Interior Solutions | Automotive & Architectural Glass in Nairobi",
   description,
@@ -47,8 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Glasstech & Interior Solutions | Automotive & Architectural Glass",
-    description:
-      "Precision-cut, professionally installed glass for Kenya\u2019s cars, homes and buildings, from one Nairobi workshop.",
+    description,
     images: [ogImage],
   },
 };

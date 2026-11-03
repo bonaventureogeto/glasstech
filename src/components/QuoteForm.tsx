@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react";
 import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { quoteMessage, site, whatsappLink, whatsappUrl } from "@/content/site";
+import { company, quoteMessage, whatsappLink, whatsappUrl } from "@/content/company";
 
 const field =
   "w-full rounded-button border border-white/18 bg-white/6 px-4 text-[15px] text-white placeholder:text-mist-muted focus-visible:border-sky";
@@ -64,7 +64,7 @@ export default function QuoteForm() {
           <WhatsAppIcon />
           Send on WhatsApp
         </button>
-        <a href={site.phones[0].href} className="btn btn-ghost min-h-[52px] text-[15px]">
+        <a href={company.phones[0].href} className="btn btn-ghost min-h-[52px] text-[15px]">
           <PhoneIcon size={18} />
           Call the workshop
         </a>

@@ -1,8 +1,8 @@
 import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { site, whatsappLink } from "@/content/site";
+import { company, whatsappLink } from "@/content/company";
 
 export default function FinalCTA() {
-  const phone = site.phones[0];
+  const phone = company.phones[0];
   return (
     <section aria-labelledby="cta-title" className="mull on-dark text-white">
       <div className="shell flex flex-col items-center gap-6 py-20 text-center md:py-28">

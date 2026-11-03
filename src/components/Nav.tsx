@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { site, whatsappLink } from "@/content/site";
+import { company, whatsappLink } from "@/content/company";
 
 const links = [
   { label: "Work", href: "/#work" },
@@ -14,7 +14,7 @@ const links = [
   { label: "Contact", href: "/#contact" },
 ];
 
-const phone = site.phones[0];
+const phone = company.phones[0];
 
 export default function Nav() {
   const menu = useRef<HTMLDialogElement>(null);
@@ -117,7 +117,7 @@ export default function Nav() {
               <PhoneIcon size={18} />
               Call {phone.display}
             </a>
-            <p className="pt-1 text-center text-[13px] text-muted">{site.hours.display}</p>
+            <p className="pt-1 text-center text-[13px] text-muted">{company.hours.display}</p>
           </div>
         </div>
       </dialog>

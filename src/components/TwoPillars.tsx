@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { media, pillarMedia } from "@/content/media";
-import { whatsappLink } from "@/content/site";
+import { whatsappLink } from "@/content/company";
 
 const pillars = [
   {

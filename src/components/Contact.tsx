@@ -1,6 +1,6 @@
 import QuoteForm from "@/components/QuoteForm";
 import { links } from "@/content/links";
-import { site } from "@/content/site";
+import { company } from "@/content/company";
 
 export default function Contact() {
   return (
@@ -15,8 +15,8 @@ export default function Contact() {
           </div>
           <div className="reveal flex flex-col gap-4 rounded-card border border-line bg-white p-5 md:p-6">
             <div className="flex flex-col gap-1">
-              <p className="eyebrow text-[11px] text-navy">{site.workshop.label}</p>
-              <h3 className="text-xl font-semibold md:text-[22px]">{site.workshop.name}</h3>
+              <p className="eyebrow text-[11px] text-navy">{company.workshop.label}</p>
+              <h3 className="text-xl font-semibold md:text-[22px]">{company.workshop.name}</h3>
             </div>
             <address className="flex flex-col gap-1 text-sm leading-normal text-muted not-italic">
               <a
@@ -25,12 +25,12 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex flex-col self-start py-1 underline decoration-outline underline-offset-4 transition-colors hover:text-red hover:decoration-red"
               >
-                {site.workshop.lines.map((line) => (
+                {company.workshop.lines.map((line) => (
                   <span key={line}>{line}</span>
                 ))}
                 <span className="sr-only">(opens in Google Maps)</span>
               </a>
-              {site.phones.map((p) => (
+              {company.phones.map((p) => (
                 <a key={p.href} href={p.href} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
                   {p.display}
                 </a>
@@ -51,10 +51,10 @@ export default function Contact() {
               >
                 Read our reviews on Google
               </a>
-              <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
-                {site.email}
+              <a href={`mailto:${company.email}`} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
+                {company.email}
               </a>
-              <span className="py-1">{site.hours.display}</span>
+              <span className="py-1">{company.hours.display}</span>
             </address>
           </div>
         </div>
@@ -70,8 +70,8 @@ export default function Contact() {
           <QuoteForm />
           <p className="text-[13px] text-mist-muted">
             Typical response within a couple of hours on business days. Or email{" "}
-            <a href={`mailto:${site.email}`} className="text-sky underline underline-offset-2 hover:text-white">
-              {site.email}
+            <a href={`mailto:${company.email}`} className="text-sky underline underline-offset-2 hover:text-white">
+              {company.email}
             </a>
           </p>
         </div>

@@ -3,7 +3,7 @@ import CountUp from "@/components/CountUp";
 import LoopVideo from "@/components/LoopVideo";
 import { CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { heroLoop } from "@/content/media";
-import { site, whatsappLink } from "@/content/site";
+import { heroStats, whatsappLink } from "@/content/company";
 
 export default function Hero() {
   return (
@@ -38,8 +38,10 @@ export default function Hero() {
             </a>
           </div>
           <dl className="order-2 grid grid-cols-3 gap-3 border-t border-line-dark pt-4 md:flex md:gap-8 lg:order-none lg:pt-3">
-            {site.stats.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse gap-0.5">
+            {heroStats.map((s) => (
+              // Reversed so the label follows the number for screen readers' dt/dd
+              // order; justify-end keeps the numbers level when a label wraps.
+              <div key={s.label} className="flex flex-col-reverse justify-end gap-0.5">
                 <dt className="text-xs text-mist-muted md:text-[13px]">{s.label}</dt>
                 <dd className="font-display text-2xl leading-tight font-bold md:text-[30px]">
                   <CountUp value={s.value} />

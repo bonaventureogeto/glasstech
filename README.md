@@ -57,7 +57,9 @@ Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.c
 
 ## Business facts
 
-Stats, phone numbers, hours, address and email live in `src/content/site.ts`, which also builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
+Stats, phone numbers, hours, address and email live in `src/content/company.ts`, which also holds `SITE_URL` and builds the `LocalBusiness` JSON-LD rendered in `src/app/layout.tsx`. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
+
+The hero's first figure is **80+ years of combined experience**: the client has not confirmed it as years trading. The number and its label are `stats.experienceYears` and `stats.experienceLabel` in `company.ts`, and the hero and the homepage meta description both read them, so if the client confirms the stronger claim, changing that one label updates both.
 
 ## Google reviews
 
@@ -116,7 +118,7 @@ src/
     googleReviews.ts     # reads reviews.json: text-only, sorted, dated
     structuredData.ts    # JSON-LD builders, typed with schema-dts
   content/
-    site.ts              # business facts and WhatsApp link builder
+    company.ts           # business facts, SITE_URL, stats and WhatsApp link builder
     links.ts             # social profiles, Taplink, Google Maps listing
     testimonials.ts      # client video testimonials (YouTube Shorts)
     reviews.json         # Google reviews, copied by hand from the listing

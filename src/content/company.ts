@@ -3,9 +3,11 @@
 
 import { links, socials } from "@/content/links";
 
-export const site = {
+/** The canonical origin. Every absolute URL on the site is built from it. */
+export const SITE_URL = "https://www.glasstech.co.ke";
+
+export const company = {
   name: "Glasstech and Interior Solutions Limited",
-  url: "https://www.glasstech.co.ke",
   email: "hello@glasstech.co.ke",
   phones: [
     { display: "+254 714 498 682", href: "tel:+254714498682", e164: "+254714498682" },
@@ -35,18 +37,32 @@ export const site = {
       { days: ["Saturday"], opens: "08:00", closes: "14:00" },
     ],
   },
-  stats: [
-    { value: 80, suffix: "+", label: "Years in business" },
-    { value: 100, suffix: "+", label: "Completed projects" },
-    { value: 10, suffix: "", label: "Specialist craftsmen" },
-  ],
 } as const;
 
-export const fullAddress = `${site.workshop.street}, ${site.workshop.city}`;
+export const stats = {
+  // Not yet confirmed as years trading, so it is labelled as the team's
+  // combined experience. If the client confirms the stronger claim, change
+  // this one label to the "in business" wording: the hero stat and the meta
+  // description both read it from here.
+  experienceYears: 80,
+  experienceLabel: "Years of combined experience",
+  projects: 100,
+  craftsmen: 10,
+} as const;
+
+/** The three figures under the hero */
+export const heroStats = [
+  { value: stats.experienceYears, suffix: "+", label: stats.experienceLabel },
+  { value: stats.projects, suffix: "+", label: "Completed projects" },
+  { value: stats.craftsmen, suffix: "", label: "Specialist craftsmen" },
+];
+
+/** The experience figure for running text: "80+ years of combined experience" */
+export const experience = `${stats.experienceYears}+ ${stats.experienceLabel.toLowerCase()}`;
 
 export const quoteMessage = "Hi Glasstech, I'd like a quote.";
 
-export const whatsappUrl = `https://wa.me/${site.whatsappNumber}`;
+export const whatsappUrl = `https://wa.me/${company.whatsappNumber}`;
 
 export function whatsappLink(text: string = quoteMessage) {
   return `${whatsappUrl}?text=${encodeURIComponent(text)}`;
@@ -55,27 +71,27 @@ export function whatsappLink(text: string = quoteMessage) {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: site.name,
-  url: site.url,
-  logo: `${site.url}/apple-touch-icon.png`,
-  image: `${site.url}/og.jpg`,
+  name: company.name,
+  url: SITE_URL,
+  logo: `${SITE_URL}/apple-touch-icon.png`,
+  image: `${SITE_URL}/og.jpg`,
   description:
     "Automotive, architectural and interior glass: windshields, shower cubicles, office partitions, balconies and facades, measured, fabricated and fitted from one Nairobi workshop.",
-  email: site.email,
-  telephone: site.phones.map((p) => p.e164),
+  email: company.email,
+  telephone: company.phones.map((p) => p.e164),
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.workshop.street,
-    addressLocality: site.workshop.city,
-    addressCountry: site.workshop.countryCode,
+    streetAddress: company.workshop.street,
+    addressLocality: company.workshop.city,
+    addressCountry: company.workshop.countryCode,
   },
   hasMap: links.googleMaps,
-  openingHoursSpecification: site.hours.schema.map((h) => ({
+  openingHoursSpecification: company.hours.schema.map((h) => ({
     "@type": "OpeningHoursSpecification",
     dayOfWeek: h.days,
     opens: h.opens,
     closes: h.closes,
   })),
-  areaServed: { "@type": "Country", name: site.workshop.country },
+  areaServed: { "@type": "Country", name: company.workshop.country },
   sameAs: [...Object.values(socials).map((s) => s.href), links.taplink],
 };
