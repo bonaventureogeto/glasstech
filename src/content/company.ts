@@ -23,6 +23,9 @@ export const company = {
     ],
     country: "Kenya",
     countryCode: "KE",
+    // The listing's own coordinates: its Google Maps page, opened by the place
+    // id in links.ts, read on 3 November 2026.
+    geo: { latitude: -1.2160668, longitude: 36.8272599 },
   },
   hours: {
     display: "Mon to Fri 8:00 to 16:30 · Sat 8:00 to 14:00",

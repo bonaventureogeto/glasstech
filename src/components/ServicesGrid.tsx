@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   BuildingIcon,
   CarIcon,
@@ -90,8 +91,8 @@ export default function ServicesGrid() {
             const photo = photoId ? media.find((m) => m.id === photoId) : undefined;
             return (
             <li key={title} className="reveal">
-              <a
-                href="#contact"
+              <Link
+                href="/#contact"
                 className="group relative flex h-full items-center gap-3.5 overflow-hidden rounded-[14px] border border-line bg-white p-[18px] text-ink transition-colors hover:border-navy md:min-h-[280px] md:flex-col md:items-stretch md:justify-between md:gap-14 md:rounded-card md:p-7"
               >
                 {/* Out of the flow, behind the icon row: the card keeps the same
@@ -130,7 +131,7 @@ export default function ServicesGrid() {
                   </p>
                 </div>
                 <ChevronRightIcon size={18} className="shrink-0 text-mist-muted md:hidden" />
-              </a>
+              </Link>
             </li>
             );
           })}

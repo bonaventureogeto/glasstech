@@ -1,6 +1,6 @@
 // JSON-LD builders, typed with schema-dts so a wrong property or type fails
 // the build. Rendered with <JsonLd>.
-import type { LocalBusiness, VideoObject, WithContext } from "schema-dts";
+import type { BreadcrumbList, LocalBusiness, VideoObject, WithContext } from "schema-dts";
 import { company, SITE_URL } from "@/content/company";
 import { lines, links, phones, socials } from "@/content/links";
 import type { MediaItem } from "@/content/media";
@@ -42,6 +42,11 @@ export function localBusiness({ rating, count }: ReviewData): WithContext<LocalB
       addressLocality: company.workshop.city,
       addressCountry: company.workshop.countryCode,
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: company.workshop.geo.latitude,
+      longitude: company.workshop.geo.longitude,
+    },
     hasMap: links.googleMaps,
     openingHoursSpecification: company.hours.schema.map((h) => ({
       "@type": "OpeningHoursSpecification",
@@ -61,6 +66,22 @@ export function localBusiness({ rating, count }: ReviewData): WithContext<LocalB
           worstRating: 1,
         },
       }),
+  };
+}
+
+/** Home, then the page's own trail, e.g. [{ name: "Our work", path: "/work" }]. */
+export function breadcrumbList(trail: { name: string; path: string }[]): WithContext<BreadcrumbList> {
+  const crumbs = [{ name: "Home", path: "/" }, ...trail];
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      // The homepage as SITE_URL, matching its canonical tag
+      item: crumb.path === "/" ? SITE_URL : absoluteUrl(crumb.path),
+    })),
   };
 }
 

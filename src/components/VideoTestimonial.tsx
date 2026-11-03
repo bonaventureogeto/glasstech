@@ -47,7 +47,7 @@ export default function VideoTestimonial({
           >
             <Image
               src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
-              alt=""
+              alt={`Still from the video: ${title}`}
               fill
               // The thumbnail is 4:3 with the Short in its middle; cropped to 9:16
               // it renders about 2.4 times the card's width.

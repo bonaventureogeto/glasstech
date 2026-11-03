@@ -26,7 +26,18 @@ npm run lint
 | `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, Jeff Koinange's feature video, client videos and six Google reviews, contact, final CTA |
 | `/work` | Jeff Koinange's feature video, then every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive (all ten automotive photos), with a lightbox |
 | `/reviews` | Every Google review with text, with the rating and links to read or leave one on Google |
-| `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
+| `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` (see Search) |
+
+## Search
+
+The canonical host is `https://www.glasstech.co.ke`, written once as `SITE_URL` in `src/content/company.ts`.
+
+- **Metadata**: each page sets its title, description (under 155 characters, naming Nairobi and the work), absolute canonical, Open Graph and Twitter cards (`public/og.jpg`) and `index, follow` through `pageMetadata()` in `src/lib/metadata.ts`. Titles read "{Page} | Glasstech and Interior Solutions"; the homepage is "Glasstech and Interior Solutions | Automotive and Architectural Glass, Nairobi". The `/reviews` description carries the rating and count from `getGoogleReviews()`. No hreflang: the site has one language.
+- **Sitemap**: `/`, `/work` and `/reviews` with absolute URLs, never section anchors. `lastmod` is the last commit that touched each page's sources (for `/work`, `src/content/media.ts`, i.e. the newest media entry), and is left out if the build has no git history. Image entries: the hero poster, Jeff Koinange's poster and the first six work images on `/` and `/work`. Add new pages to `src/app/sitemap.ts`.
+- **robots.txt**: everything allowed except `/api/`, and the sitemap's address.
+- **Redirects** (`next.config.ts`, all 301): the bare domain to the same path on www; trailing slashes to the path without them (Next's own trailing-slash redirect is a 308, so it is switched off); and `glasstechandinteriors.com` (with or without www) page by page to its new home (`/about-us/` to `/#about`, `/portfolio/` and `/project/*` to `/work`, and so on), anything else to the same path. Two things live outside the repo: Vercel's domain settings already redirect the bare domain to www, with a 308 (set it to 301 there to match); and the old domain is still a separate site on Cloudflare, so its redirects only apply once it is added to this Vercel project, or they need setting up in Cloudflare as well.
+- **Structured data** (`src/lib/structuredData.ts`, typed with `schema-dts`): `/` has LocalBusiness (address, geo from the listing, both phone lines, opening hours, `sameAs`, AggregateRating) and the VideoObject; `/work` has a BreadcrumbList and the VideoObject; `/reviews` a BreadcrumbList. All four checked in the Schema.org validator with no errors or warnings.
+- **Search Console**: put the HTML tag's token in `NEXT_PUBLIC_GSC_VERIFICATION` (see `.env.example`; in Vercel, then redeploy) and every page gets the `google-site-verification` meta tag. Then submit `https://www.glasstech.co.ke/sitemap.xml`.
 
 ## Brand
 
@@ -117,6 +128,9 @@ Both loops autoplay muted unless the visitor has asked for reduced motion or is 
 - **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
 - **Automotive number plates**: the ten automotive photos show customers' plates (KDK 350R on the Land Cruiser behind pillar card 01, and others on /work). Blur them before launch if the clients have not agreed to appear.
 - **Email**: `hello@glasstech.co.ke` is the address on the site; the mailbox is set up by hand in cPanel, so confirm it receives mail.
+- **Which number is which** (`TODO(confirm with client)` in `src/content/links.ts`): the site treats 0714 498 682 as the architectural line and 0726 019 644 as the automotive line. Note that the Google Business listing shows 0726 019 644 as its phone number.
+- **80+ figure**: labelled "Years of combined experience" until the client confirms it as years in business (`stats.experienceLabel` in `src/content/company.ts`).
+- **Keys**: `GOOGLE_PLACES_API_KEY` is empty in `.env.local`, so the rating and count come from `reviews.json` (66 ratings at 4.3, read from the listing on 3 November 2026) until it is set, locally and in Vercel. `NEXT_PUBLIC_GSC_VERIFICATION` waits for Search Console's token.
 
 ## Project structure
 
@@ -136,6 +150,7 @@ src/
   lib/
     googleReviews.ts     # rating, count and reviews: live Places API, else reviews.json
     structuredData.ts    # JSON-LD builders, typed with schema-dts
+    metadata.ts          # pageMetadata(): title, description, canonical, cards
   content/
     company.ts           # business facts, SITE_URL and stats
     links.ts             # phone lines and WhatsApp links, social profiles, Taplink, Google Maps listing

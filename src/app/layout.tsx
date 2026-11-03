@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Inter } from "next/font/google";
-import { experience, SITE_URL } from "@/content/company";
+import { SITE_URL } from "@/content/company";
+import { HOME_TITLE, SITE_NAME } from "@/lib/metadata";
 import "./globals.css";
 
 // Variable fonts: one file each covers Figtree 600-800 and Inter 400-700.
@@ -16,41 +17,21 @@ const inter = Inter({
   display: "swap",
 });
 
-// The experience figure comes from company.ts, so it follows the stat label.
-const description = `Automotive and architectural glass in Nairobi: windshields, shower cubicles, partitions and facades from a team with ${experience}.`;
-
-const ogImage = {
-  url: "/og.jpg",
-  width: 1200,
-  height: 630,
-  alt: "Glasstech and Interior Solutions logo beside a black-framed glass conservatory the team installed",
-};
+// Shared by every page. Each page sets its own title, description, canonical
+// URL, Open Graph and Twitter cards with pageMetadata() (src/lib/metadata.ts).
+// Pages without their own (the 404) fall back to the homepage title.
+const gscToken = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title:
-    "Glasstech & Interior Solutions | Automotive & Architectural Glass in Nairobi",
-  description,
-  alternates: { canonical: "/" },
+  title: { template: `%s | ${SITE_NAME}`, default: HOME_TITLE },
+  applicationName: SITE_NAME,
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: "/apple-touch-icon.png",
   },
-  openGraph: {
-    title: "Glasstech & Interior Solutions | Automotive & Architectural Glass",
-    description,
-    url: "/",
-    type: "website",
-    locale: "en_KE",
-    siteName: "Glasstech & Interior Solutions Limited",
-    images: [ogImage],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Glasstech & Interior Solutions | Automotive & Architectural Glass",
-    description,
-    images: [ogImage],
-  },
+  // Google Search Console's HTML tag: paste the token into NEXT_PUBLIC_GSC_VERIFICATION
+  ...(gscToken && { verification: { google: gscToken } }),
 };
 
 export const viewport: Viewport = {

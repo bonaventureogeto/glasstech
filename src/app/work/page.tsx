@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import FeatureVideo from "@/components/FeatureVideo";
 import WorkLibrary from "@/components/WorkLibrary";
@@ -8,14 +7,15 @@ import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
 import JsonLd from "@/components/JsonLd";
 import { media } from "@/content/media";
-import { videoObject } from "@/lib/structuredData";
+import { pageMetadata } from "@/lib/metadata";
+import { breadcrumbList, videoObject } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "Our work | Glasstech & Interior Solutions",
+export const metadata = pageMetadata({
+  title: "Our work",
+  path: "/work",
   description:
-    "Photos and short clips of glass jobs by Glasstech and Interior Solutions: facades, glass balconies, windows and sliding doors, office partitions, shower cubicles and interiors across Kenya.",
-  alternates: { canonical: "/work" },
-};
+    "Photos and clips of our glass work in Nairobi and across Kenya: windshields, facades, glass balconies, office partitions, shower cubicles and interiors.",
+});
 
 export default function WorkPage() {
   const feature = media.find((m) => m.featured && m.type === "video");
@@ -23,6 +23,7 @@ export default function WorkPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbList([{ name: "Our work", path: "/work" }])} />
       {feature && <JsonLd data={videoObject(feature)} />}
       <Nav />
       <main>
