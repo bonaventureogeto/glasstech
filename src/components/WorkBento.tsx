@@ -6,7 +6,7 @@ import Lightbox from "@/components/Lightbox";
 import { PlayIcon } from "@/components/icons";
 import type { MediaItem } from "@/content/media";
 import { eyebrowFor, filters, type WorkFilter } from "@/content/labels";
-import { whatsappLink } from "@/content/company";
+import { whatsappHref } from "@/content/links";
 
 // Desktop bento: one wide and one medium tile, then three equal tiles.
 const spans = [
@@ -61,7 +61,7 @@ export default function WorkBento({
             book a fitting and see the work in person.
           </p>
           <a
-            href={whatsappLink("Hi Glasstech, I'd like to book an auto glass fitting.")}
+            href={whatsappHref("automotive", "Hi Glasstech, I'd like to book an auto glass fitting.")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-red"

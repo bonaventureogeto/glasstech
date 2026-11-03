@@ -10,7 +10,7 @@ import {
   WrenchIcon,
 } from "@/components/icons";
 import { media, serviceMedia } from "@/content/media";
-import { whatsappLink } from "@/content/company";
+import { whatsappHref } from "@/content/links";
 
 const services: {
   title: string;
@@ -75,7 +75,7 @@ export default function ServicesGrid() {
             </p>
           </div>
           <a
-            href={whatsappLink("Hi Glasstech, I'm not sure which glass I need. Can you advise?")}
+            href={whatsappHref("architectural", "Hi Glasstech, I'm not sure which glass I need. Can you advise?")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline self-start md:self-auto"

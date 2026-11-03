@@ -1,9 +1,11 @@
+import Link from "next/link";
 import Configurator from "@/components/Configurator";
 import CountUp from "@/components/CountUp";
 import LoopVideo from "@/components/LoopVideo";
-import { CheckIcon, WhatsAppIcon } from "@/components/icons";
+import QuoteChooser from "@/components/QuoteChooser";
+import { CheckIcon, ChevronDownIcon, WhatsAppIcon } from "@/components/icons";
 import { heroLoop } from "@/content/media";
-import { heroStats, whatsappLink } from "@/content/company";
+import { heroStats } from "@/content/company";
 
 export default function Hero() {
   return (
@@ -24,18 +26,14 @@ export default function Hero() {
             by people who do this every day.
           </p>
           <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3.5">
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-red min-h-[52px] px-6 text-[15px] md:min-h-[54px]"
-            >
+            <QuoteChooser buttonClassName="btn btn-red min-h-[52px] w-full px-6 text-[15px] sm:w-auto md:min-h-[54px]">
               <WhatsAppIcon />
               Quote on WhatsApp
-            </a>
-            <a href="#work" className="btn btn-ghost min-h-[52px] px-6 text-[15px] md:min-h-[54px]">
+              <ChevronDownIcon size={16} className="transition-transform group-open:rotate-180" />
+            </QuoteChooser>
+            <Link href="/#work" className="btn btn-ghost min-h-[52px] px-6 text-[15px] md:min-h-[54px]">
               See our work
-            </a>
+            </Link>
           </div>
           <dl className="order-2 grid grid-cols-3 gap-3 border-t border-line-dark pt-4 md:flex md:gap-8 lg:order-none lg:pt-3">
             {heroStats.map((s) => (

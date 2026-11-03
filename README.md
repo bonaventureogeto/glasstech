@@ -57,9 +57,24 @@ Navy and red, taken from the logo. Tokens live in `@theme` in `src/app/globals.c
 
 ## Business facts
 
-Stats, phone numbers, hours, address and email live in `src/content/company.ts`, which also holds `SITE_URL`. `src/lib/structuredData.ts` builds the homepage's `LocalBusiness` JSON-LD from them. Social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every external URL is written once, there. Change them there and every section updates.
+Stats, hours, address and email live in `src/content/company.ts`, which also holds `SITE_URL`. Phone numbers, social profiles, the Taplink page and the Google Maps listing live in `src/content/links.ts`; every number and external URL is written once, there. Change them there and every section updates. `src/lib/structuredData.ts` builds the homepage's `LocalBusiness` JSON-LD from both.
 
 The hero's first figure is **80+ years of combined experience**: the client has not confirmed it as years trading. The number and its label are `stats.experienceYears` and `stats.experienceLabel` in `company.ts`, and the hero and the homepage meta description both read them, so if the client confirms the stronger claim, changing that one label updates both.
+
+### Phone lines
+
+There are two lines, `phones.architectural` (+254 714 498 682) and `phones.automotive` (+254 726 019 644) in `links.ts`, each with a label. Which number serves which trade is still to be confirmed with the client (`TODO(confirm with client)` there); swapping them is a change to that one object.
+
+| Where | Goes to |
+|-------|---------|
+| Header phone link, "Call now" in the phone bar, the final CTA's call button | Architectural |
+| "Get a quote" (header), "Quote on WhatsApp" (hero, final CTA), the floating WhatsApp button, "WhatsApp quote" (phone bar) | A chooser: "Architectural quote" or "Automotive quote", each with its own prefilled message (`QuoteChooser`, built on `<details>`) |
+| Phone menu | "Architectural quote" and "Automotive quote" buttons, then a call button (architectural) |
+| Quote configurator | Automotive glass to the automotive line, every other service to the architectural line |
+| Pillar cards | 01 "Book a fitting": automotive. 02 "Start a project": architectural |
+| Contact | Both lines as labelled rows, each with a `tel:` link and a WhatsApp link; the quote form's "Send on WhatsApp" and "Call the workshop" follow its "Building or interior glass" / "Vehicle glass" choice (building by default) |
+| Footer, under the final CTA | Both lines, labelled |
+| LocalBusiness JSON-LD | Both under `telephone`, and one `ContactPoint` each (`contactType` "sales", Kenya, English and Swahili) |
 
 ## Google reviews
 
@@ -122,8 +137,8 @@ src/
     googleReviews.ts     # rating, count and reviews: live Places API, else reviews.json
     structuredData.ts    # JSON-LD builders, typed with schema-dts
   content/
-    company.ts           # business facts, SITE_URL, stats and WhatsApp link builder
-    links.ts             # social profiles, Taplink, Google Maps listing
+    company.ts           # business facts, SITE_URL and stats
+    links.ts             # phone lines and WhatsApp links, social profiles, Taplink, Google Maps listing
     testimonials.ts      # client video testimonials (YouTube Shorts)
     reviews.json         # Google rating, count and reviews (npm run reviews refreshes it)
     media.ts             # generated media library and homepage picks

@@ -9,7 +9,7 @@ import {
   XIcon,
   YouTubeIcon,
 } from "@/components/icons";
-import { links, socials, type Social } from "@/content/links";
+import { lines, links, phones, socials, telHref, type Social } from "@/content/links";
 import { company } from "@/content/company";
 
 const serviceLinks = [
@@ -134,10 +134,13 @@ export default function Footer() {
                 {company.workshop.lines.slice(1).join(", ")}
                 <span className="sr-only"> (opens in Google Maps)</span>
               </a>
-              {company.phones.map((p) => (
-                <a key={p.href} href={p.href} className={link}>
-                  {p.display}
-                </a>
+              {lines.map((line) => (
+                <p key={line} className="flex flex-col pt-1">
+                  <span className="text-xs text-mist-muted">{phones[line].short}</span>
+                  <a href={telHref(line)} className={`${link} min-h-10 self-start`}>
+                    {phones[line].display}
+                  </a>
+                </p>
               ))}
               <a href={`mailto:${company.email}`} className={`${link} break-all`}>
                 {company.email}

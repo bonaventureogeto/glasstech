@@ -2,11 +2,13 @@
 // the build. Rendered with <JsonLd>.
 import type { LocalBusiness, VideoObject, WithContext } from "schema-dts";
 import { company, SITE_URL } from "@/content/company";
-import { links, socials } from "@/content/links";
+import { lines, links, phones, socials } from "@/content/links";
 import type { MediaItem } from "@/content/media";
 import type { ReviewData } from "@/lib/googleReviews";
 
 export const absoluteUrl = (path: string) => new URL(path, SITE_URL).href;
+
+const e164 = (digits: string) => `+${digits}`;
 
 /**
  * The business, for the homepage. The AggregateRating is the same rating and
@@ -24,7 +26,16 @@ export function localBusiness({ rating, count }: ReviewData): WithContext<LocalB
     description:
       "Automotive, architectural and interior glass: windshields, shower cubicles, office partitions, balconies and facades, measured, fabricated and fitted from one Nairobi workshop.",
     email: company.email,
-    telephone: company.phones.map((p) => p.e164),
+    // Both lines; contactPoint says which is which
+    telephone: lines.map((line) => e164(phones[line].e164)),
+    contactPoint: lines.map((line) => ({
+      "@type": "ContactPoint" as const,
+      telephone: e164(phones[line].e164),
+      contactType: "sales",
+      name: phones[line].label,
+      areaServed: company.workshop.countryCode,
+      availableLanguage: ["English", "Swahili"],
+    })),
     address: {
       "@type": "PostalAddress",
       streetAddress: company.workshop.street,

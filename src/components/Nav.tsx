@@ -3,8 +3,10 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import { ArrowRightIcon, CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { company, whatsappLink } from "@/content/company";
+import QuoteChooser from "@/components/QuoteChooser";
+import { ChevronDownIcon, CloseIcon, MenuIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { company } from "@/content/company";
+import { lines, phones, quoteMessages, quoteOptions, telHref, whatsappHref } from "@/content/links";
 
 const links = [
   { label: "Work", href: "/#work" },
@@ -14,7 +16,8 @@ const links = [
   { label: "Contact", href: "/#contact" },
 ];
 
-const phone = company.phones[0];
+// One number in the header: the architectural line. The quote button asks which.
+const phone = phones.architectural;
 
 export default function Nav() {
   const menu = useRef<HTMLDialogElement>(null);
@@ -42,21 +45,21 @@ export default function Nav() {
 
         <div className="flex items-center gap-2 md:gap-3">
           <a
-            href={phone.href}
+            href={telHref("architectural")}
             className="hidden min-h-11 items-center gap-2 px-1 text-sm font-medium text-ink transition-colors hover:text-red min-[920px]:inline-flex"
           >
             <PhoneIcon size={16} />
+            <span className="sr-only">{phone.label}: </span>
             {phone.display}
           </a>
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-red min-h-11 px-3.5 text-[13px] max-[379px]:hidden md:px-[18px] md:text-sm"
+          <QuoteChooser
+            placement="below-end"
+            className="max-[379px]:hidden"
+            buttonClassName="btn btn-red min-h-11 gap-1.5 px-3.5 text-[13px] md:gap-2 md:px-[18px] md:text-sm"
           >
             Get a quote
-            <ArrowRightIcon size={16} className="hidden md:block" />
-          </a>
+            <ChevronDownIcon size={16} className="hidden transition-transform group-open:rotate-180 md:block" />
+          </QuoteChooser>
           <button
             type="button"
             onClick={() => menu.current?.showModal()}
@@ -103,17 +106,20 @@ export default function Nav() {
           </ul>
 
           <div className="mt-auto flex flex-col gap-3 px-5 pt-8 pb-[calc(24px+env(safe-area-inset-bottom))]">
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              className="btn btn-red min-h-[52px] text-[15px]"
-            >
-              <WhatsAppIcon />
-              Quote on WhatsApp
-            </a>
-            <a href={phone.href} className="btn btn-outline min-h-[52px] text-[15px]">
+            {lines.map((line) => (
+              <a
+                key={line}
+                href={whatsappHref(line, quoteMessages[line])}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={close}
+                className="btn btn-red min-h-[52px] text-[15px]"
+              >
+                <WhatsAppIcon />
+                {quoteOptions[line].title}
+              </a>
+            ))}
+            <a href={telHref("architectural")} className="btn btn-outline min-h-[52px] text-[15px]">
               <PhoneIcon size={18} />
               Call {phone.display}
             </a>

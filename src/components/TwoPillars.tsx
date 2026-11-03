@@ -1,14 +1,25 @@
 import Image from "next/image";
 import { media, pillarMedia } from "@/content/media";
-import { whatsappLink } from "@/content/company";
+import { whatsappHref, type Line } from "@/content/links";
 
-const pillars = [
+// Each card's button goes to its own line, with its own prefilled message.
+const pillars: {
+  kicker: string;
+  title: string;
+  body: string;
+  chips: string[];
+  cta: string;
+  line: Line;
+  message: string;
+  mediaId: string | null;
+}[] = [
   {
     kicker: "01 · Automotive glass",
     title: "Back on the road, same day",
     body: "Windshield replacement, chip and crack repair, side and rear glass. Private cars, fleets and insurance jobs.",
     chips: ["Windshields", "Chip repair", "Side and rear", "Fleet and insurance"],
     cta: "Book a fitting",
+    line: "automotive",
     message: "Hi Glasstech, I'd like to book an auto glass fitting.",
     mediaId: pillarMedia.automotive,
   },
@@ -18,6 +29,7 @@ const pillars = [
     body: "Toughened and laminated glass supplied, fabricated and installed for homes, offices and developments across Kenya.",
     chips: ["Shower cubicles", "Partitions", "Facades", "Balconies"],
     cta: "Start a project",
+    line: "architectural",
     message: "Hi Glasstech, I'd like to start an architectural glass project.",
     mediaId: pillarMedia.architectural,
   },
@@ -71,7 +83,7 @@ export default function TwoPillars() {
                     ))}
                   </ul>
                   <a
-                    href={whatsappLink(p.message)}
+                    href={whatsappHref(p.line, p.message)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-red mt-1 self-start md:mt-2"

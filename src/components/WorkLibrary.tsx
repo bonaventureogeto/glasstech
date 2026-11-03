@@ -6,7 +6,7 @@ import Lightbox from "@/components/Lightbox";
 import { PlayIcon } from "@/components/icons";
 import type { MediaItem } from "@/content/media";
 import { categoryLabels, categoryOrder, eyebrowFor, filters, sectorLabels, type WorkFilter } from "@/content/labels";
-import { whatsappLink } from "@/content/company";
+import { whatsappHref } from "@/content/links";
 
 // Portrait tiles: the 800px variant is enough. Landscape media is cropped to a
 // portrait tile, so it needs the full-size still to stay sharp on 2x screens.
@@ -55,7 +55,7 @@ export default function WorkLibrary({ items }: { items: MediaItem[] }) {
             book a fitting and see the work in person.
           </p>
           <a
-            href={whatsappLink("Hi Glasstech, I'd like to book an auto glass fitting.")}
+            href={whatsappHref("automotive", "Hi Glasstech, I'd like to book an auto glass fitting.")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-red"

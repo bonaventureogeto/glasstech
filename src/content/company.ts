@@ -1,6 +1,6 @@
 // Business facts used across the site and in the LocalBusiness schema
-// (src/lib/structuredData.ts). Change a number, phone or address here and it
-// updates everywhere.
+// (src/lib/structuredData.ts). Change a figure, the address or the hours here
+// and it updates everywhere. Phone numbers and WhatsApp links are in links.ts.
 
 /** The canonical origin. Every absolute URL on the site is built from it. */
 export const SITE_URL = "https://www.glasstech.co.ke";
@@ -8,11 +8,6 @@ export const SITE_URL = "https://www.glasstech.co.ke";
 export const company = {
   name: "Glasstech and Interior Solutions Limited",
   email: "hello@glasstech.co.ke",
-  phones: [
-    { display: "+254 714 498 682", href: "tel:+254714498682", e164: "+254714498682" },
-    { display: "+254 726 019 644", href: "tel:+254726019644", e164: "+254726019644" },
-  ],
-  whatsappNumber: "254714498682",
   workshop: {
     label: "Workshop and showroom",
     name: "Sunrise Centre, Northern Bypass",
@@ -58,11 +53,3 @@ export const heroStats = [
 
 /** The experience figure for running text: "80+ years of combined experience" */
 export const experience = `${stats.experienceYears}+ ${stats.experienceLabel.toLowerCase()}`;
-
-export const quoteMessage = "Hi Glasstech, I'd like a quote.";
-
-export const whatsappUrl = `https://wa.me/${company.whatsappNumber}`;
-
-export function whatsappLink(text: string = quoteMessage) {
-  return `${whatsappUrl}?text=${encodeURIComponent(text)}`;
-}

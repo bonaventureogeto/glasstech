@@ -1,8 +1,8 @@
-import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
-import { company, whatsappLink } from "@/content/company";
+import QuoteChooser from "@/components/QuoteChooser";
+import { ChevronDownIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { phones, telHref } from "@/content/links";
 
 export default function FinalCTA() {
-  const phone = company.phones[0];
   return (
     <section aria-labelledby="cta-title" className="mull on-dark text-white">
       <div className="shell flex flex-col items-center gap-6 py-20 text-center md:py-28">
@@ -14,20 +14,26 @@ export default function FinalCTA() {
           Windshield, shower screen or an entire facade. Same measured, professional job every time.
         </p>
         <div className="reveal flex w-full flex-col justify-center gap-3 pt-2 sm:w-auto sm:flex-row sm:gap-3.5">
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-red min-h-[54px] px-[26px] text-[15px]"
+          <QuoteChooser
+            placement="below-center"
+            buttonClassName="btn btn-red min-h-[54px] w-full px-[26px] text-[15px] sm:w-auto"
           >
             <WhatsAppIcon />
             Quote on WhatsApp
-          </a>
-          <a href={phone.href} className="btn btn-ghost min-h-[54px] px-[26px] text-[15px]">
+            <ChevronDownIcon size={16} className="transition-transform group-open:rotate-180" />
+          </QuoteChooser>
+          <a href={telHref("architectural")} className="btn btn-ghost min-h-[54px] px-[26px] text-[15px]">
             <PhoneIcon size={18} />
-            Call {phone.display}
+            <span className="sr-only">{phones.architectural.label}: </span>
+            Call {phones.architectural.display}
           </a>
         </div>
+        <p className="reveal text-sm text-mist">
+          {phones.automotive.label}:{" "}
+          <a href={telHref("automotive")} className="font-semibold text-white underline underline-offset-4 hover:text-sky">
+            {phones.automotive.display}
+          </a>
+        </p>
       </div>
     </section>
   );

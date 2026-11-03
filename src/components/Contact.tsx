@@ -1,5 +1,6 @@
 import QuoteForm from "@/components/QuoteForm";
-import { links } from "@/content/links";
+import { WhatsAppIcon } from "@/components/icons";
+import { lines, links, phones, quoteMessages, telHref, whatsappHref } from "@/content/links";
 import { company } from "@/content/company";
 import { getGoogleReviews, readAllOnGoogle } from "@/lib/googleReviews";
 
@@ -33,11 +34,6 @@ export default async function Contact() {
                 ))}
                 <span className="sr-only">(opens in Google Maps)</span>
               </a>
-              {company.phones.map((p) => (
-                <a key={p.href} href={p.href} className="inline-flex min-h-11 items-center self-start font-semibold text-ink hover:text-red">
-                  {p.display}
-                </a>
-              ))}
               <a
                 href={links.taplink}
                 target="_blank"
@@ -60,6 +56,34 @@ export default async function Contact() {
               <span className="py-1">{company.hours.display}</span>
             </address>
           </div>
+          {/* One row per line: call it, or message it on WhatsApp */}
+          <ul
+            aria-label="Phone numbers"
+            className="reveal flex flex-col divide-y divide-line rounded-card border border-line bg-white"
+          >
+            {lines.map((line) => (
+              <li key={line} className="flex items-center justify-between gap-4 px-5 py-3.5 md:px-6">
+                <p className="flex min-w-0 flex-col">
+                  <span className="eyebrow text-[11px] text-navy">{phones[line].short}</span>
+                  <a
+                    href={telHref(line)}
+                    className="inline-flex min-h-11 items-center self-start text-lg font-semibold text-ink transition-colors hover:text-red"
+                  >
+                    {phones[line].display}
+                  </a>
+                </p>
+                <a
+                  href={whatsappHref(line, quoteMessages[line])}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`WhatsApp the ${phones[line].short.toLowerCase()} team`}
+                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-outline text-navy transition-colors hover:border-red hover:bg-red hover:text-white"
+                >
+                  <WhatsAppIcon size={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="reveal on-dark flex flex-col gap-6 rounded-card bg-navy-deep p-6 text-white md:rounded-panel md:p-10 lg:col-span-6">
