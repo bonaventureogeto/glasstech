@@ -1,6 +1,7 @@
 import type { MediaCategory, MediaItem, MediaSector } from "@/content/media";
 
 export const categoryLabels: Record<MediaCategory, string> = {
+  feature: "As featured",
   facade: "Facades",
   "balcony-railing": "Balconies and railings",
   "windows-glazing": "Windows and glazing",
@@ -12,7 +13,8 @@ export const categoryLabels: Record<MediaCategory, string> = {
   team: "Our team",
 };
 
-// Order of the groups on /work
+// Order of the groups on /work. "feature" is left out: featured videos play in
+// their own block at the top of the page, not as tiles.
 export const categoryOrder: MediaCategory[] = [
   "facade",
   "balcony-railing",

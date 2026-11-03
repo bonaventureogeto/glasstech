@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
+import FeatureVideo from "@/components/FeatureVideo";
 import WorkLibrary from "@/components/WorkLibrary";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import MotionSystem from "@/components/MotionSystem";
+import JsonLd from "@/components/JsonLd";
 import { media } from "@/content/media";
+import { videoObject } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Our work | Glasstech & Interior Solutions",
@@ -15,8 +18,12 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  const feature = media.find((m) => m.featured && m.type === "video");
+  const library = media.filter((m) => !m.featured);
+
   return (
     <>
+      {feature && <JsonLd data={videoObject(feature)} />}
       <Nav />
       <main>
         <section aria-labelledby="work-title" className="border-b border-line bg-frost">
@@ -32,7 +39,12 @@ export default function WorkPage() {
           </div>
         </section>
         <div className="shell flex flex-col gap-12 py-10 md:gap-16 md:py-16">
-          <WorkLibrary items={media} />
+          {feature && (
+            <section aria-labelledby="featured-title">
+              <FeatureVideo video={feature} label="Featured" labelAs="h2" labelId="featured-title" />
+            </section>
+          )}
+          <WorkLibrary items={library} />
         </div>
         <FinalCTA />
       </main>

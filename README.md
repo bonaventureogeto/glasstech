@@ -23,8 +23,8 @@ npm run lint
 
 | Route | What it is |
 |-------|------------|
-| `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, client videos and six Google reviews, contact, final CTA |
-| `/work` | Every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive, with a lightbox |
+| `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, Jeff Koinange's feature video, client videos and six Google reviews, contact, final CTA |
+| `/work` | Jeff Koinange's feature video, then every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive, with a lightbox |
 | `/reviews` | Every Google review with text, with the rating and links to read or leave one on Google |
 | `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
@@ -79,10 +79,15 @@ All photography and video is Glasstech's own work; there is no stock imagery.
    - clips: 720p H.264, 30fps, no audio, at most 8s, with WebP posters (1600px and 800px)
    - hero loop: 4:5 crop at 864x1080, 8s with a 1s crossfade so it loops seamlessly, kept under 6 MB (4.8 MB)
    - process loop: 16:9 at 1280x720, 10s crossfaded, kept under 10 MB (1.7 MB)
+   - feature videos (`category: "feature"`): the whole clip with its sound, H.264 at 1080p max, re-encoded until it is under 12 MB. 1080p is only kept if it fits at CRF 26 or better; otherwise 720p at a lower CRF looks sharper for the same bytes. iPhone HDR (HLG) footage is tone mapped to SDR with macOS `avconvert` first, or it plays back grey and flat. The poster is a chosen frame (`poster` in seconds), plus a 24px blurred copy inlined in `media.ts` that fills the frame around vertical footage
 
    It only builds what is missing; `--force` rebuilds and `--only=id,id` limits the run. Without ffmpeg it prints the exact commands to run and leaves missing clips out of `media.ts`, so the site never links to a file that does not exist.
 
 Both loops autoplay muted unless the visitor has asked for reduced motion or is on Save-Data; the hero plays at every screen size, the process loop only from 768px up. Everyone else sees the poster.
+
+### Jeff Koinange's feature
+
+`jeff-koinange.MOV` (repo root, gitignored: 146 MB of iPhone 4K HDR) is encoded to `public/media/video/jeff-koinange-feature.mp4` (720x1280, 46s, with sound, 11.4 MB). It never autoplays: `FeatureVideo` shows the poster and a play button, then mounts a native `<video>` with controls in place. It plays first in "What clients say", across the full width (4:5 on phones, 16:9 from 768px; the footage is vertical, so it sits on a blurred copy of its poster), and at the top of `/work`. One video plays at a time: starting it unloads a playing client Short, starting a Short or a `/work` lightbox clip pauses it. Both pages carry its `VideoObject` JSON-LD. `jeff-koinange-2.mp4` is a 576x1024 second angle of the same moment and is not used; to swap it in, point the manifest item's `source` at it and run `npm run media -- --force --only=jeff-koinange-feature`.
 
 ### Placeholders to replace before launch
 
@@ -109,6 +114,7 @@ src/
     reviews/page.tsx     # /reviews
   lib/
     googleReviews.ts     # reads reviews.json: text-only, sorted, dated
+    structuredData.ts    # JSON-LD builders, typed with schema-dts
   content/
     site.ts              # business facts and WhatsApp link builder
     links.ts             # social profiles, Taplink, Google Maps listing
@@ -116,7 +122,7 @@ src/
     reviews.json         # Google reviews, copied by hand from the listing
     media.ts             # generated media library and homepage picks
     labels.ts            # category and sector labels, filters
-  components/            # one file per section, plus Lightbox, LoopVideo, CountUp, icons
+  components/            # one file per section, plus FeatureVideo, Lightbox, LoopVideo, CountUp, JsonLd, icons
 public/
   brand/                 # logo SVGs
   media/                 # optimised photos, clips and posters (committed)

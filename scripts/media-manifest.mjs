@@ -2,8 +2,13 @@
 // writes the optimised files to public/media/ and regenerates src/content/media.ts.
 //
 // `source` paths are relative to public/content/ (the original camera files,
-// kept out of git). A `repo:` prefix points at a file tracked in the repo instead.
+// kept out of git). A `repo:` prefix points at a path from the repo root instead.
 // Video `trim` and `poster` are seconds in the source clip.
+//
+// `category: "feature"` marks a headline video: kept whole with its sound and
+// played in its own block (testimonials, top of /work), not as a gallery tile.
+// It also needs `featured`, a `caption` for under the player, and a
+// `description` and `uploadDate` for its VideoObject structured data.
 
 export const projects = {
   tower: { title: "Apartment Tower Glazing", sector: "residential" },
@@ -23,9 +28,19 @@ export const projects = {
   roofCrew: { title: "Glass Roof Installation", sector: "commercial" },
   safetyDemo: { title: "Safety Glass Demonstration" },
   yard: { title: "Yard and Glass Delivery Truck" },
+  koinange: { title: "Jeff Koinange features Glasstech and Interior Solutions" },
 };
 
 export const items = [
+  // Jeff Koinange at the Glasstech stand (14 Oct): iPhone 4K HDR, 46s, with sound.
+  // The original (146 MB) is gitignored; jeff-koinange-2.mp4 is a second angle
+  // of the same moment at 576x1024, not used.
+  { id: "jeff-koinange-feature", source: "repo:jeff-koinange.MOV", type: "video", project: "koinange", category: "feature",
+    featured: true, poster: 18.5, uploadDate: "2026-11-03T09:00:00+03:00",
+    alt: "Jeff Koinange features Glasstech and Interior Solutions",
+    caption: "Jeff Koinange on Glasstech",
+    description: "Jeff Koinange takes the break-the-glass challenge at the Glasstech and Interior Solutions stand, swinging a hammer at a panel of Glasstech glass." },
+
   // Apartment tower, aerial (1 Jul)
   { id: "tower-rooftop", source: "drone shots/DJI_0214.MP4", type: "video", project: "tower", category: "facade", trim: [24, 36], poster: 30,
     alt: "Drone rising past the rooftop of a white and brown apartment tower with glazed balconies" },

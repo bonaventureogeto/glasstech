@@ -7,6 +7,9 @@
 //
 // Images: WebP at max 2000px on the long edge, plus an 800px variant.
 // Videos: H.264 MP4 (720p, 30fps, no audio) trimmed to 8s, with WebP posters.
+// Feature videos (category "feature"): the whole clip with its sound, H.264 at
+// 1080p max, re-encoded until it is under 12 MB. iPhone HDR footage is tone
+// mapped to SDR first (macOS avconvert), or it plays back grey and flat.
 // Homepage loops (hero, process) are cropped, crossfaded so they wrap without
 // a jump, and re-encoded until they fit their byte budget.
 //
@@ -16,6 +19,7 @@
 import { execFile, execFileSync } from "node:child_process";
 import { promisify } from "node:util";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import sharp from "sharp";
 import { projects, items, slots } from "./media-manifest.mjs";
@@ -35,6 +39,12 @@ const VIDEO_MAX = 1280;
 const CLIP_MAX = 8;
 const CRF = 30;
 const JOBS = 3;
+// Short side, and the highest CRF worth using at that size. 1080p is tried
+// first; when it only fits the budget at a CRF that smears faces and text,
+// 720p at a lower CRF looks better for the same bytes (and scores higher SSIM).
+const FEATURE_SIZES = [[1080, 26], [720, 32]];
+const FEATURE_MAX_BYTES = 12e6;
+const HDR_TRANSFERS = new Set(["arib-std-b67", "smpte2084"]); // HLG (iPhone), PQ
 
 const args = process.argv.slice(2);
 const force = args.includes("--force");
@@ -50,6 +60,9 @@ const hasFfmpeg = (() => {
     return false;
   }
 })();
+
+// macOS ships avconvert, whose H.264 presets tone map HDR to SDR the way Photos does.
+const hasAvconvert = process.platform === "darwin" && fs.existsSync("/usr/bin/avconvert");
 
 const todo = [];
 const metaCache = fs.existsSync(META_CACHE) ? JSON.parse(fs.readFileSync(META_CACHE, "utf8")) : {};
@@ -151,6 +164,77 @@ async function processVideo(item) {
   return { src: publicUrl(mp4), poster: publicUrl(`${base}.webp`), thumb: publicUrl(`${base}-800.webp`), ...out };
 }
 
+// An SDR copy of an HDR source, made in `dir`; SDR sources are returned as they are.
+async function sdrSource(src, dir) {
+  const { stdout } = await run("ffprobe", ["-v", "error", "-select_streams", "v:0", "-show_entries",
+    "stream=color_transfer", "-of", "default=nw=1:nk=1", src]);
+  const transfer = stdout.trim();
+  if (!HDR_TRANSFERS.has(transfer)) return src;
+  if (!hasAvconvert) {
+    console.warn(`  warn   HDR source (${transfer}) and no avconvert: encoding without tone mapping, colours will look flat`);
+    return src;
+  }
+  // Preset1920x1080 fits the frame inside 1920x1080 (1080x1920 for portrait),
+  // applies the rotation flag and tone maps to BT.709.
+  const out = path.join(dir, "sdr.mov");
+  await run("avconvert", ["--source", src, "--preset", "Preset1920x1080", "--output", out, "--replace"]);
+  return out;
+}
+
+// Whole clip, with sound, re-encoded until it fits the byte budget.
+async function processFeature(item) {
+  const base = path.join(VIDEO_DIR, item.id);
+  const mp4 = `${base}.mp4`;
+  const src = sourcePath(item.source);
+  const build = plan(item.id, item.source, mp4, `${base}.webp`, `${base}-800.webp`);
+  if (build === null) return null;
+  if (build && !hasFfmpeg) {
+    todo.push(`ffmpeg -i ${quote(src)} -vf "scale='if(gt(iw,ih),-2,720)':'if(gt(iw,ih),720,-2)',fps=30,format=yuv420p" -c:v libx264 -preset slow -crf 25 -c:a aac -b:a 128k -movflags +faststart ${quote(mp4)}`,
+      `ffmpeg -ss ${item.poster ?? 0} -i ${quote(src)} -frames:v 1 ${quote(`${base}.png`)}   # then save as ${item.id}.webp (1600px) and ${item.id}-800.webp`);
+    return null;
+  }
+  if (build) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "glasstech-media-"));
+    try {
+      const input = await sdrSource(src, tmp);
+      const meta = await probe(input);
+      let size = 0;
+      fit: for (const [side, maxCrf] of FEATURE_SIZES) {
+        const short = Math.min(meta.width, meta.height, side);
+        const scale = meta.width >= meta.height ? `scale=-2:${short}` : `scale=${short}:-2`;
+        for (let crf = 23; crf <= maxCrf; crf++) {
+          await run("ffmpeg", ["-v", "error", "-y", "-i", input, "-map", "0:v:0", "-map", "0:a:0?",
+            "-vf", `${scale}:flags=lanczos,fps=30,format=yuv420p`,
+            "-c:v", "libx264", "-preset", "slow", "-crf", String(crf), "-profile:v", "high", "-pix_fmt", "yuv420p",
+            "-c:a", "aac", "-b:a", "128k", "-ac", "2", "-movflags", "+faststart", "-tag:v", "avc1", mp4]);
+          size = fs.statSync(mp4).size;
+          if (size <= FEATURE_MAX_BYTES) {
+            console.log(`  video  ${item.id}  ${short}p crf ${crf}  ${round(size / 1e6, 2)}MB (budget ${FEATURE_MAX_BYTES / 1e6}MB)`);
+            break fit;
+          }
+        }
+      }
+      if (size > FEATURE_MAX_BYTES) console.warn(`  warn   ${item.id}: ${round(size / 1e6, 2)}MB, over the budget even at 720p`);
+      await writeStills(await frame(input, item.poster ?? 0), base, POSTER_MAX);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+  const out = await outputMeta(mp4);
+  if (!out) return null;
+  return {
+    src: publicUrl(mp4), poster: publicUrl(`${base}.webp`), thumb: publicUrl(`${base}-800.webp`), ...out,
+    blurDataURL: await blurDataURL(`${base}-800.webp`),
+  };
+}
+
+// A 24px copy of the poster as a data URI: blurred, it fills the frame around
+// footage that does not match the card's shape, for no extra request.
+async function blurDataURL(file) {
+  const buffer = await sharp(file).resize(24).webp({ quality: 40 }).toBuffer();
+  return `data:image/webp;base64,${buffer.toString("base64")}`;
+}
+
 // A loop of `length` seconds whose last `crossfade` seconds dissolve into its
 // first frame, so playback wraps around without a visible jump.
 async function processLoop(name, slot) {
@@ -207,17 +291,26 @@ async function pool(tasks, size) {
 
 console.log(`Media: ${items.length} items${only ? `, building ${only.join(", ")}` : ""}${hasFfmpeg ? "" : " (ffmpeg not found)"}`);
 
+const processor = (item) =>
+  item.type === "image" ? processImage : item.category === "feature" ? processFeature : processVideo;
+
 const built = await pool(items.map((item) => async () => {
-  const out = item.type === "image" ? await processImage(item) : await processVideo(item);
+  const out = await processor(item)(item);
   if (!out) return null;
   const project = projects[item.project];
   return {
     id: item.id, src: out.src, type: item.type, category: item.category,
     ...(project.sector && { sector: project.sector }),
-    title: project.title, alt: item.alt, width: out.width, height: out.height,
+    ...(item.featured && { featured: true }),
+    title: project.title, alt: item.alt,
+    ...(item.caption && { caption: item.caption }),
+    ...(item.description && { description: item.description }),
+    ...(item.uploadDate && { uploadDate: item.uploadDate }),
+    width: out.width, height: out.height,
     ...(out.duration && { duration: out.duration }),
     ...(out.poster && { poster: out.poster }),
     thumb: out.thumb,
+    ...(out.blurDataURL && { blurDataURL: out.blurDataURL }),
   };
 }), JOBS);
 
@@ -236,6 +329,7 @@ fs.writeFileSync(MEDIA_TS, `// Generated by scripts/optimise-media.mjs from scri
 // Do not edit by hand: change the manifest, then run \`npm run media\`.
 
 export type MediaCategory =
+  | "feature"
   | "facade"
   | "balcony-railing"
   | "windows-glazing"
@@ -254,13 +348,23 @@ export interface MediaItem {
   type: "image" | "video";
   category: MediaCategory;
   sector?: MediaSector;
+  /** A headline piece: played in its own block, not shown as a gallery tile */
+  featured?: boolean;
   title: string;
   alt: string;
+  /** Short line shown under a featured player */
+  caption?: string;
+  /** What happens in it; used for the VideoObject structured data */
+  description?: string;
+  /** ISO 8601 date and time it was first published on the site */
+  uploadDate?: string;
   width: number;
   height: number;
   duration?: number;
   poster?: string;
   thumb: string;
+  /** Tiny blurred poster as a data URI, for filling the frame around the video */
+  blurDataURL?: string;
 }
 
 export interface MediaLoop {

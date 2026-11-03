@@ -2,32 +2,36 @@ import GoogleReviews from "@/components/GoogleReviews";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import { YouTubeIcon } from "@/components/icons";
 import { socials } from "@/content/links";
+import { media } from "@/content/media";
 import { testimonials } from "@/content/testimonials";
 import { getReviews } from "@/lib/googleReviews";
 
-// "What clients say": the client videos from src/content/testimonials.ts, played
-// in place, then the Google rating and six reviews, featured ones first. From
-// 1024px the heading and YouTube link sit to the left of the videos.
+// "What clients say": Jeff Koinange's feature, then the client videos from
+// src/content/testimonials.ts, all played in place, then the Google rating
+// and six reviews, featured ones first.
 export default function Testimonials() {
   const reviews = getReviews();
+  const feature = media.find((m) => m.featured && m.type === "video");
 
   return (
     <section aria-labelledby="testimonials-title" className="bg-white">
       <div className="shell flex flex-col gap-10 py-16 md:gap-14 md:py-24">
-        <div className="grid gap-6 md:gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-8">
+        <div className="flex flex-col gap-8 md:gap-10">
           <div className="reveal flex max-w-[640px] flex-col gap-3 md:gap-4">
             <p className="eyebrow text-[11px] text-navy md:text-xs">What clients say</p>
             <h2 id="testimonials-title" className="text-h2 font-bold">
               Fitted once, done right.
             </h2>
           </div>
-          {testimonials.length > 0 && (
-            <>
-              <VideoTestimonials
-                items={testimonials}
-                className="reveal lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-[680px]"
-              />
-              <div className="lg:col-start-1 lg:row-start-2">
+          <VideoTestimonials
+            feature={feature}
+            items={testimonials}
+            aside={
+              <div className="flex max-w-[420px] flex-col items-start gap-3 md:gap-4">
+                <p className="eyebrow text-[11px] text-navy md:text-xs">Client videos</p>
+                <p className="text-[15px] text-muted md:text-[17px] md:leading-[1.65]">
+                  Clients on the work we did for them, in their own words.
+                </p>
                 <a
                   href={socials.youtube.href}
                   target="_blank"
@@ -38,8 +42,8 @@ export default function Testimonials() {
                   Watch more on YouTube
                 </a>
               </div>
-            </>
-          )}
+            }
+          />
         </div>
         <div className="border-t border-line pt-10 md:pt-14">
           <GoogleReviews data={reviews} limit={6} />

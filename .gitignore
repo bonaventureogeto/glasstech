@@ -43,3 +43,7 @@ next-env.d.ts
 # original camera media (multi-GB); only the optimised copies in /public/media are committed
 /public/content/
 /glasstech content/
+
+# Jeff Koinange originals at the repo root (the MOV is 146 MB); only the
+# optimised copy in /public/media/video is committed
+/jeff-koinange*

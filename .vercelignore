@@ -1,3 +1,5 @@
 # Original camera media: 18 GB, never deployed. The site serves /public/media.
 public/content
 glasstech content
+# Jeff Koinange originals; the site serves the optimised copy in public/media
+/jeff-koinange*

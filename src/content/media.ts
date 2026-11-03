@@ -2,6 +2,7 @@
 // Do not edit by hand: change the manifest, then run `npm run media`.
 
 export type MediaCategory =
+  | "feature"
   | "facade"
   | "balcony-railing"
   | "windows-glazing"
@@ -20,13 +21,23 @@ export interface MediaItem {
   type: "image" | "video";
   category: MediaCategory;
   sector?: MediaSector;
+  /** A headline piece: played in its own block, not shown as a gallery tile */
+  featured?: boolean;
   title: string;
   alt: string;
+  /** Short line shown under a featured player */
+  caption?: string;
+  /** What happens in it; used for the VideoObject structured data */
+  description?: string;
+  /** ISO 8601 date and time it was first published on the site */
+  uploadDate?: string;
   width: number;
   height: number;
   duration?: number;
   poster?: string;
   thumb: string;
+  /** Tiny blurred poster as a data URI, for filling the frame around the video */
+  blurDataURL?: string;
 }
 
 export interface MediaLoop {
@@ -40,6 +51,24 @@ export interface MediaLoop {
 }
 
 export const media: MediaItem[] = [
+  {
+    "id": "jeff-koinange-feature",
+    "src": "/media/video/jeff-koinange-feature.mp4",
+    "type": "video",
+    "category": "feature",
+    "featured": true,
+    "title": "Jeff Koinange features Glasstech and Interior Solutions",
+    "alt": "Jeff Koinange features Glasstech and Interior Solutions",
+    "caption": "Jeff Koinange on Glasstech",
+    "description": "Jeff Koinange takes the break-the-glass challenge at the Glasstech and Interior Solutions stand, swinging a hammer at a panel of Glasstech glass.",
+    "uploadDate": "2026-11-03T09:00:00+03:00",
+    "width": 720,
+    "height": 1280,
+    "duration": 46,
+    "poster": "/media/video/jeff-koinange-feature.webp",
+    "thumb": "/media/video/jeff-koinange-feature-800.webp",
+    "blurDataURL": "data:image/webp;base64,UklGRkYBAABXRUJQVlA4IDoBAACQBwCdASoYACsAPu1op08ppiMiKqwBMB2JYgCxH3LG4V5TqQdZP97VUzuXmMWInc8zxlXTZ8ZLyBIUW/xZwPkOwmWpSJAA/j2iqE638kfM2D3bB6C5Gt9BLc+sYgxVeBKMhcYVsqXGXlE4iSr259nHsV/FC/RTxyOwL7h6zlYeexTAzvHT1oQoHc+D7cXbr5Z3ze1Ig7sLUvEa6e9VKxzl0qM2UrZCAn7z04eQv/Cdr//PhK8i4ijGArHq5UKhwOu+jESSfdlZrFxef6F9bHxi0YUNddkWC28hUJ3CkMDuIBMJkgfUl60KFOCIHknfkc0LV6at/yqD3fW5bnBrVO9OpK/brUqUfqYq94G7COoVzC9K0sqUyR5JfbCcmsPTcqvrudBUMyC1ognbnrxPJhcz3xkN9L/d8xAAAA=="
+  },
   {
     "id": "tower-rooftop",
     "src": "/media/video/tower-rooftop.mp4",
