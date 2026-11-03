@@ -1276,6 +1276,126 @@ export const media: MediaItem[] = [
     "width": 1600,
     "height": 1200,
     "thumb": "/media/images/warehouse-partitions-800.webp"
+  },
+  {
+    "id": "land-cruiser-windshield-out",
+    "src": "/media/images/land-cruiser-windshield-out.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Toyota Land Cruiser Windshield Replacement",
+    "alt": "Black Toyota Land Cruiser with an ARB bull bar, its windshield taken out and wipers raised for the new glass, on a paved residential street",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/land-cruiser-windshield-out-800.webp"
+  },
+  {
+    "id": "land-cruiser-new-windshield",
+    "src": "/media/images/land-cruiser-new-windshield.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Toyota Land Cruiser Windshield Replacement",
+    "alt": "Black Toyota Land Cruiser with an ARB bull bar and its new windshield fitted, parked on a paved residential street",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/land-cruiser-new-windshield-800.webp"
+  },
+  {
+    "id": "isuzu-npr-windshield-out",
+    "src": "/media/images/isuzu-npr-windshield-out.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Isuzu NPR Windshield Replacement",
+    "alt": "Isuzu NPR box truck with its windshield removed, the old cracked windshield laid on the paving in front of the cab",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/isuzu-npr-windshield-out-800.webp"
+  },
+  {
+    "id": "isuzu-npr-new-windshield",
+    "src": "/media/images/isuzu-npr-new-windshield.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Isuzu NPR Windshield Replacement",
+    "alt": "Isuzu NPR box truck with a new windshield fitted, tape holding the glass in place while the adhesive cures",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/isuzu-npr-new-windshield-800.webp"
+  },
+  {
+    "id": "x-trail-windshield-out",
+    "src": "/media/images/x-trail-windshield-out.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Nissan X-Trail Windshield Replacement",
+    "alt": "White Nissan X-Trail with its windshield removed and wipers raised, ready for the new glass",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/x-trail-windshield-out-800.webp"
+  },
+  {
+    "id": "x-trail-new-windshield",
+    "src": "/media/images/x-trail-new-windshield.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Nissan X-Trail Windshield Replacement",
+    "alt": "White Nissan X-Trail with a new windshield fitted, tape along the top edge holding it while the adhesive cures",
+    "width": 1200,
+    "height": 1600,
+    "thumb": "/media/images/x-trail-new-windshield-800.webp"
+  },
+  {
+    "id": "voxy-broken-rear-windscreen",
+    "src": "/media/images/voxy-broken-rear-windscreen.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Toyota Voxy Rear Windscreen Replacement",
+    "alt": "Shattered rear windscreen on a black Toyota Voxy, looking through the broken glass into the cabin",
+    "width": 1600,
+    "height": 1200,
+    "thumb": "/media/images/voxy-broken-rear-windscreen-800.webp"
+  },
+  {
+    "id": "voxy-new-rear-windscreen",
+    "src": "/media/images/voxy-new-rear-windscreen.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Toyota Voxy Rear Windscreen Replacement",
+    "alt": "Black Toyota Voxy seen from behind with its replacement rear windscreen fitted",
+    "width": 960,
+    "height": 1280,
+    "thumb": "/media/images/voxy-new-rear-windscreen-800.webp"
+  },
+  {
+    "id": "axor-windshield-out",
+    "src": "/media/images/axor-windshield-out.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Mercedes-Benz Axor Windshield Replacement",
+    "alt": "Mercedes-Benz Axor truck cab with its windshield taken out, beside a workbench of fitting tools in a gravel yard",
+    "width": 960,
+    "height": 1280,
+    "thumb": "/media/images/axor-windshield-out-800.webp"
+  },
+  {
+    "id": "isuzu-elf-windshield",
+    "src": "/media/images/isuzu-elf-windshield.webp",
+    "type": "image",
+    "category": "automotive",
+    "sector": "automotive",
+    "title": "Isuzu ELF Windshield",
+    "alt": "Front of a white Isuzu ELF light truck with its windshield in place, parked on wet block paving",
+    "width": 1600,
+    "height": 1200,
+    "thumb": "/media/images/isuzu-elf-windshield-800.webp"
   }
 ];
 
@@ -1300,15 +1420,19 @@ export const processLoop: MediaLoop | null = {
 };
 
 export const pillarMedia: { automotive: string | null; architectural: string | null } = {
-  "automotive": null,
+  "automotive": "land-cruiser-windshield-out",
   "architectural": "tower-orbit"
 };
 
-export const bentoPicks: Record<"all" | "residential" | "commercial", string[]> = {
+export const serviceMedia: { automotive: string | null } = {
+  "automotive": "isuzu-npr-windshield-out"
+};
+
+export const bentoPicks: Record<"all" | MediaSector, string[]> = {
   "all": [
     "tower-glass-balconies",
     "office-entrance-doors",
-    "villa-pool-doors",
+    "land-cruiser-new-windshield",
     "shower-cubicle",
     "roof-crew-laying-panels"
   ],
@@ -1325,5 +1449,12 @@ export const bentoPicks: Record<"all" | "residential" | "commercial", string[]> 
     "terrace-lounge",
     "warehouse-partitions",
     "balustrades-upper-floor"
+  ],
+  "automotive": [
+    "voxy-broken-rear-windscreen",
+    "land-cruiser-windshield-out",
+    "isuzu-npr-windshield-out",
+    "land-cruiser-new-windshield",
+    "x-trail-new-windshield"
   ]
 };

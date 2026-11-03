@@ -44,5 +44,6 @@ export const filters: { value: WorkFilter; label: string }[] = [
 
 export function eyebrowFor(item: MediaItem) {
   const category = categoryLabels[item.category];
-  return item.sector ? `${sectorLabels[item.sector]} · ${category}` : category;
+  // "Automotive · Automotive glass" would say it twice
+  return item.sector && item.sector !== item.category ? `${sectorLabels[item.sector]} · ${category}` : category;
 }

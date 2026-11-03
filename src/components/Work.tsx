@@ -12,7 +12,7 @@ export default function Work() {
     all: pick(bentoPicks.all),
     residential: pick(bentoPicks.residential),
     commercial: pick(bentoPicks.commercial),
-    automotive: media.filter((m) => m.sector === "automotive").slice(0, 5),
+    automotive: pick(bentoPicks.automotive),
   };
 
   return (
@@ -21,14 +21,15 @@ export default function Work() {
         <WorkBento
           sets={sets}
           heading={
-            <div className="reveal flex max-w-[640px] flex-col gap-3 md:gap-4">
+            // Keyed: WorkBento renders it beside the filters, and an element
+            // passed from a server component is otherwise warned about there.
+            <div key="heading" className="reveal flex max-w-[640px] flex-col gap-3 md:gap-4">
               <p className="eyebrow text-[11px] text-navy md:text-xs">Selected projects</p>
               <h2 id="work-title" className="text-h2 font-bold">
                 Work you can walk up to.
               </h2>
               <p className="text-[15px] text-muted md:text-[17px] md:leading-[1.65]">
-                From office partitions to full residential glazing. Every project measured, cut and fitted by our own
-                team.
+                From windshields to full residential glazing. Every project measured, cut and fitted by our own team.
               </p>
             </div>
           }

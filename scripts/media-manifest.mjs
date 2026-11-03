@@ -29,6 +29,12 @@ export const projects = {
   safetyDemo: { title: "Safety Glass Demonstration" },
   yard: { title: "Yard and Glass Delivery Truck" },
   koinange: { title: "Jeff Koinange features Glasstech and Interior Solutions" },
+  landCruiser: { title: "Toyota Land Cruiser Windshield Replacement", sector: "automotive" },
+  isuzuNpr: { title: "Isuzu NPR Windshield Replacement", sector: "automotive" },
+  xTrail: { title: "Nissan X-Trail Windshield Replacement", sector: "automotive" },
+  voxy: { title: "Toyota Voxy Rear Windscreen Replacement", sector: "automotive" },
+  axor: { title: "Mercedes-Benz Axor Windshield Replacement", sector: "automotive" },
+  isuzuElf: { title: "Isuzu ELF Windshield", sector: "automotive" },
 };
 
 export const items = [
@@ -236,6 +242,29 @@ export const items = [
     alt: "Frameless glass office partitions with gold pull handles on a blue-carpeted office floor" },
   { id: "warehouse-partitions", source: "repo:images/glass-1.jpeg", type: "image", project: "warehouse", category: "office-partition",
     alt: "Aluminium-framed glass partitions dividing a warehouse floor stacked with stock" },
+
+  // Automotive jobs: WhatsApp photos in automotive/ (3 Nov), all ten used.
+  // Strongest first, each vehicle's before and after together.
+  { id: "land-cruiser-windshield-out", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.29 (2).jpeg", type: "image", project: "landCruiser", category: "automotive",
+    alt: "Black Toyota Land Cruiser with an ARB bull bar, its windshield taken out and wipers raised for the new glass, on a paved residential street" },
+  { id: "land-cruiser-new-windshield", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.30.jpeg", type: "image", project: "landCruiser", category: "automotive",
+    alt: "Black Toyota Land Cruiser with an ARB bull bar and its new windshield fitted, parked on a paved residential street" },
+  { id: "isuzu-npr-windshield-out", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.28.jpeg", type: "image", project: "isuzuNpr", category: "automotive",
+    alt: "Isuzu NPR box truck with its windshield removed, the old cracked windshield laid on the paving in front of the cab" },
+  { id: "isuzu-npr-new-windshield", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.28 (1).jpeg", type: "image", project: "isuzuNpr", category: "automotive",
+    alt: "Isuzu NPR box truck with a new windshield fitted, tape holding the glass in place while the adhesive cures" },
+  { id: "x-trail-windshield-out", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.27 (2).jpeg", type: "image", project: "xTrail", category: "automotive",
+    alt: "White Nissan X-Trail with its windshield removed and wipers raised, ready for the new glass" },
+  { id: "x-trail-new-windshield", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.27 (1).jpeg", type: "image", project: "xTrail", category: "automotive",
+    alt: "White Nissan X-Trail with a new windshield fitted, tape along the top edge holding it while the adhesive cures" },
+  { id: "voxy-broken-rear-windscreen", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.29.jpeg", type: "image", project: "voxy", category: "automotive",
+    alt: "Shattered rear windscreen on a black Toyota Voxy, looking through the broken glass into the cabin" },
+  { id: "voxy-new-rear-windscreen", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.29 (1).jpeg", type: "image", project: "voxy", category: "automotive",
+    alt: "Black Toyota Voxy seen from behind with its replacement rear windscreen fitted" },
+  { id: "axor-windshield-out", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.26.jpeg", type: "image", project: "axor", category: "automotive",
+    alt: "Mercedes-Benz Axor truck cab with its windshield taken out, beside a workbench of fitting tools in a gravel yard" },
+  { id: "isuzu-elf-windshield", source: "repo:automotive/WhatsApp Image 2026-11-03 at 10.04.27.jpeg", type: "image", project: "isuzuElf", category: "automotive",
+    alt: "Front of a white Isuzu ELF light truck with its windshield in place, parked on wet block paving" },
 ];
 
 // Files in public/content that are deliberately not published, and why.
@@ -272,10 +301,15 @@ export const slots = {
     source: "drone shots/DJI_0224.MP4", start: 8, length: 10, crossfade: 1, aspect: [16, 9], width: 1280, maxBytes: 10e6,
     alt: "Two installers fitting a glass balcony balustrade on an upper floor of an apartment tower",
   },
-  pillars: { automotive: null, architectural: "tower-orbit" },
+  // Background of pillar card 01: the strongest windshield-fitting shot
+  pillars: { automotive: "land-cruiser-windshield-out", architectural: "tower-orbit" },
+  // Image strip on the "Automotive glass" service card: the second strongest
+  services: { automotive: "isuzu-npr-windshield-out" },
   bento: {
-    all: ["tower-glass-balconies", "office-entrance-doors", "villa-pool-doors", "shower-cubicle", "roof-crew-laying-panels"],
+    all: ["tower-glass-balconies", "office-entrance-doors", "land-cruiser-new-windshield", "shower-cubicle", "roof-crew-laying-panels"],
     residential: ["conservatory-aerial-orbit", "kerugoya-lodge-glass-walls", "villa-pool-doors", "shower-cubicle", "stone-house-gable-front"],
     commercial: ["office-suite-partitions", "office-entrance-doors", "terrace-lounge", "warehouse-partitions", "balustrades-upper-floor"],
+    // The landscape shot leads: the first tile is the wide one
+    automotive: ["voxy-broken-rear-windscreen", "land-cruiser-windshield-out", "isuzu-npr-windshield-out", "land-cruiser-new-windshield", "x-trail-new-windshield"],
   },
 };

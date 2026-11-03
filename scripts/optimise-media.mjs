@@ -387,7 +387,9 @@ export const pillarMedia: { automotive: string | null; architectural: string | n
   automotive: keep(slots.pillars.automotive), architectural: keep(slots.pillars.architectural),
 })};
 
-export const bentoPicks: Record<"all" | "residential" | "commercial", string[]> = ${json(bento)};
+export const serviceMedia: { automotive: string | null } = ${json({ automotive: keep(slots.services.automotive) })};
+
+export const bentoPicks: Record<"all" | MediaSector, string[]> = ${json(bento)};
 `);
 console.log(`Wrote ${path.relative(ROOT, MEDIA_TS)}: ${media.length} of ${items.length} items`);
 

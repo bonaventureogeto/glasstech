@@ -24,7 +24,7 @@ npm run lint
 | Route | What it is |
 |-------|------------|
 | `/` | Homepage: hero with quote configurator, trusted-for strip, two pillars, services, selected work, process, Jeff Koinange's feature video, client videos and six Google reviews, contact, final CTA |
-| `/work` | Jeff Koinange's feature video, then every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive, with a lightbox |
+| `/work` | Jeff Koinange's feature video, then every photo and clip in `src/content/media.ts`, grouped by category, filterable by Residential / Commercial / Automotive (all ten automotive photos), with a lightbox |
 | `/reviews` | Every Google review with text, with the rating and links to read or leave one on Google |
 | `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
@@ -72,8 +72,8 @@ The rating and reviews under the client videos (six) and on `/reviews` (all) are
 
 All photography and video is Glasstech's own work; there is no stock imagery.
 
-1. **Originals** go in `public/content/` (a mirror of the `glasstech content` folder: about 18 GB of 4K drone and Osmo Pocket footage). It is gitignored and listed in `.vercelignore`, so it is never committed or uploaded.
-2. **`scripts/media-manifest.mjs`** is the source of truth: each item's source file, category, project, alt text, trim window and poster frame, which items fill the homepage slots, and the files that are deliberately left out with the reason.
+1. **Originals** go in `public/content/` (a mirror of the `glasstech content` folder: about 18 GB of 4K drone and Osmo Pocket footage). It is gitignored and listed in `.vercelignore`, so it is never committed or uploaded. Small photo sets are committed instead and referenced with a `repo:` path: `images/` (earlier project photos) and `automotive/` (ten WhatsApp photos of windshield and rear-windscreen jobs, 2.5 MB).
+2. **`scripts/media-manifest.mjs`** is the source of truth: each item's source file, category, project, alt text, trim window and poster frame, which items fill the homepage slots (pillar backgrounds, the automotive service card's image strip, the bento tiles for each filter), and the files that are deliberately left out with the reason.
 3. **`npm run media`** (`scripts/optimise-media.mjs`, needs `ffmpeg`) writes the optimised files to `public/media/` and regenerates **`src/content/media.ts`** (do not edit that file by hand):
    - images: WebP at max 2000px on the long edge, plus an 800px variant
    - clips: 720p H.264, 30fps, no audio, at most 8s, with WebP posters (1600px and 800px)
@@ -95,7 +95,7 @@ Both loops autoplay muted unless the visitor has asked for reduced motion or is 
 - **Project titles**: the camera files have no project names (`DJI_20260714...`), so titles in the manifest are descriptive ("Garden Glass Conservatory", "Apartment Tower Glazing"). Swap in real project names in `projects` in `scripts/media-manifest.mjs`, then `npm run media`.
 - **Sectors**: residential/commercial is inferred from the footage; check it per project.
 - **Yard aerial** (`yard-aerial`): looks like the Glasstech yard but is described neutrally until confirmed.
-- **Automotive**: there is no automotive footage yet, so the automotive pillar shows the plain window grid and the Automotive filter shows a "book a fitting" message. Add automotive items to the manifest when photos exist.
+- **Automotive number plates**: the ten automotive photos show customers' plates (KDK 350R on the Land Cruiser behind pillar card 01, and others on /work). Blur them before launch if the clients have not agreed to appear.
 - **Email**: `hello@glasstech.co.ke` is the address on the site; the mailbox is set up by hand in cPanel, so confirm it receives mail.
 
 ## Project structure
