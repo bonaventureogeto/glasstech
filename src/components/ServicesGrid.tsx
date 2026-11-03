@@ -23,7 +23,7 @@ const services: {
   {
     title: "Glass shower cubicles",
     body: "Frameless and semi-frameless enclosures cut to your bathroom, with polished edges and quality hardware.",
-    spec: "8 to 10mm · Toughened · Frameless",
+    spec: "10mm · Toughened · Frameless",
     Icon: ShowerIcon,
   },
   {
