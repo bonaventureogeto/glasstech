@@ -37,9 +37,10 @@ export const company = {
 } as const;
 
 export const stats = {
-  // Not yet confirmed as years trading, so it is labelled as the team's
-  // combined experience. If the client confirms the stronger claim, change
-  // this one label to the "in business" wording: the hero stat and the meta
+  // TODO(confirm with client): is 80+ the years trading, or the team's
+  // combined experience? Until confirmed it is labelled as combined
+  // experience. If the client confirms the stronger claim, change this one
+  // label to the "in business" wording: the hero stat and the meta
   // description both read it from here.
   experienceYears: 80,
   experienceLabel: "Years of combined experience",
