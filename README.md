@@ -37,7 +37,7 @@ The canonical host is `https://www.glasstech.co.ke`, written once as `SITE_URL` 
 - **robots.txt**: everything allowed except `/api/`, and the sitemap's address.
 - **Redirects** (`next.config.ts`, all 301): the bare domain to the same path on www; trailing slashes to the path without them (Next's own trailing-slash redirect is a 308, so it is switched off); and `glasstechandinteriors.com` (with or without www) page by page to its new home (`/about-us/` to `/#about`, `/portfolio/` and `/project/*` to `/work`, and so on), anything else to the same path. Two things live outside the repo: Vercel's domain settings already redirect the bare domain to www, with a 308 (set it to 301 there to match); and the old domain is still a separate site on Cloudflare, so its redirects only apply once it is added to this Vercel project, or they need setting up in Cloudflare as well.
 - **Structured data** (`src/lib/structuredData.ts`, typed with `schema-dts`): `/` has LocalBusiness (address, geo from the listing, both phone lines, opening hours, `sameAs`, AggregateRating) and the VideoObject; `/work` has a BreadcrumbList and the VideoObject; `/reviews` a BreadcrumbList. All four checked in the Schema.org validator with no errors or warnings.
-- **Search Console**: put the HTML tag's token in `NEXT_PUBLIC_GSC_VERIFICATION` (see `.env.example`; in Vercel, then redeploy) and every page gets the `google-site-verification` meta tag. Then submit `https://www.glasstech.co.ke/sitemap.xml`.
+- **Search Console**: verified with the HTML file method. `public/google9b60d6c112612619.html` is served at `https://www.glasstech.co.ke/google9b60d6c112612619.html`; keep it, as Search Console checks it again from time to time and drops the verification if it is gone. Once verified, submit `https://www.glasstech.co.ke/sitemap.xml`. (The meta tag method also works, by putting a token in `NEXT_PUBLIC_GSC_VERIFICATION`, but is not needed alongside the file.)
 
 ## Brand
 
@@ -130,7 +130,7 @@ Loops autoplay muted unless the visitor has asked for reduced motion or is on Sa
 - **Email**: `hello@glasstech.co.ke` is the address on the site; the mailbox is set up by hand in cPanel, so confirm it receives mail.
 - **Which number is which** (`TODO(confirm with client)` in `src/content/links.ts`): the site treats 0714 498 682 as the architectural line and 0726 019 644 as the automotive line. Note that the Google Business listing shows 0726 019 644 as its phone number.
 - **80+ figure**: labelled "Years of combined experience" until the client confirms it as years in business (`stats.experienceLabel` in `src/content/company.ts`).
-- **Keys**: `GOOGLE_PLACES_API_KEY` is empty in `.env.local`, so the rating and count come from `reviews.json` (66 ratings at 4.3, read from the listing on 3 November 2026) until it is set, locally and in Vercel. `NEXT_PUBLIC_GSC_VERIFICATION` waits for Search Console's token.
+- **Keys**: `GOOGLE_PLACES_API_KEY` is empty in `.env.local`, so the rating and count come from `reviews.json` (66 ratings at 4.3, read from the listing on 3 November 2026) until it is set, locally and in Vercel. Search Console is verified by file (`public/google9b60d6c112612619.html`), so `NEXT_PUBLIC_GSC_VERIFICATION` can stay empty.
 
 ## Project structure
 
