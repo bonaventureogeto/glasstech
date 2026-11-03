@@ -16,7 +16,8 @@ const links = [
   { label: "Contact", href: "/#contact" },
 ];
 
-// One number in the header: the architectural line. The quote button asks which.
+// The header bar has no phone number: its quote button asks which line. The
+// phone menu ends with a call button for the architectural line.
 const phone = phones.architectural;
 
 export default function Nav() {
@@ -44,14 +45,6 @@ export default function Nav() {
         </ul>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <a
-            href={telHref("architectural")}
-            className="hidden min-h-11 items-center gap-2 px-1 text-sm font-medium text-ink transition-colors hover:text-red min-[920px]:inline-flex"
-          >
-            <PhoneIcon size={16} />
-            <span className="sr-only">{phone.label}: </span>
-            {phone.display}
-          </a>
           <QuoteChooser
             placement="below-end"
             className="max-[379px]:hidden"

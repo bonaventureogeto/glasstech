@@ -78,7 +78,7 @@ There are two lines, `phones.architectural` (+254 714 498 682) and `phones.autom
 
 | Where | Goes to |
 |-------|---------|
-| Header phone link, "Call now" in the phone bar, the final CTA's call button | Architectural |
+| "Call now" in the phone bar, the final CTA's call button | Architectural (the header bar shows no number) |
 | "Get a quote" (header), "Quote on WhatsApp" (hero, final CTA), the floating WhatsApp button, "WhatsApp quote" (phone bar) | A chooser: "Architectural quote" or "Automotive quote", each with its own prefilled message (`QuoteChooser`, built on `<details>`) |
 | Phone menu | "Architectural quote" and "Automotive quote" buttons, then a call button (architectural) |
 | Quote configurator | Automotive glass to the automotive line, every other service to the architectural line |
